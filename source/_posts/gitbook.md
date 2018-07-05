@@ -6,7 +6,7 @@ tags: [gitbook, nodejs]
 
 ## 安装
 
-```shell
+```bash
 npm install -g gitbook-cli
 ```
 
