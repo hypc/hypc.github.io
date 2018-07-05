@@ -1,0 +1,19 @@
+language: node_js
+node_js: 8
+install:
+  - npm install -g hexo-cli
+  - npm install
+  - git submodule init && git submodule update
+script:
+  - hexo g
+after_script:
+  - cd public
+  - git init
+  - git config user.name hypc
+  - git config user.email h_yp00@163.com
+  - git add .
+  - git commit -m 'deploy'
+  - git push --force --quiet https://$GITHUB_TOKEN@github.com/hypc/hypc.github.io master:master
+branches:
+  only:
+    - hexo
