@@ -36,6 +36,76 @@ Unable to save binary /usr/local/lib/node_modules/node-sass/vendor/linux_musl-x6
 
 > node-sass@4.8.3 postinstall /usr/local/lib/node_modules/node-sass
 > node scripts/build.js
+......
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! node-sass@4.8.3 postinstall: `node scripts/build.js`
+npm ERR! Exit status 1
+npm ERR!
+npm ERR! Failed at the node-sass@4.8.3 postinstall script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /root/.npm/_logs/2018-04-02T05_17_18_651Z-debug.log
+```
+
+<!--more-->
+
+**解决办法是在安装时添加参数：`--unsafe-perm`**
+
+```bash
+npm install -g --unsafe-perm node-sass@4.8 --sass-binary-site=https://npm.taobao.org/mirrors/node-sass/
+```
+
+执行结果如下：
+
+```txt
+/usr/local/bin/node-sass -> /usr/local/lib/node_modules/node-sass/bin/node-sass
+
+> node-sass@4.8.3 install /usr/local/lib/node_modules/node-sass
+> node scripts/install.js
+
+Downloading binary from https://npm.taobao.org/mirrors/node-sass//v4.8.3/linux_musl-x64-57_binding.node
+Download complete  ] - :
+Binary saved to /usr/local/lib/node_modules/node-sass/vendor/linux_musl-x64-57/binding.node
+Caching binary to /root/.npm/node-sass/4.8.3/linux_musl-x64-57_binding.node
+
+> node-sass@4.8.3 postinstall /usr/local/lib/node_modules/node-sass
+> node scripts/build.js
+
+Binary found at /usr/local/lib/node_modules/node-sass/vendor/linux_musl-x64-57/binding.node
+Testing binary
+Binary is fine
++ node-sass@4.8.3
+added 187 packages in 15.667s
+```
+
+**错误详情如下**
+
+```txt
+/usr/local/bin/node-sass -> /usr/local/lib/node_modules/node-sass/bin/node-sass
+
+> node-sass@4.8.3 install /usr/local/lib/node_modules/node-sass
+> node scripts/install.js
+
+Unable to save binary /usr/local/lib/node_modules/node-sass/vendor/linux_musl-x64-57 : { Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/node-sass/vendor'
+    at Object.fs.mkdirSync (fs.js:885:18)
+    at sync (/usr/local/lib/node_modules/node-sass/node_modules/mkdirp/index.js:71:13)
+    at Function.sync (/usr/local/lib/node_modules/node-sass/node_modules/mkdirp/index.js:77:24)
+    at checkAndDownloadBinary (/usr/local/lib/node_modules/node-sass/scripts/install.js:114:11)
+    at Object.<anonymous> (/usr/local/lib/node_modules/node-sass/scripts/install.js:157:1)
+    at Module._compile (module.js:643:30)
+    at Object.Module._extensions..js (module.js:654:10)
+    at Module.load (module.js:556:32)
+    at tryModuleLoad (module.js:499:12)
+    at Function.Module._load (module.js:491:3)
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'mkdir',
+  path: '/usr/local/lib/node_modules/node-sass/vendor' }
+
+> node-sass@4.8.3 postinstall /usr/local/lib/node_modules/node-sass
+> node scripts/build.js
 
 Building: /usr/local/bin/node /usr/local/lib/node_modules/node-sass/node_modules/node-gyp/bin/node-gyp.js rebuild --verbose --libsass_ext= --libsass_cflags= --libsass_ldflags= --libsass_library=
 gyp info it worked if it ends with ok
@@ -118,33 +188,4 @@ npm ERR! This is probably not a problem with npm. There is likely additional log
 
 npm ERR! A complete log of this run can be found in:
 npm ERR!     /root/.npm/_logs/2018-04-02T05_17_18_651Z-debug.log
-```
-
-**解决办法是在安装时添加参数：`--unsafe-perm`**
-
-```bash
-npm install -g --unsafe-perm node-sass@4.8 --sass-binary-site=https://npm.taobao.org/mirrors/node-sass/
-```
-
-执行结果如下：
-
-```txt
-/usr/local/bin/node-sass -> /usr/local/lib/node_modules/node-sass/bin/node-sass
-
-> node-sass@4.8.3 install /usr/local/lib/node_modules/node-sass
-> node scripts/install.js
-
-Downloading binary from https://npm.taobao.org/mirrors/node-sass//v4.8.3/linux_musl-x64-57_binding.node
-Download complete  ] - :
-Binary saved to /usr/local/lib/node_modules/node-sass/vendor/linux_musl-x64-57/binding.node
-Caching binary to /root/.npm/node-sass/4.8.3/linux_musl-x64-57_binding.node
-
-> node-sass@4.8.3 postinstall /usr/local/lib/node_modules/node-sass
-> node scripts/build.js
-
-Binary found at /usr/local/lib/node_modules/node-sass/vendor/linux_musl-x64-57/binding.node
-Testing binary
-Binary is fine
-+ node-sass@4.8.3
-added 187 packages in 15.667s
 ```
