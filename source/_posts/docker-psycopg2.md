@@ -1,7 +1,7 @@
 ---
 title: 在python:3.5-alpine镜像中安装psycopg2
 date: 2018-07-15 21:29:02
-tags: [docker, python]
+tags: [docker, python, postgresql]
 ---
 
 需要先安装依赖包`postgresql-dev`、`gcc`、`python3-dev`、`musl-dev`：
