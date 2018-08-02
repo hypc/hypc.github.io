@@ -38,6 +38,8 @@ EXPOSE 80
 CMD ["http-server", "/app/dist", "-p", "80"]
 ```
 
+<!--more-->
+
 ### 编写`docker-compose.yaml`文件
 
 ```yaml

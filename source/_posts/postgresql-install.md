@@ -34,6 +34,8 @@ apt-get install -y postgresql-9.4
 +host    all             all             192.168.0.0/16          trust
 ```
 
+<!--more-->
+
 ## CentOS7上安装
 
 ```bash
