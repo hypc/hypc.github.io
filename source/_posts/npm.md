@@ -6,7 +6,7 @@ tags: [npm, nodejs]
 
 在用户home目录下新建文件`~/.npmrc`：
 
-```
+```ini
 registry=https://registry.npm.taobao.org
 
 chromedriver_cdnurl=https://npm.taobao.org/mirrors/chromedriver/

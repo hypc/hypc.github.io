@@ -15,3 +15,5 @@ tags: [osx]
 * **对规则图形进行截图**
 
     同时按住`command+shift+4`，然后按一下空格健，然后用鼠标选择一块区域，单击就能实现自动截图，图片保存在桌面上。
+
+_详细用法参见：[https://support.apple.com/zh-cn/HT201361](https://support.apple.com/zh-cn/HT201361)_

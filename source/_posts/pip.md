@@ -6,9 +6,9 @@ tags: [pip, python]
 
 在用户home目录下新建文件`~/.pip/pip.conf`：
 
-```
+```ini
 [global]
-index-url = https://mirrors.aliyun.com/pypi/simple/
+index-url=https://mirrors.aliyun.com/pypi/simple/
 
 [install]
 trusted-host=mirrors.aliyun.com

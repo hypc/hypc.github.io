@@ -6,7 +6,7 @@ tags: [ubuntu]
 
 在`/usr/share/applications`目录下创建一个以`.desktop`结尾的文件，里面内容如下：
 
-```
+```ini
 [Desktop Entry]
 Name=eclipse
 Type=Application
