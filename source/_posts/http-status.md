@@ -4,7 +4,8 @@ date: 2018-08-31 15:11:14
 tags: [http]
 ---
 
-HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。它由 RFC2616 规范定义的，并得到 RFC2518、RFC2817、RFC2295、RFC2774、RFC4918等规范扩展。
+HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
+它由[RFC2616][]规范定义的，并得到[RFC2518][]、[RFC2817][]、[RFC2295][]、[RFC2774][]、[RFC4918][]等规范扩展。
 
 ## 1xx: 信息
 
@@ -12,7 +13,7 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
 ------------------------|------------------------------------------------------------------------------
 100 Continue            |服务器仅接收到部分请求，但是一旦服务器并没有拒绝该请求，客户端应该继续发送其余的请求。
 101 Switching Protocols |服务器转换协议：服务器将遵从客户的请求转换到另外一种协议。
-102 Processing          |由WebDAV（RFC 2518）扩展的状态码，代表处理将被继续执行。
+102 Processing          |由WebDAV（[RFC2518][]）扩展的状态码，代表处理将被继续执行。
 
 ## 2xx: 成功
 
@@ -25,7 +26,7 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
 204 No Content          |没有新文档。浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的。
 205 Reset Content       |没有新文档。但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容。
 206 Partial Content     |客户发送了一个带有Range头的GET请求，服务器完成了它。
-207 Multi-Status        |由WebDAV(RFC 2518)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。
+207 Multi-Status        |由WebDAV([RFC2518][])扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。
 
 <!--more-->
 
@@ -65,13 +66,13 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
 416 Requested Range Not Satisfiable |服务器不能满足客户在请求中指定的Range头。
 417 Expectation Failed  |在请求头 Expect 中指定的预期内容无法被服务器满足，或者这个服务器是一个代理服务器，它有明显的证据证明在当前路由的下一个节点上，Expect 的内容无法被满足。
 421 too many connections|从当前客户端所在的IP地址到服务器的连接数超过了服务器许可的最大范围。通常，这里的IP地址指的是从服务器上看到的客户端地址（比如用户的网关或者代理服务器地址）。在这种情况下，连接数的计算可能涉及到不止一个终端用户。
-422 Unprocessable Entity|请求格式正确，但是由于含有语义错误，无法响应。（RFC 4918 WebDAV）
-423 Locked              |当前资源被锁定。（RFC 4918 WebDAV）
-424 Failed Dependency   |由于之前的某个请求发生的错误，导致当前请求失败，例如 PROPPATCH。（RFC 4918 WebDAV）
-425 Unordered Collection|在WebDav Advanced Collections 草案中定义，但是未出现在《WebDAV 顺序集协议》（RFC 3658）中。
-426 Upgrade Required    |客户端应当切换到TLS/1.0。（RFC 2817）
+422 Unprocessable Entity|请求格式正确，但是由于含有语义错误，无法响应。（[RFC4918][] WebDAV）
+423 Locked              |当前资源被锁定。（[RFC4918][] WebDAV）
+424 Failed Dependency   |由于之前的某个请求发生的错误，导致当前请求失败，例如 PROPPATCH。（[RFC4918][] WebDAV）
+425 Unordered Collection|在WebDav Advanced Collections 草案中定义，但是未出现在《WebDAV 顺序集协议》（[RFC3658][]）中。
+426 Upgrade Required    |客户端应当切换到TLS/1.0。（[RFC2817][]）
 449 Retry With          |由微软扩展，代表请求应当在执行完适当的操作后进行重试。
-451 Unavailable For Legal Reasons   |该请求因法律原因不可用。（RFC 7725）
+451 Unavailable For Legal Reasons   |该请求因法律原因不可用。（[RFC7725][]）
 
 ## 5xx: 服务器错误
 
@@ -83,13 +84,23 @@ HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状�
 503 Service Unavailable |请求未完成。服务器临时过载或当机。
 504 Gateway Timeout     |网关超时。
 505 HTTP Version Not Supported      |服务器不支持请求中指明的HTTP协议版本。
-506 Variant Also Negotiates         |由《透明内容协商协议》（RFC 2295）扩展，代表服务器存在内部配置错误：被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。
-507 Insufficient Storage            |服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。WebDAV（RFC 4918）
+506 Variant Also Negotiates         |由《透明内容协商协议》（[RFC2295][]）扩展，代表服务器存在内部配置错误：被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。
+507 Insufficient Storage            |服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。WebDAV（[RFC4918][]）
 509 Bandwidth Limit Exceeded        |服务器达到带宽限制。这不是一个官方的状态码，但是仍被广泛使用。
-510 Not Extended        |获取资源所需要的策略并没有被满足。（RFC 2774）
+510 Not Extended        |获取资源所需要的策略并没有被满足。（[RFC2774][]）
 
 ## 6xx: 服务器错误
 
 消息                     |描述
 ------------------------|------------------------------------------------------------------------------
 600 Unparseable Response Headers    |源站没有返回响应头部，只返回实体内容
+
+
+[RFC2616]: https://tools.ietf.org/html/rfc2616
+[RFC2518]: https://tools.ietf.org/html/rfc2518
+[RFC2817]: https://tools.ietf.org/html/rfc2817
+[RFC2295]: https://tools.ietf.org/html/rfc2295
+[RFC2774]: https://tools.ietf.org/html/rfc2774
+[RFC4918]: https://tools.ietf.org/html/rfc4918
+[RFC7725]: https://tools.ietf.org/html/rfc7725
+[RFC3658]: https://tools.ietf.org/html/rfc3658

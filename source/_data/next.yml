@@ -189,9 +189,9 @@ links_layout: block
 links:
   #Title: http://example.com/
   json-schema-tutorial: https://hypc-pub.github.io/json-schema-tutorial
-  design-patterns: https://hypc-pub.github.io/design-patterns
   redis-tutorial: https://hypc-pub.github.io/redis-tutorial
   lua-tutorial: https://hypc-pub.github.io/lua-tutorial
+  design-patterns: https://hypc-pub.github.io/design-patterns
   python-style-guide: https://hypc-pub.github.io/python-style-guide
 
 # Sidebar Avatar
