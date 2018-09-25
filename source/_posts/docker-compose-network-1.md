@@ -6,7 +6,7 @@ tags: [docker]
 
 配置默认网络并设置子网：
 
-```dockerfile
+```yaml
 networks:
   default:
     driver: bridge
@@ -18,7 +18,7 @@ networks:
 
 使用已存在的网络：
 
-```dockerfile
+```yaml
 networks:
   default:
     external:
