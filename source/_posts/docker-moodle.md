@@ -40,6 +40,8 @@ services:
             - DB_ENV_MYSQL_DATABASE=moodle
             - DB_ENV_MYSQL_USER=moodle
             - DB_ENV_MYSQL_PASSWORD=moodle
+        volumes:
+            - ./data:/var/moodledata
         depends_on:
             - moodle_db
     moodle_db:
@@ -51,6 +53,8 @@ services:
             - MYSQL_ROOT_PASSWORD=moodle
             - MYSQL_USER=moodle
             - MYSQL_PASSWORD=moodle
+        volumes:
+            - ./db:/var/lib/mysql
 networks:
     default:
         driver: bridge
