@@ -1,7 +1,7 @@
 ---
 title: Installing OpenVPN in Docker
 date: 2018-07-16 21:16:59
-tags: [docker, openvpn]
+tags: [docker, openvpn, vpn]
 ---
 
 ## 准备工作
