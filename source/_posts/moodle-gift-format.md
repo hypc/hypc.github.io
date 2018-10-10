@@ -140,4 +140,30 @@ When was Ulysses S. Grant born? {#
 Write a short biography of Dag Hammarskjöld. {}
 ```
 
+## 问题类别
+
+```text
+$CATEGORY: mycategory
+```
+
+可以在文件的任何位置设置，也可以设置多个。
+设置之后表示从这开始到下一个设置或文件末尾，其中包含的所有问题的类型都是这个类型。
+
+如果这个问题类型不存在则会创建。
+
+## 转义字符
+
+```text
+::GIFT Control Characters::
+Which of the following is NOT a control character for the GIFT import format? {
+  ~ \~     # \~ is a control character.
+  ~ \=     # \= is a control character.
+  ~ \#     # \# is a control character.
+  ~ \{     # \{ is a control character.
+  ~ \}     # \} is a control character.
+  = \      # Correct! \ (backslash) is not a control character. BUT,
+             it is used to escape the control characters.
+}
+```
+
 [Moodle]: https://moodle.org/
