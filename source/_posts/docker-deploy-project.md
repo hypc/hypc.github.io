@@ -119,7 +119,7 @@ services:
     cloud:
         build:
             context: ..
-            dockerfile: Dockerfile
+            dockerfile: .docker/Dockerfile
             args:
                 debug: true
         image: cloud
