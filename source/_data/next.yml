@@ -188,11 +188,12 @@ links_layout: block
 #links_layout: inline
 links:
   #Title: http://example.com/
-  JSONSchema Tutorial: https://hypc-pub.github.io/json-schema-tutorial
-  Redis Tutorial: https://hypc-pub.github.io/redis-tutorial
-  Lua Tutorial: https://hypc-pub.github.io/lua-tutorial
-  Design Patterns: https://hypc-pub.github.io/design-patterns
-  Python Style Guide: https://hypc-pub.github.io/python-style-guide
+  Django Tutorial: https://hypc-pub.github.io/django-tutorial/
+  JSONSchema Tutorial: https://hypc-pub.github.io/json-schema-tutorial/
+  Redis Tutorial: https://hypc-pub.github.io/redis-tutorial/
+  Lua Tutorial: https://hypc-pub.github.io/lua-tutorial/
+  Design Patterns: https://hypc-pub.github.io/design-patterns/
+  Python Style Guide: https://hypc-pub.github.io/python-style-guide/
 
 # Sidebar Avatar
 avatar:
