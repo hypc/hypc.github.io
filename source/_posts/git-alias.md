@@ -20,9 +20,6 @@ alias.lg=log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold g
 alias.llg=log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
 alias.d=diff
 alias.master=checkout master
-alias.spull=svn rebase
-alias.spush=svn dcommit
-alias.alias=!git config --list | grep 'alias\.' | sed 's/alias\.\([^=]*\)=\(.*\)/\1\	 => \2/' | sort
 ```
 
 <!--more-->
@@ -45,7 +42,4 @@ git config --global alias.lg "log --color --graph --pretty=format:'%C(bold white
 git config --global alias.llg "log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit"
 git config --global alias.d "diff"
 git config --global alias.master "checkout master"
-git config --global alias.spull "svn rebase"
-git config --global alias.spush "svn dcommit"
-git config --global alias.alias "!git config --list | grep 'alias\.' | sed 's/alias\.\([^=]*\)=\(.*\)/\1\	 => \2/' | sort"
 ```
