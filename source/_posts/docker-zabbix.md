@@ -66,7 +66,7 @@ networks:
         ipam:
             driver: default
             config:
-                 - subnet: 172.27.4.0/24
+                - subnet: 172.27.4.0/24
 ```
 
 **注意**：启动服务时需要依次启动：`zabbix_db`、`zabbix_ser`、`zabbix`。
@@ -92,7 +92,7 @@ networks:
         ipam:
             driver: default
             config:
-                 - subnet: 172.27.5.0/24
+                - subnet: 172.27.5.0/24
 ```
 
 [zabbix]: https://www.zabbix.com/
