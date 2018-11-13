@@ -1,5 +1,5 @@
 ---
-title: docker中安装node-sass失败解决办法
+title: 【BUG】docker中安装node-sass失败解决办法
 date: 2018-07-24 20:18:13
 tags: [docker, npm, nodejs]
 ---

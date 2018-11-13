@@ -33,6 +33,8 @@ git配置一般分为两种，一种是当前项目的配置，一种是全局�
 git config user.name                # 查看用户名设置
 git config user.name <your_name>    # 设置用户名
 git config --global core.editor vim # 全局设置git命令编辑器为vim
+git config credential.helper cache  # 将账号密码缓存15分钟
+git config credential.helper store  # 将账号密码永久缓存
 ```
 
 ### git add

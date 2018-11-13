@@ -1,5 +1,5 @@
 ---
-title: NGINX+GUNICORN+DJANGO出现400错误
+title: 【BUG】NGINX+GUNICORN+DJANGO出现400错误
 date: 2018-07-24 20:13:00
 tags: [nginx, python, django, gunicorn]
 ---
