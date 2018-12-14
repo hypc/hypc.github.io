@@ -10,5 +10,5 @@ tags: [coreos, docker]
 打开文件`/run/flannel_docker_opts.env`，在其中添加下面内容：
 
 ```
-DOCKER_OPTS="--registry-mirror=https://qxx96o44.mirror.aliyuncs.com"
+DOCKER_OPTS="--registry-mirror=https://registry.docker-cn.com"
 ```
