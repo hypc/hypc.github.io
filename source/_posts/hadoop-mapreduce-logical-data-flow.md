@@ -1,7 +1,7 @@
 ---
 title: MapReduce逻辑数据流图
 date: 2018-12-21 14:00:39
-tags: [hadoop, mapreduce]
+tags: [hadoop, mapreduce, bigdata]
 ---
 
 ![MapReduce逻辑数据流图](/images/hadoop_mapreduce_logical_data_flow.jpg)
