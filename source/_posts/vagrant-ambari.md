@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.vm.box = "centos/7"
     config.vm.box_check_update = false
 
-    config.vm.define vm_name = "ser" do |ser|
+    config.vm.define vm_name = $instance_name_prefix do |ser|
         ser.vm.hostname = "#{$instance_name_prefix}.#{$root_domain}"
         ser.vm.network "private_network", ip: "192.168.56.20"
         ser.vm.provider "virtualbox" do |vb|
@@ -32,11 +32,11 @@ Vagrant.configure("2") do |config|
     end
 
     (1..$num_instances).each do |i|
-        config.vm.define vm_name = "agent-%02d" % i do |agent|
+        config.vm.define vm_name = "%s-%02d" % [$instance_name_prefix, i] do |agent|
             agent.vm.hostname = "%s-%02d.%s" % [$instance_name_prefix, i, $root_domain]
             agent.vm.network "private_network", ip: "192.168.56.#{20 + i}"
             agent.vm.provider "virtualbox" do |vb|
-                vb.memory = "4096"
+                vb.memory = "6144"
             end
         end
     end
