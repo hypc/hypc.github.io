@@ -591,7 +591,7 @@ needmoreshare2:
 #google_site_verification:
 
 # Google Analytics
-#google_analytics:
+google_analytics: UA-131598830-1
 
 # Bing Webmaster tools verification setting
 # See: https://www.bing.com/webmaster/
@@ -602,7 +602,7 @@ needmoreshare2:
 #yandex_site_verification:
 
 # CNZZ count
-#cnzz_siteid:
+cnzz_siteid: https://s23.cnzz.com/z_stat.php?id=1275841535&web_id=1275841535
 
 # Application Insights
 # See https://azure.microsoft.com/en-us/services/application-insights/
