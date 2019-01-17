@@ -1,5 +1,5 @@
 ---
-title: 使用Helm时遇到的一些问题
+title: Helm问题集
 date: 2018-12-31 12:44:33
 tags: [kubernetes, docker]
 ---

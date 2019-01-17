@@ -1,13 +1,18 @@
 ---
-title: 使用RobotFramework时遇到一些问题
+title: RobotFramework问题集
 date: 2018-12-28 16:34:31
 tags: [python, robotframework, testing]
 ---
 
 > Importing test library 'Selenium2Library' failed: ImportError: No module named 'Selenium2Library'
 
-安装seleniumlibrary时需要注意有两个包，`robotframework-seleniumlibrary`和`robotframework-selenium2library`。
-使用`pip install robotframework robotframework-seleniumlibrary robotframework-selenium2library`命令安装依赖包。
+安装`seleniumlibrary`时需要注意有两个包，`robotframework-seleniumlibrary`和`robotframework-selenium2library`。
+
+```bash
+pip install robotframework robotframework-seleniumlibrary
+# or
+pip install robotframework robotframework-selenium2library
+```
 
 ----
 

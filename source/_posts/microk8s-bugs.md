@@ -1,5 +1,5 @@
 ---
-title: 使用MicroK8s时遇到的一些问题
+title: MicroK8s问题集
 date: 2018-12-28 16:39:35
 tags: [kubernetes, docker]
 ---
