@@ -10,10 +10,6 @@ tags: [tesseract]
 
 参考[Install Tesseract via pre-built binary package][tesseract_wiki]安装Tesseract。
 
-### MacOS
-
-在macox上安装时，使用`brew install --with-training-tools tesseract`命令安装。
-
 ## 识别验证码
 
 识别验证码可以按照以下步骤进行：
