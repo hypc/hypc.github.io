@@ -48,7 +48,7 @@ with open(os.path.join(here, 'requests', '__version__.py'), 'r', 'utf-8') as f:
 
 --------
 
-## requests/__version__.py
+## requests/\_\_version__.py
 
 ```python
 __title__ = 'requests'
