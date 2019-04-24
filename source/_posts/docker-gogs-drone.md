@@ -16,7 +16,7 @@ services:
         volumes:
             - ./data:/data
     drone:
-        image: drone/drone:1.0.0-rc.2
+        image: drone/drone:1.0.1
         container_name: drone
         restart: always
         ports:
