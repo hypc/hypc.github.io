@@ -188,11 +188,12 @@ links_layout: block
 #links_layout: inline
 links:
   #Title: http://example.com/
-  Django Tutorial: https://hypc-pub.github.io/django-tutorial/
   JSONSchema Tutorial: https://hypc-pub.github.io/json-schema-tutorial/
   Redis Tutorial: https://hypc-pub.github.io/redis-tutorial/
   Lua Tutorial: https://hypc-pub.github.io/lua-tutorial/
   Design Patterns: https://hypc-pub.github.io/design-patterns/
+  RFC6749: https://hypc-pub.github.io/rfc6749/
+  Django Tutorial: https://hypc-pub.github.io/django-tutorial/
   Python Style Guide: https://hypc-pub.github.io/python-style-guide/
   Volere Requirements Specification Template: https://hypc-pub.github.io/volere-requirements-specification-template/
   The Go Programming Language: https://hypc-pub.github.io/gopl-zh/
@@ -490,10 +491,10 @@ pangu: false
 
 # Disqus
 disqus:
-  enable: false
-  shortname:
+  enable: true
+  shortname: hypc-github-io
   count: true
-  lazyload: false
+  lazyload: true
 
 # Hypercomments
 #hypercomments_id:
@@ -604,7 +605,7 @@ google_analytics: UA-131598830-1
 #yandex_site_verification:
 
 # CNZZ count
-cnzz_siteid: https://s23.cnzz.com/z_stat.php?id=1275841535&web_id=1275841535
+#cnzz_siteid: 1275841535
 
 # Application Insights
 # See https://azure.microsoft.com/en-us/services/application-insights/
