@@ -492,7 +492,7 @@ pangu: false
 # Disqus
 disqus:
   enable: true
-  shortname: hypc-github-io
+  shortname: hypc
   count: true
   lazyload: true
 
