@@ -68,7 +68,7 @@ __cake__ = u'\u2728 \U0001f370 \u2728'
 
 --------
 
-## requests/__init__.py
+## requests/\_\_init__.py
 
 ```python
 from .__version__ import __title__, __description__, __url__, __version__
