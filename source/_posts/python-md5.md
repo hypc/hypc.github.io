@@ -9,8 +9,8 @@ tags: [python, md5]
 ```python
 import hashlib
 
-str = ''
-md5 = hashlib.md5(str.encode('utf-8')).hexdigest()
+string = ''
+md5 = hashlib.md5(string.encode('utf-8')).hexdigest()
 print(md5)
 ```
 
