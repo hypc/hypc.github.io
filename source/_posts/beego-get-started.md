@@ -47,7 +47,7 @@ proj
 
 安装或升级beego：
 
-```shell
+```bash
 $ go get -u github.com/astaxie/beego
 ```
 
@@ -76,7 +76,7 @@ func main() {
 
 编译并且运行服务：
 
-```shell
+```bash
 $ go build -o hello hello.go
 $ ./hello
 ```
@@ -87,13 +87,13 @@ $ ./hello
 
 安装或升级bee：
 
-```shell
+```bash
 $ go get -u github.com/beego/bee
 ```
 
 快速创建应用并应用：
 
-```shell
+```bash
 $ cd $GOPATH/src
 $ bee new hello
 $ cd hello

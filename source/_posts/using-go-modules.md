@@ -10,7 +10,7 @@ tags: [golang]
 
 golang提供了`go mod`命令来管理包。
 
-```shell
+```bash
 $ go help mod
 Go mod provides access to operations on modules.
 
@@ -45,7 +45,7 @@ Use "go help mod <command>" for more information about a command.
 
 创建一个新项目，并使用`go mod init`初始化：
 
-```shell
+``````bash
 $ mkdir hello
 $ cd hello
 $ go mod init
@@ -95,7 +95,7 @@ func main() {
 
 当我们下载依赖包时，由于一些原因，导致下载失败，这时候我们可以通过设置`GOPROXY`来解决这个问题。
 
-```shell
+``````bash
 export GOPROXY=https://mirrors.aliyun.com/goproxy/
 ```
 

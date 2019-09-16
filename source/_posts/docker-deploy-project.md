@@ -146,7 +146,7 @@ COMPOSE_PROJECT_NAME=cloud
 
 ## 项目部署
 
-```shell
+```bash
 # 部署时执行
 docker-compose -f .docker/docker-compose.yaml up -d --build
 # 重启时执行

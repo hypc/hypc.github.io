@@ -10,7 +10,7 @@ tags: [nodejs]
 
 **安装**
 
-```shell
+```bash
 npm install pageres
 ```
 
@@ -34,13 +34,13 @@ const pageres = new Pageres({delay: 2})
 
 **安装**
 
-```shell
+```bash
 npm install --global pageres-cli
 ```
 
 **使用**
 
-```shell
+```bash
 # pageres <url> <resolution>
 pageres todomvc.com 1024x768 1366x768 # 2 screenshots
 pageres todomvc.com yeoman.io 1024x768 # 2 screenshots

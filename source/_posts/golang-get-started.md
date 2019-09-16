@@ -12,13 +12,13 @@ tags: [golang]
 
 [下载][go downloads]相应的压缩包，并解压：
 
-```shell
+```bash
 $ tar -C /usr/local -xvf go$VERSION.$OS-$ARCH.tar.gz
 ```
 
 设置环境变量：
 
-```shell
+```bash
 export PATH=$PATH:/usr/local/go/bin
 ```
 
@@ -30,7 +30,7 @@ export PATH=$PATH:/usr/local/go/bin
 
 创建你的工作目录`$HOME/go`（可以使用其他目录），并设置环境变量：
 
-```shell
+```bash
 export GOPATH=$HOME/go
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
@@ -49,7 +49,7 @@ func main() {
 
 编译并且执行：
 
-```shell
+```bash
 $ cd $GOPATH/src/hello
 $ go build
 $ ./hello
