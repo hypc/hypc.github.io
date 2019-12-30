@@ -10,7 +10,7 @@ tags: [docker, python, pip]
 version: "2"
 services:
     pypi:
-        image: hypc/pypi:1.2.0-alpine
+        image: hypc/pypi:1.3.1-alpine
         volumes:
             - /srv/pypi:/srv/pypi
         ports:

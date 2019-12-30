@@ -19,7 +19,7 @@ zip -s 100m -r file.zip foo/
 zip existing.zip --out new.zip -s 50m
 ```
 
-执行晚之后回创建下面一系列文件：
+执行完之后会创建下面一系列文件：
 
 ```text
 new.zip
