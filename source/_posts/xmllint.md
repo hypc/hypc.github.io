@@ -6,6 +6,8 @@ tags: [shell]
 
 [xmllint][]是一个命令行xml工具。
 
+[xmllint]: http://xmlsoft.org/xmllint.html
+
 ## 格式化
 
 使用`--format`参数格式化文件。
