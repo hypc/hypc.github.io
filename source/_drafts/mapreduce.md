@@ -1,5 +1,5 @@
 ---
-title: mapreduce
+title: 学习MapReduce
 date: 2020-01-14 09:35:08
 tags: [mapreduce, bigdata]
 ---

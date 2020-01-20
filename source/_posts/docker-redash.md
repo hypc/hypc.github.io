@@ -28,7 +28,7 @@ x-redash-service: &redash-service
   env_file: ./env
   restart: always
 services:
-  redash:
+  server:
     <<: *redash-service
     command: server
     ports:
@@ -74,4 +74,13 @@ POSTGRES_PASSWORD=${postgres_password}
 REDASH_COOKIE_SECRET=${redash_cookie_secret}
 REDASH_SECRET_KEY=${redash_secret_key}
 REDASH_DATABASE_URL=postgresql://postgres:${postgres_password}@postgres/postgres
+```
+
+**启动服务**
+
+```bash
+# 初始化数据库
+docker-compose run --rm server create_db
+# 启动服务
+docker-compose up -d
 ```

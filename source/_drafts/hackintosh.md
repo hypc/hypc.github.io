@@ -29,6 +29,11 @@ tags: [osx]
 ### 导入EFI引导文件到优盘
 
 1. 下载最新版[Clover EFI Bootloader][]，将Clover安装到U盘。
-2. 拷贝对应机型的驱动到U盘。
+2. 拷贝对应[机型](https://github.com/daliansky/Hackintosh)的驱动到U盘。
 
 ## 安装
+
+1. 引导EFI进入安装界面
+2. 选择`磁盘工具`，抹掉/格式化磁盘
+3. 安装MacOS系统
+4. 安装完成后，重启系统，然后将Clover引导复制到本地EFI分区中
