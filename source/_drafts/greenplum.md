@@ -33,7 +33,9 @@ tags: [postgresql, greenplum]
 
 ## 单节点安装
 
-基于Ubuntu18.04：
+基于Ubuntu18.04，我是直接在[vagrant][]启动的虚拟机中进行安装的：
+
+[vagrant]: https://www.vagrantup.com/
 
 ```bash
 ## install greenplum

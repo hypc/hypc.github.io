@@ -53,7 +53,7 @@ def send_wx_text(self, target_origin_id, to_user, txt):
 ## 小心使用gevent
 
 利用gevent来部署worker，若task使用了那些不支持gevent的库（例如requests的普通模式），
-会使到异步变同步，极其影响性能。这一点对于其它的协程库也是一样的例如eventlet。
+会使异步变同步，极其影响性能。这一点对于其它的协程库也是一样的例如eventlet。
 
 ## 对失败进行重试处理
 

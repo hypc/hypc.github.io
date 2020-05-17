@@ -76,6 +76,8 @@ REDASH_SECRET_KEY=${redash_secret_key}
 REDASH_DATABASE_URL=postgresql://postgres:${postgres_password}@postgres/postgres
 ```
 
+更多设置参考：[env-vars-settings](https://redash.io/help/open-source/admin-guide/env-vars-settings)
+
 **启动服务**
 
 ```bash

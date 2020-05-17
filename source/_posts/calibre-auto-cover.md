@@ -1,5 +1,5 @@
 ---
-title: Calibre自动生成封面
+title: Calibre一键生成封面
 date: 2020-01-21 11:06:25
 tags: [calibre, shell]
 ---

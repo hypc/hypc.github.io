@@ -92,7 +92,7 @@ setup(
 )
 ```
 
-其中`setup()`的具体参数详见：[setup-args][]。
+其中`setup()`的具体参数详见：[setup-args][]和[setuptools][]。
 
 <!--more-->
 
@@ -129,5 +129,6 @@ twine upload -r myrepo dist/*   # 将分发包上传到指定服务器上
 
 
 [setup-args]: https://packaging.python.org/tutorials/distributing-packages/#setup-args
+[setuptools]: https://setuptools.readthedocs.io/en/latest/setuptools.html
 [pypirc-file]: https://docs.python.org/3.5/distutils/packageindex.html#the-pypirc-file
 [twine]: https://pypi.python.org/pypi/twine
