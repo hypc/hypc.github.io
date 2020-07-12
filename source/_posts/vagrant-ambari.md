@@ -4,6 +4,9 @@ date: 2018-12-25 15:48:57
 tags: [vagrant, hadoop, ambari, bigdata]
 ---
 
+[Ambari][]是创建、管理、监视 Hadoop 的集群的工具，这里的 Hadoop 是广义，指的是 Hadoop 整个生态圈（例如 Hive，Hbase，Sqoop，Zookeeper 等），而并不仅是特指 Hadoop。
+简单来说，Ambari 就是为了让 Hadoop 以及相关的大数据软件更容易使用的一个工具。
+
 `Vagrantfile`文件内容如下：
 
 ```ruby
@@ -50,4 +53,5 @@ end
 
 更详细的信息可参考：[Deploy_and_Configure_a_HDP_Cluster][]
 
+[Ambari]: https://ambari.apache.org/
 [Deploy_and_Configure_a_HDP_Cluster]: https://docs.hortonworks.com/HDPDocuments/Ambari-2.7.0.0/bk_ambari-installation/content/ch_Deploy_and_Configure_a_HDP_Cluster.html

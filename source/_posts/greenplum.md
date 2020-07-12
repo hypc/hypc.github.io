@@ -41,7 +41,7 @@ tags: [postgresql, greenplum]
 ## install greenplum
 sudo add-apt-repository -y ppa:greenplum/db
 sudo apt update -y && sudo apt install -y greenplum-db git tree vim
-echo "export GPHOME=/opt/greenplum-db-6.2.1" >> ~/.bashrc
+echo "export GPHOME=/opt/$(basename /opt/greenplum-db*)" >> ~/.bashrc
 echo '. $GPHOME/greenplum_path.sh' >> ~/.bashrc
 source ~/.bashrc
 

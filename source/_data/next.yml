@@ -35,8 +35,8 @@ menu:
 
 sidebar:
   # Sidebar Position.
-  position: left
-  #position: right
+  # position: left
+  position: right
 
 # Sidebar Avatar
 avatar:
