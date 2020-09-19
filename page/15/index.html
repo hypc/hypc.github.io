@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif?v=7.4.0">
+  <link rel="mask-icon" href="/images/avatar.gif?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hypc&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/page/15/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hypc&#39;s blog">
+<meta name="twitter:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+  <link rel="canonical" href="http://yoursite.com/page/15/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hypc's blog</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-131598830-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hypc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/docker-moodle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/20/docker-moodle/" class="post-title-link" itemprop="url">使用Docker部署Moodle系统</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-20 20:46:29" itemprop="dateCreated datePublished" datetime="2018-09-20T20:46:29+00:00">2018-09-20</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/20/docker-moodle/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/20/docker-moodle/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Moodle简介"><a href="#Moodle简介" class="headerlink" title="Moodle简介"></a>Moodle简介</h2><p><a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>是一个开源课程管理系统（CMS），也被称为学习管理系统（LMS）或虚拟学习环境（VLE）。</p>
+<p><a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>平台界面简单、精巧。使用者可以根据需要随时调整界面，增减内容。
+课程列表显示了服务器上每门课程的描述，包括是否允许访客使用，访问者可以对课程进行分类和搜索，按自己的需要学习课程。</p>
+<p><a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>平台还具有兼容和易用性。可以几乎在任何支持PHP的平台上安装，安装过程简单。只需要一个数据库（并且可以共享）。
+它具有全面的数据库抽象层，几乎支持所有的主流数据库（除了初始表定义）。
+利用<a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>，现今主要的媒体文件都可以进行传送，这使可以利用的资源极大丰富。
+在对媒体资源进行编辑时，利用的是用所见即所得的编辑器，这使得使用者无需经过专业培训，就能掌握Moodle的基本操作与编辑。
+<a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>注重全面的安全性，所有的表单都被检查，数据都被校验，cookie是被加密的。
+用户注册时，通过电子邮件进行首次登陆，且同一个邮件地址不能在同一门课程中进行重复注册，所有这些，都使得<a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>的安全性得到了加强。
+目前，<a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>项目仍然在不断的开发与完善中。</p>
+<p><a href="https://moodle.org/" target="_blank" rel="noopener">Moodle</a>是B/S模式的应用程序，但是一般而言，只适合于中小型学校。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/09/20/docker-moodle/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/alpine-timezone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/19/alpine-timezone/" class="post-title-link" itemprop="url">alpine设置时区</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-19 10:38:21" itemprop="dateCreated datePublished" datetime="2018-09-19T10:38:21+00:00">2018-09-19</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/19/alpine-timezone/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/19/alpine-timezone/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> apk update &amp;&amp; apk add ca-certificates \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apk add tzdata \</span></span><br><span class="line"><span class="bash">    &amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \</span></span><br><span class="line"><span class="bash">    &amp;&amp; <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/docker-compose-network-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/18/docker-compose-network-1/" class="post-title-link" itemprop="url">Docker Compose网络配置</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-18 14:49:30" itemprop="dateCreated datePublished" datetime="2018-09-18T14:49:30+00:00">2018-09-18</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/18/docker-compose-network-1/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/18/docker-compose-network-1/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>配置默认网络并设置子网：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">default:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line">    <span class="attr">ipam:</span></span><br><span class="line">      <span class="attr">driver:</span> <span class="string">default</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">subnet:</span> <span class="number">172.17</span><span class="number">.2</span><span class="number">.0</span><span class="string">/24</span></span><br></pre></td></tr></table></figure>
+<p>使用已存在的网络：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">default:</span></span><br><span class="line">    <span class="attr">external:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">other-existing-network</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/endian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/17/endian/" class="post-title-link" itemprop="url">字节序</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-17 13:48:23" itemprop="dateCreated datePublished" datetime="2018-09-17T13:48:23+00:00">2018-09-17</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/17/endian/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/17/endian/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>字节序，顾名思义就是字节的顺序。说详细点，就是大于一个字节类型的数据在内存中存放的顺序。
+通常情况下，开发时不会直接和字节序打交道，只有在跨平台或网络传输字节数据时会使用到。</p>
+<p>字节序按类型分为两种：<code>Little-Endian</code>和<code>Big-Endian</code>：</p>
+<ul>
+<li><strong>Little-Endian</strong>：低位字节排放在内存的低地址端，高位字节排放在内存的高地址端。</li>
+<li><strong>Big-Endian</strong>：高位字节排放在内存的低地址端，低位字节排放在内存的高地址端。</li>
+<li><strong>网络字节序</strong>：TCP/IP各层协议将字节序定义为<code>Big-Endian</code>，因此TCP/IP协议中使用的字节序通常称之为网络字节序。</li>
+</ul>
+<p>例：如果将<code>0x1234abcd</code>写入到以<code>0x0000</code>开始的内存中，则结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">         BE    LE</span><br><span class="line">0x0000  0x12  0xcd</span><br><span class="line">0x0001  0x34  0xab</span><br><span class="line">0x0002  0xab  0x34</span><br><span class="line">0x0003  0xcd  0x12</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/java-junit-muti-thread-parameterized/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/16/java-junit-muti-thread-parameterized/" class="post-title-link" itemprop="url">JUnit多线程参数化测试</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-16 17:42:57" itemprop="dateCreated datePublished" datetime="2018-09-16T17:42:57+00:00">2018-09-16</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/16/java-junit-muti-thread-parameterized/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/16/java-junit-muti-thread-parameterized/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>参数化测试本身是不支持多线程测试的，对于一些测试结果没有依赖的测试来说，单线程的测试执行效率相当低下。</p>
+<p>通过在测试用例中添加线程租，开启多个线程同时执行测试用例，并且在线程租中线程都执行完的时候结束测试，来达到优化测试效率的目的。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/09/16/java-junit-muti-thread-parameterized/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/java-junit-parameterized/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/16/java-junit-parameterized/" class="post-title-link" itemprop="url">JUnit参数化测试</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-16 17:32:23" itemprop="dateCreated datePublished" datetime="2018-09-16T17:32:23+00:00">2018-09-16</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/16/java-junit-parameterized/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/16/java-junit-parameterized/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>参数化测试的编写稍微有点麻烦（当然这是相对于<code>JUnit</code>中其它特性而言）：</p>
+<ol>
+<li>为准备使用参数化测试的测试类指定特殊的运行器<code>org.junit.runners.Parameterized</code>。</li>
+<li>为测试类声明几个变量，分别用于存放期望值和测试所用数据。</li>
+<li>为测试类声明一个使用注解<code>org.junit.runners.Parameterized.Parameters</code>修饰的，
+ 返回值为<code>java.util.Collection</code>的公共静态方法，并在此方法中初始化所有需要测试的参数对。</li>
+<li>为测试类声明一个带有参数的公共构造函数，并在其中为第二个环节中声明的几个变量赋值。</li>
+<li>编写测试方法，使用定义的变量作为参数进行测试。</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/09/16/java-junit-parameterized/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/15/volere-software-requirements-specification/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/15/volere-software-requirements-specification/" class="post-title-link" itemprop="url">软件需求规格说明模板目录</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-15 16:46:08" itemprop="dateCreated datePublished" datetime="2018-09-15T16:46:08+00:00">2018-09-15</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/15/volere-software-requirements-specification/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/15/volere-software-requirements-specification/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>项目驱动</strong>——描述了项目的理由和动机</p>
+<ol>
+<li><strong>项目的目标</strong>——投资构建产品的理由以及这样做我们希望取得的业务上的好处</li>
+<li><strong>客户、顾客和其他的利益相关者</strong>——产品涉及他们的利益或对他们产生影响</li>
+<li><strong>产品的用户</strong>——预期的最终用户，以及他们对产品可用性的影响</li>
+</ol>
+<p><strong>项目限制条件</strong>——加在项目和产品上的约束条件</p>
+<ol start="4">
+<li><strong>需求限制条件</strong>——项目的局限性和产品设计的约束条件</li>
+<li><strong>命名标准和定义</strong>——项目的词汇表</li>
+<li><strong>相关事实和假定</strong>——对产品产生一定影响的外部因素，或开发者所作的假定</li>
+</ol>
+<p><strong>功能需求</strong>——产品的功能</p>
+<ol start="7">
+<li><strong>工作的范围</strong>——针对的业务领域</li>
+<li><strong>产品的范围</strong>——定义预期产品的边界，以及它与相邻系统的连接情况</li>
+<li><strong>功能与数据需求</strong>——产品必须做的事情以及功能所操作的数据</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/09/15/volere-software-requirements-specification/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/git-alias/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/12/git-alias/" class="post-title-link" itemprop="url">Git常用别名</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-12 08:48:25" itemprop="dateCreated datePublished" datetime="2018-09-12T08:48:25+00:00">2018-09-12</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/12/git-alias/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/12/git-alias/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">alias.s</span>=status</span><br><span class="line"><span class="attr">alias.a</span>=!git add . &amp;&amp; git status</span><br><span class="line"><span class="attr">alias.au</span>=!git add -u . &amp;&amp; git status</span><br><span class="line"><span class="attr">alias.aa</span>=!git add . &amp;&amp; git add -u . &amp;&amp; git status</span><br><span class="line"><span class="attr">alias.c</span>=commit</span><br><span class="line"><span class="attr">alias.cm</span>=commit -m</span><br><span class="line"><span class="attr">alias.ca</span>=commit --amend</span><br><span class="line"><span class="attr">alias.ac</span>=!git add . &amp;&amp; git commit</span><br><span class="line"><span class="attr">alias.acm</span>=!git add . &amp;&amp; git commit -m</span><br><span class="line"><span class="attr">alias.l</span>=log --graph --all --pretty=format:<span class="string">'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'</span></span><br><span class="line"><span class="attr">alias.ll</span>=log --stat --abbrev-commit</span><br><span class="line"><span class="attr">alias.lg</span>=log --color --graph --pretty=format:<span class="string">'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)&lt;%an&gt;%Creset'</span> --abbrev-commit --date=relative</span><br><span class="line"><span class="attr">alias.llg</span>=log --color --graph --pretty=format:<span class="string">'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an &lt;%ae&gt;%Creset %C(bold green)%cr (%ci)'</span> --abbrev-commit</span><br><span class="line"><span class="attr">alias.last</span>=log --stat --abbrev-commit -<span class="number">1</span></span><br><span class="line"><span class="attr">alias.d</span>=diff</span><br><span class="line"><span class="attr">alias.master</span>=checkout master</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/09/12/git-alias/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/git-editor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/11/git-editor/" class="post-title-link" itemprop="url">修改Git默认编辑器</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-11 16:57:44" itemprop="dateCreated datePublished" datetime="2018-09-11T16:57:44+00:00">2018-09-11</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/11/git-editor/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/11/git-editor/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>使用<code>git config</code>设置：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.editor vim     <span class="comment"># 全局设置</span></span><br><span class="line">git config core.editor vim              <span class="comment"># 当前项目设置</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用环境变量<code>GIT_EDITOR</code>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GIT_EDITOR=vim</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/05/ssh-tunnel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/09/05/ssh-tunnel/" class="post-title-link" itemprop="url">SSH隧道</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-09-05 22:18:04" itemprop="dateCreated datePublished" datetime="2018-09-05T22:18:04+00:00">2018-09-05</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/05/ssh-tunnel/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/09/05/ssh-tunnel/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>通过使用SSH连接来建立的通道，它被称之为SSH隧道。</p>
+<h2 id="本地SSH隧道"><a href="#本地SSH隧道" class="headerlink" title="本地SSH隧道"></a>本地SSH隧道</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -N -f -L 8080:234.234.234.234:80 123.123.123.123    <span class="comment"># 通过SSH服务器（123.123.123.123）将远程机器（234.234.234.234）的80端口映射到本地8080端口</span></span><br><span class="line">curl -i http://localhost:8080   <span class="comment"># 访问本地8080端口相当于访问远程机器（234.234.234.234）的80端口</span></span><br></pre></td></tr></table></figure>
+<p>参数介绍：</p>
+<ul>
+<li><code>-N</code>: 不执行远程指令</li>
+<li><code>-f</code>: 后台执行ssh指令</li>
+<li><code>-L</code>: 做本地端口转发，冒号（:）分隔的三个参数分别是<ul>
+<li>本地端口号</li>
+<li>目标机器IP地址</li>
+<li>目标机器端口号</li>
+</ul>
+</li>
+<li>最后一个参数是远程SSH服务器地址</li>
+</ul>
+<h2 id="远程SSH隧道"><a href="#远程SSH隧道" class="headerlink" title="远程SSH隧道"></a>远程SSH隧道</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -N -f -C -R 8080:234.234.234.234:80 123.123.123.123      <span class="comment"># 将本地的80端口映射到远程服务器（123.123.123.123）的8080端口</span></span><br><span class="line"><span class="comment"># 切换到机器123.123.123.123上</span></span><br><span class="line">curl -i http://127.0.0.1:8080     <span class="comment"># 访问127.0.0.1的8080端口相当于访问机器234.234.234.234的80端口</span></span><br></pre></td></tr></table></figure>
+<p>参数介绍：</p>
+<ul>
+<li><code>-N</code>: 不执行远程指令</li>
+<li><code>-f</code>: 后台执行ssh指令</li>
+<li><code>-C</code>: 压缩请求数据</li>
+<li><code>-R</code>: 做远程端口转发，冒号（:）分隔的三个参数分别是：<ul>
+<li>目标机器端口号</li>
+<li>需要映射内部机器的IP地址</li>
+<li>本地端口号</li>
+</ul>
+</li>
+<li>最后一个参数是远程SSH服务器地址</li>
+</ul>
+<h2 id="Socks代理"><a href="#Socks代理" class="headerlink" title="Socks代理"></a>Socks代理</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -qtfnNC -D 0.0.0.0:7070 123.123.123.123  <span class="comment"># 通过123.123.123.123建立socks代理，并绑定到0.0.0.0的7070端口上</span></span><br></pre></td></tr></table></figure>
+<p>参数介绍：</p>
+<ul>
+<li><code>-q</code>: 静默模式</li>
+<li><code>-t</code>: 为远程系统上的ssh进程分配一个伪tty（终端）</li>
+<li><code>-f</code>: 后台执行ssh指令</li>
+<li><code>-n</code>: 将标准输出重定向到<code>/dev/null</code></li>
+<li><code>-N</code>: 不执行远程指令</li>
+<li><code>-C</code>: 压缩请求数据</li>
+<li><code>-D</code>: 绑定地址</li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>如果经常发现过一段时间SSH连接自动断开，可能原因是SSH客户端的<code>TCPKeepAlive</code>被关闭了，可以使用参数<code>-o TCPKeepAlive=yes</code>来开启。</li>
+<li>自动检查连接，<code>-o ServerAliveInterval=30</code>，表示每30s检查一次连接，
+<code>-o ServerAliveCountMax=3</code>表示服务器没有响应次数达到3次，则断开连接。</li>
+</ul>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="hypc">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">245</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">105</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/hypc" title="GitHub &rarr; https://github.com/hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https://hypc-pub.github.io/json-schema-tutorial/" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https://hypc-pub.github.io/redis-tutorial/" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https://hypc-pub.github.io/lua-tutorial/" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https://hypc-pub.github.io/design-patterns/" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https://hypc-pub.github.io/rfc6749/" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https://hypc-pub.github.io/django-tutorial/" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https://hypc-pub.github.io/python-style-guide/" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https://hypc-pub.github.io/volere-requirements-specification-template/" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https://hypc-pub.github.io/gopl-zh/" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https://hypc-pub.github.io/advanced-go-programming-book/" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

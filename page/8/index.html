@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif?v=7.4.0">
+  <link rel="mask-icon" href="/images/avatar.gif?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hypc&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/page/8/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hypc&#39;s blog">
+<meta name="twitter:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+  <link rel="canonical" href="http://yoursite.com/page/8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hypc's blog</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-131598830-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hypc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/05/gray-release/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/07/05/gray-release/" class="post-title-link" itemprop="url">灰度发布</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-07-05 16:00:23" itemprop="dateCreated datePublished" datetime="2019-07-05T16:00:23+00:00">2019-07-05</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/07/05/gray-release/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/05/gray-release/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>灰度发布（又名金丝雀发布）是指在黑与白之间，能够平滑过渡的一种发布方式。
+在其上可以进行A/B testing，即让一部分用户继续用产品特性A，一部分用户开始用产品特性B，
+如果用户对B没有什么反对意见，那么逐步扩大范围，把所有用户都迁移到B上面来。
+灰度发布可以保证整体系统的稳定，在初始灰度的时候就可以发现、调整问题，以保证其影响度。</p>
+<h2 id="灰度发布流程"><a href="#灰度发布流程" class="headerlink" title="灰度发布流程"></a>灰度发布流程</h2><p><img src="/images/gray-release-1.jpg" alt="灰度发布流程"></p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/pci-dss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/07/01/pci-dss/" class="post-title-link" itemprop="url">PCI DSS简介</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-07-01 09:24:37" itemprop="dateCreated datePublished" datetime="2019-07-01T09:24:37+00:00">2019-07-01</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/07/01/pci-dss/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/01/pci-dss/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://zh.pcisecuritystandards.org/" target="_blank" rel="noopener">PCI DSS</a> (支付卡行业数据安全标准) 旨在促进并增强持卡人的数据安全，便于统一的数据安全措施在全球范围内的广泛应用。
+<a href="https://zh.pcisecuritystandards.org/" target="_blank" rel="noopener">PCI DSS</a> 为意在保护帐户数据的技术和操作要求提供了一个基准。
+<a href="https://zh.pcisecuritystandards.org/" target="_blank" rel="noopener">PCI DSS</a> 适用于参与支付卡处理的所有实体 — 包括商户、处理商、收单机构、发卡机构和服务提供商。
+<a href="https://zh.pcisecuritystandards.org/" target="_blank" rel="noopener">PCI DSS</a> 还适用于存储、处理或传输持卡人数据 (CHD) 和/或敏感验证数据 (SAD) 的所有其他实体。</p>
+<table style="width: 720px; margin: auto;">
+    <tr>
+        <td><b>建立并维护安全的网络和系统</b></td>
+        <td>1. 安装并维护防火墙配置以保护持卡人数据<br>2. 不要使用供应商提供的默认系统密码和其他安全参数</td>
+    </tr>
+    <tr>
+        <td><b>保护持卡人数据</b></td>
+        <td>3. 保护存储的持卡人数据<br>4. 加密持卡人数据在开放式公共网络中的传输</td>
+    </tr>
+    <tr>
+        <td><b>维护漏洞管理计划</b></td>
+        <td>5. 为所有系统提供恶意软件防护并定期更新杀毒软件或程序<br>6. 开发并维护安全的系统和应用程序</td>
+    </tr>
+    <tr>
+        <td><b>实施强效访问控制措施</b></td>
+        <td>7. 按业务知情需要限制对持卡人数据的访问<br>8. 识别并验证对系统组件的访问<br>9. 限制对持卡人数据的物理访问</td>
+    </tr>
+    <tr>
+        <td><b>定期监控并测试网络</b></td>
+        <td>10. 跟踪并监控对网络资源和持卡人数据的所有访问<br>11. 定期测试安全系统和流程</td>
+    </tr>
+    <tr>
+        <td><b>维护信息安全政策</b></td>
+        <td>12. 维护针对所有工作人员的信息安全政策</td>
+    </tr>
+</table>
+
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/docker-frp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/05/29/docker-frp/" class="post-title-link" itemprop="url">使用FRP搭建内网穿透服务</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-05-29 13:46:38" itemprop="dateCreated datePublished" datetime="2019-05-29T13:46:38+00:00">2019-05-29</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/05/29/docker-frp/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/29/docker-frp/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://github.com/fatedier/frp" target="_blank" rel="noopener">frp</a>是一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp 协议，为 http 和 https 应用协议提供了额外的能力，且尝试性支持了点对点穿透。</p>
+<p>本文主要内容是『如何利用内网穿透访问内网Web服务』。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>一台有公网ip的服务器S1，ip为：x.x.x.x</li>
+<li>一台位于内网（没有公网ip）的服务器S2</li>
+<li>一个已经解析到公网ip的域名：test.yourdomain.com</li>
+<li>一个位于内网的Web服务，地址为：y.y.y.y:local_port</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/05/29/docker-frp/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/29/docker-verdaccio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/05/29/docker-verdaccio/" class="post-title-link" itemprop="url">使用verdaccio搭建npmjs服务</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-05-29 08:16:30" itemprop="dateCreated datePublished" datetime="2019-05-29T08:16:30+00:00">2019-05-29</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/05/29/docker-verdaccio/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/29/docker-verdaccio/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong><a href="https://verdaccio.org/" target="_blank" rel="noopener">verdaccio</a></strong>: A lightweight private npm proxy registry.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>直接使用<a href="https://hub.docker.com/r/verdaccio/verdaccio" target="_blank" rel="noopener">verdaccio/verdaccio</a>镜像启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm --name verdaccio -p 4873:4873 verdaccio/verdaccio</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/05/29/docker-verdaccio/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/docker-nextcloud-draw/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/05/05/docker-nextcloud-draw/" class="post-title-link" itemprop="url">使用Docker部署NextCloud和draw.io</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-05-05 10:43:09" itemprop="dateCreated datePublished" datetime="2019-05-05T10:43:09+00:00">2019-05-05</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/05/05/docker-nextcloud-draw/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/05/docker-nextcloud-draw/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong><a href="https://nextcloud.com/" target="_blank" rel="noopener">NextCloud</a></strong>是一款用于自建私有网盘的云存储开源软件，采用PHP+MySQL开发，
+功能类似百度云盘，提供了PC、IOS和Android三个同步客户端支持多种设备访问，
+用户可以很方便地与服务器上存储的文件、日程安排、通讯录、书签等重要数据保持同步，
+还支持其他同步来源：Amazon S3、Dropbox、FTP、Google Drive、OpenStack Object Storage、SMB、WebDAV、SFTP。</p>
+<p><strong><a href="https://www.draw.io/" target="_blank" rel="noopener">draw.io</a></strong>是一个强大简洁的在线的绘图网站，支持流程图，UML图，架构图，原型图等图标。
+支持Github，Google Drive, One drive等网盘同步，并且永久免费。
+如果觉得使用Web版不方便，draw.io 也提供了多平台的离线桌面版可供下载。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/05/05/docker-nextcloud-draw/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/24/django-static-files/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/04/24/django-static-files/" class="post-title-link" itemprop="url">Django静态文件配置</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-04-24 11:15:07" itemprop="dateCreated datePublished" datetime="2019-04-24T11:15:07+00:00">2019-04-24</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/04/24/django-static-files/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/24/django-static-files/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>首先，需要保证<code>INSTALLED_APPS</code>中有<code>django.contrib.staticfiles</code>模块：</p>
+<p> <img src="/images/django-static-files-1.png" alt></p>
+</li>
+<li><p>在<code>settings.py</code>中配置<code>STATIC_ROOT</code>：</p>
+<p> <img src="/images/django-static-files-2.png" alt></p>
+<p> <strong>注意</strong>，这一步执行完之后可以执行<code>python manage.py collectstatic</code>将所有App的静态资源都收集到<code>STATIC_ROOT</code>目录下。</p>
+</li>
+<li><p>在<code>urls.py</code>中添加静态文件路由配置：</p>
+<p> <img src="/images/django-static-files-3.png" alt></p>
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/docker-nextcloud-collabora/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/04/22/docker-nextcloud-collabora/" class="post-title-link" itemprop="url">使用Docker部署NextCloud和Collabora</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-04-22 14:54:45" itemprop="dateCreated datePublished" datetime="2019-04-22T14:54:45+00:00">2019-04-22</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/04/22/docker-nextcloud-collabora/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/22/docker-nextcloud-collabora/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong><a href="https://nextcloud.com/" target="_blank" rel="noopener">NextCloud</a></strong>是一款用于自建私有网盘的云存储开源软件，采用PHP+MySQL开发，
+功能类似百度云盘，提供了PC、IOS和Android三个同步客户端支持多种设备访问，
+用户可以很方便地与服务器上存储的文件、日程安排、通讯录、书签等重要数据保持同步，
+还支持其他同步来源：Amazon S3、Dropbox、FTP、Google Drive、OpenStack Object Storage、SMB、WebDAV、SFTP。</p>
+<p><strong><a href="https://www.collabora.com/" target="_blank" rel="noopener">Collabora</a></strong>是一个功能强大的基于libreoffice的在线办公室，
+它支持所有主要文档、电子表格和演示文件格式，您可以将这些格式集成到自己的基础结构中。
+主要功能是协同编辑和卓越的Office文件格式支持。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/04/22/docker-nextcloud-collabora/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/privoxy-socks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/04/19/privoxy-socks/" class="post-title-link" itemprop="url">使用Privoxy将Socks代理转为Http代理</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-04-19 13:13:55" itemprop="dateCreated datePublished" datetime="2019-04-19T13:13:55+00:00">2019-04-19</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/04/19/privoxy-socks/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/19/privoxy-socks/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://www.privoxy.org/" target="_blank" rel="noopener">Privoxy</a>是一款带过滤功能的代理服务器，针对HTTP、HTTPS协议。
+通过Privoxy的过滤功能，用户可以保护隐私、对网页内容进行过滤、管理cookies，以及拦阻各种广告等。</p>
+<h2 id="安装Privoxy"><a href="#安装Privoxy" class="headerlink" title="安装Privoxy"></a>安装Privoxy</h2><p>ubuntu:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y privoxy</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> privoxy</span><br><span class="line">sudo systemctl start privoxy</span><br></pre></td></tr></table></figure>
+<p>centos:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y privoxy</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> privoxy</span><br><span class="line">sudo systemctl start privoxy</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/04/19/privoxy-socks/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/kms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/04/15/kms/" class="post-title-link" itemprop="url">搭建KMS服务器</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-04-15 14:29:34" itemprop="dateCreated datePublished" datetime="2019-04-15T14:29:34+00:00">2019-04-15</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/04/15/kms/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/15/kms/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Key Management Service（简称:KMS），这个功能是在Windows Vista之后的产品中的一种新型产品激活机制。
+我们可以利用手里闲置的VPS安装<a href="https://github.com/Wind4/vlmcsd" target="_blank" rel="noopener">vlmcsd</a>来搭建KMS激活服务器，
+这篇文章以CentOS为例，当然vlmcsd并不局限限于CentOS，如Ubuntu、Windows、MacOS等都可以安装服务端，原理和方法相同。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/04/15/kms/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/docker-plex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/04/15/docker-plex/" class="post-title-link" itemprop="url">Deploying Plex in Docker</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-04-15 08:20:20" itemprop="dateCreated datePublished" datetime="2019-04-15T08:20:20+00:00">2019-04-15</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/04/15/docker-plex/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/15/docker-plex/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://www.plex.tv/" target="_blank" rel="noopener">Plex</a>是一套媒体播放器及媒体服务器软件，由于Plex Media Server和Plex Media Player组成，
+主要功能是存储+索引+转码+在线播放。Plex Media Server不是简单地帮你存储分类影音文件，
+它还能分析影片的信息从而从IMDB等数据库补全影片介绍等信息，进行索引以方便搜索。</p>
+<p><a href="https://www.plex.tv/" target="_blank" rel="noopener">Plex</a>可用于Windows、Android、Linux、OS X、FreeBSD和XBox，PS，各种TV，树莓派等，可以说是全平台通吃，
+甚至与Bitcasa、Box和Dropbox等云服务兼容，Plex支持在线格式转换，支持将视频、音乐等各类文件转化为流至移动设备、智能电视和电子媒体播放器上。</p>
+<h2 id="部署服务"><a href="#部署服务" class="headerlink" title="部署服务"></a>部署服务</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="attr">plex:</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">plexinc/pms-docker</span></span><br><span class="line">        <span class="attr">container_name:</span> <span class="string">plex</span></span><br><span class="line">        <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">        <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">        <span class="attr">environment:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">ADVERTISE_IP=http://192.168.31.160:32400/</span></span><br><span class="line">        <span class="attr">volumes:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">./media:/data</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="hypc">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">245</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">105</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/hypc" title="GitHub &rarr; https://github.com/hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https://hypc-pub.github.io/json-schema-tutorial/" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https://hypc-pub.github.io/redis-tutorial/" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https://hypc-pub.github.io/lua-tutorial/" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https://hypc-pub.github.io/design-patterns/" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https://hypc-pub.github.io/rfc6749/" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https://hypc-pub.github.io/django-tutorial/" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https://hypc-pub.github.io/python-style-guide/" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https://hypc-pub.github.io/volere-requirements-specification-template/" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https://hypc-pub.github.io/gopl-zh/" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https://hypc-pub.github.io/advanced-go-programming-book/" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

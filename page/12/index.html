@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif?v=7.4.0">
+  <link rel="mask-icon" href="/images/avatar.gif?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hypc&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/page/12/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hypc&#39;s blog">
+<meta name="twitter:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+  <link rel="canonical" href="http://yoursite.com/page/12/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hypc's blog</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-131598830-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hypc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/hadoop-mapreduce-logical-data-flow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/12/21/hadoop-mapreduce-logical-data-flow/" class="post-title-link" itemprop="url">MapReduce逻辑数据流图</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-12-21 14:00:39" itemprop="dateCreated datePublished" datetime="2018-12-21T14:00:39+00:00">2018-12-21</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/12/21/hadoop-mapreduce-logical-data-flow/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/21/hadoop-mapreduce-logical-data-flow/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/images/hadoop_mapreduce_logical_data_flow.jpg" alt="MapReduce逻辑数据流图"></p>
+<ol>
+<li><code>input</code>：将数据转换成<code>map</code>的输入；</li>
+<li><code>map</code>：处理输入的数据，每一行输入处理之后得到一行输出，输出是一个<code>key-value</code>格式的数据；</li>
+<li><code>shuffle</code>：将<code>map</code>得到的数据按<code>key</code>进行组合，最后得到一个<code>key-values</code>的数据；</li>
+<li><code>reduce</code>：将每一个<code>key</code>对应的<code>values</code>进行处理，得到结果<code>key-value2</code>；</li>
+<li><code>output</code>：输出结果。</li>
+</ol>
+<p>这里需要理解的一个事情是，value的数据类型不仅仅是int，它可以是任意类型，包括数组。</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/14/docker-gogs-drone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/12/14/docker-gogs-drone/" class="post-title-link" itemprop="url">Gogs + Drone搭建私有CI/CD平台</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-12-14 08:55:17" itemprop="dateCreated datePublished" datetime="2018-12-14T08:55:17+00:00">2018-12-14</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/12/14/docker-gogs-drone/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/14/docker-gogs-drone/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="attr">gogs:</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">gogs/gogs</span></span><br><span class="line">        <span class="attr">container_name:</span> <span class="string">gogs</span></span><br><span class="line">        <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="number">3000</span><span class="string">:3000</span></span><br><span class="line">        <span class="attr">volumes:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">./data:/data</span></span><br><span class="line">    <span class="attr">drone:</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">drone/drone:1.0.1</span></span><br><span class="line">        <span class="attr">container_name:</span> <span class="string">drone</span></span><br><span class="line">        <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">        <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="number">80</span><span class="string">:80</span></span><br><span class="line">        <span class="attr">environment:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">DRONE_GIT_ALWAYS_AUTH=false</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">DRONE_GOGS_SERVER=http://gogs.xxxx.com</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">DRONE_RUNNER_CAPACITY=2</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">DRONE_SERVER_HOST=drone.xxxx.com</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">DRONE_SERVER_PROTO=http</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">DRONE_TLS_AUTOCERT=false</span></span><br><span class="line">        <span class="attr">volumes:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">./data:/data</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">/var/run/docker.sock:/var/run/docker.sock</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/postgresql-timestamp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/11/29/postgresql-timestamp/" class="post-title-link" itemprop="url">PostgreSQL日期时间</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-11-29 09:45:44" itemprop="dateCreated datePublished" datetime="2018-11-29T09:45:44+00:00">2018-11-29</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/29/postgresql-timestamp/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/29/postgresql-timestamp/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>查询时区</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> pg_timezone_names;</span><br></pre></td></tr></table></figure>
+<p><strong>格式化时间</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 格式化当前时间</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="keyword">now</span>() <span class="keyword">at</span> <span class="built_in">time</span> zone <span class="string">'Asia/Shanghai'</span>, <span class="string">'YYYY-MM-DD HH24:MI:SS+8:00'</span>);</span><br><span class="line"><span class="comment">-- 格式化指定时间</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="built_in">timestamp</span> <span class="string">'2018-11-29 17:00:00'</span> <span class="keyword">at</span> <span class="built_in">time</span> zone <span class="string">'Asia/Shanghai'</span>, <span class="string">'YYYY-MM-DD HH24:MI:SS+8:00'</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>反格式化时间</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取当前时间的0点</span></span><br><span class="line"><span class="keyword">select</span> timestamptz(to_char(<span class="keyword">now</span>() <span class="keyword">at</span> <span class="built_in">time</span> zone <span class="string">'Asia/Shanghai'</span>, <span class="string">'YYYY-MM-DD 00:00:00+8:00'</span>));</span><br><span class="line"><span class="comment">-- 获取指定时间的0点</span></span><br><span class="line"><span class="keyword">select</span> timestamptz(to_char(<span class="built_in">timestamp</span> <span class="string">'2018-11-29 17:00:00'</span> <span class="keyword">at</span> <span class="built_in">time</span> zone <span class="string">'Asia/Shanghai'</span>, <span class="string">'YYYY-MM-DD 00:00:00+8:00'</span>));</span><br></pre></td></tr></table></figure>
+<p><strong>日期计算</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">now</span>() - <span class="string">'1 month'</span>::<span class="built_in">interval</span>;     <span class="comment">-- 1月前</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">now</span>() + <span class="string">'1 hour'</span>::<span class="built_in">interval</span>;      <span class="comment">-- 1小时后</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">now</span>() + <span class="string">'1 year 1 month 1 day 1 hour 1 min 1 sec'</span>::<span class="built_in">interval</span>;     <span class="comment">-- 1年1月1日1小时1分钟1秒后</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/big-data-learning-route/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/11/24/big-data-learning-route/" class="post-title-link" itemprop="url">大数据学习路线</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-11-24 14:17:46" itemprop="dateCreated datePublished" datetime="2018-11-24T14:17:46+00:00">2018-11-24</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/24/big-data-learning-route/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/24/big-data-learning-route/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>主要分为7个阶段：</p>
+<blockquote>
+<p><code>入门知识</code> → <code>Java基础</code> → <code>Scala基础</code> → <code>Hadoop技术模块</code> → <code>Hadoop项目实战</code> → <code>Spark技术模块</code> → <code>大数据项目实战</code></p>
+</blockquote>
+<h2 id="阶段一：入门知识"><a href="#阶段一：入门知识" class="headerlink" title="阶段一：入门知识"></a>阶段一：入门知识</h2><p>学习入门知识这一部分主要针对的是新手，在学习之前需要先掌握基本的数据库知识。
+MySQL是一个DBMS（数据库管理系统），是最流行的关系型数据库管理系统（关系数据库，
+是建立在关系数据库模型基础上的数据库，借助于集合代数等概念和方法来处理数据库中的数据）。
+MongoDB是IT行业非常流行的一种非关系型数据库（NoSQL），
+其灵活的数据存储方式备受当前IT从业人员的青睐。
+而Redis是一个开源、支持网络、基于内存、键值对存储数据库。两者都非常有必要了解。</p>
+<ol>
+<li>Linux基础入门</li>
+<li>Vim编辑器</li>
+<li>Git实战教程</li>
+<li>MySQL基础课程</li>
+<li>MongoDB基础教程</li>
+<li>Redis基础教程</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/11/24/big-data-learning-route/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/how-to-write-articles/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/11/13/how-to-write-articles/" class="post-title-link" itemprop="url">怎么写技术文章</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-11-13 09:56:30" itemprop="dateCreated datePublished" datetime="2018-11-13T09:56:30+00:00">2018-11-13</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/13/how-to-write-articles/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/13/how-to-write-articles/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>互联网发展很快，以前程序员一个人能干的活现在慢慢的被细分成多人协作，
+常见的职位有UI、UE、产品、前端、测试、后端、DBA，PE。
+但是没有哪个职位是专门负责写文档的，所有文档都是各个岗位的人兼职在做，毕竟大家都识字写两篇wiki不难。
+程序员可能会写接口文档，PM可能会写产品文档，UE可能会写交互文档，但并不是每个人都能写好文档。</p>
+<p>写文档这件事很重要，也是一项很有前途的技能。但是为什么没有专业的人去做这样一件专业的事情呢？
+我猜测是大家都不重视，好比我是程序员里文档写的最好的和我是程序员里代码写的最快的哪个更有份量？</p>
+<p>怎样的技术文档才算好文档呢？</p>
+<ol>
+<li><p>结构清晰</p>
+<p> 所谓结构清晰就是用户能马上找到自己要查找的知识点在哪，分类清晰。
+ 有些文档爱用模棱两个的词，比如<code>1. 常见问题</code>、<code>2. 热点问题</code>、<code>3. 高频问题</code>。</p>
+</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/11/13/how-to-write-articles/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/redesign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/11/12/redesign/" class="post-title-link" itemprop="url">重新设计的原因</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-11-12 17:25:03" itemprop="dateCreated datePublished" datetime="2018-11-12T17:25:03+00:00">2018-11-12</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/12/redesign/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/12/redesign/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>下面阐述了一些导致重新设计的一般原因，以及解决这些问题所用到的设计模式：</p>
+<ul>
+<li><p><strong>通过显示地指定一个类来创建对象</strong></p>
+<p>  在创建对象时指定类名将使你受特定实现的约束而不是特定接口的约束。
+  这会使未来的变化更复杂。要避免这种情况，应该间接地创建对象。</p>
+<p>  设计模式：<code>Abstract Factory</code>、<code>Factory Method</code>、<code>Prototype</code>。</p>
+</li>
+<li><p><strong>对特殊操作的依赖</strong></p>
+<p>  当你为请求指定一个特殊的操作时，完成该请求的方式就固定下来了。
+  为避免把请求代码写死，你将可以在编译时刻或运行时刻很方便地改变响应请求的方法。</p>
+<p>  设计模式：<code>Chain of Resposibility</code>、<code>Command</code>。</p>
+</li>
+<li><p><strong>对硬件和软件平台的依赖</strong></p>
+<p>  外部的操作系统接口和应用编程接口（API）在不同的软硬件平台上是不同的。
+  依赖于特定平台的软件将很难移植到其他平台上，甚至都很难跟上本地平台的更新。
+  所以设计系统时限制其平台相关性就很重要了。</p>
+<p>  设计模式：<code>Abstract Factory</code>、<code>Bridge</code>。</p>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/11/12/redesign/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/10/java-interview-questions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/11/10/java-interview-questions/" class="post-title-link" itemprop="url">Java面试题</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-11-10 09:50:33" itemprop="dateCreated datePublished" datetime="2018-11-10T09:50:33+00:00">2018-11-10</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/10/java-interview-questions/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/10/java-interview-questions/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>面向对象的特征有哪些方面？</li>
+<li>访问修饰符<code>public</code>、<code>private</code>、<code>protected</code>以及不写（默认）时的区别？</li>
+<li><code>String</code>是最基本的数据类型吗？</li>
+<li><code>float f=3.4;</code>是否正确？</li>
+<li><code>short s1 = 1; s1 = s1 + 1;</code>有错吗?<code>short s1 = 1; s1 += 1;</code>有错吗？</li>
+<li>Java有没有<code>goto</code>？</li>
+<li><code>int</code>和<code>Integer</code>有什么区别？</li>
+<li><code>&amp;</code>和<code>&amp;&amp;</code>的区别？</li>
+<li>解释内存中的栈(stack)、堆(heap)和静态区(static area)的用法。</li>
+<li><code>Math.round(11.5)</code> 等于多少？<code>Math.round(-11.5)</code>等于多少？</li>
+<li><code>switch</code>是否能作用在<code>byte</code>上，是否能作用在<code>long</code>上，是否能作用在<code>String</code>上？</li>
+<li>用最有效率的方法计算2乘以8？</li>
+<li>数组有没有<code>length()</code>方法？<code>String</code>有没有<code>length()</code>方法？</li>
+<li>在Java中，如何跳出当前的多重嵌套循环？</li>
+<li>构造器（constructor）是否可被重写（override）？</li>
+<li>两个对象值相同(<code>x.equals(y) == true</code>)，但却可有不同的hash code，这句话对不对？</li>
+<li>是否可以继承<code>String</code>类？</li>
+<li>当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递？</li>
+<li><code>String</code>和<code>StringBuilder</code>、<code>StringBuffer</code>的区别？</li>
+<li>重载（Overload）和重写（Override）的区别。重载的方法能否根据返回类型进行区分？
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/11/10/java-interview-questions/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/talking-about-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/11/01/talking-about-study/" class="post-title-link" itemprop="url">论学习</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-11-01 08:35:23" itemprop="dateCreated datePublished" datetime="2018-11-01T08:35:23+00:00">2018-11-01</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/01/talking-about-study/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/01/talking-about-study/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>论语中有这样一句著名的评价：“以其好学之心，假之以年，则不日而化矣”。
+其意思就是说，倘若人能够有一颗好学的心，那么几年以后，
+这个人不可同日而语，必将取得大的成就。</p>
+<p>“性相近，习相远也”。每一个人生下来是没有什么区别的，而恰恰是后天学习让他们各有所长，
+从而走上了不同的岗位，走上了不同的领域。学习之重，是孔圣人一直所强调的。
+学习是一个人由无知走上智慧的唯一之路，要想成大事业，必须具备相关的知识，
+否则就是白日做梦。孔子说“学而时习之，不亦乐乎？十室之邑，必有忠信如丘者焉，
+不如丘之好学也”。可见，学习的重要性远远大于了天资等先天条件，勤能补拙，
+倘若能够早点认识到学习的重要性，那么你就比别人早到终点一步。</p>
+<p>好学首先表现为勤奋，懒惰的人天天口头上吵着要学习，但是却懒于付出行动，
+丝毫收获不到成果。勤奋的学习理念，端正的学习态度是好学之心不可缺少的两大元素。</p>
+<p>勤奋的人才有可能成功。当有人问鲁迅先生为什么能在文学上取得如此大的成就时，
+鲁迅先生说：“我没有什么天分，我不过是把别人喝咖啡的时间用来读书、写字罢了”。
+这就是成功的秘籍。
+勤奋是大多数平庸的人懒于去做的事情，他们可以找到各种理由来安慰自己，
+把自己的好学之心扼杀在摇篮中：今天周末，怎么能学习呢，这么好的天气应该去公园中打牌；
+算了，今天太累了，看书的计划取消吧，改日再看；
+这书有什么好看的，看了以后也会忘，不如不看，出去玩会……
+长期以往，你便失去了学习的习惯，好学对于你而言就成了神话。</p>
+<p>无论对于个人和集体，学习都是不可少的一个环节。没有好学之心，个人不能进步；
+没有好学的氛围，集体的发展也停滞不前。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/11/01/talking-about-study/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/30/about-service/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/10/30/about-service/" class="post-title-link" itemprop="url">服务说明文件</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-30 21:25:07" itemprop="dateCreated datePublished" datetime="2018-10-30T21:25:07+00:00">2018-10-30</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/10/30/about-service/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/30/about-service/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>对于每一个服务而言，都应有一个清晰的服务说明，描述当前服务的信息，同时帮助团队更快地理解并快速上手。
+譬如，在笔者的微服务实践过程中，对于每一个代码库，其服务说明都包括如下几个部分。</p>
+<h2 id="服务介绍"><a href="#服务介绍" class="headerlink" title="服务介绍"></a>服务介绍</h2><ul>
+<li>服务提供什么功能，譬如产品服务主要提供产品数据的获取或者存储。</li>
+<li>谁是服务的消费者。譬如产品服务的消费者为电商的前端网站系统或者CRM系统。</li>
+</ul>
+<h2 id="服务维护者"><a href="#服务维护者" class="headerlink" title="服务维护者"></a>服务维护者</h2><ul>
+<li>挑选1~2个团队的成员，作为服务的负责人，登记其姓名、电子邮件、电话等联系方式，以便其他团队遇到问题能及时找到服务的负责人。</li>
+</ul>
+<h2 id="服务可用期"><a href="#服务可用期" class="headerlink" title="服务可用期"></a>服务可用期</h2><ul>
+<li>服务可用周期，如7×24小时，或周一~周五（7:00~19:00）等。</li>
+<li>可用率，可用率是指服务可以正常访问的时间占总时间的百分比，如99.9%或者99%。
+如果服务一天内都可以访问，则服务当天的可用率为100%。
+如果服务有3分钟访问中断，而一天共有1440分钟，那么服务的可用率为： ((1440 - 3) / 1440) * 100%，也就是99.79%。</li>
+<li>响应时间，指服务返回数据的可接受响应时间。譬如为0.5~1秒。</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/10/30/about-service/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/30/login-with-third-account/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2018/10/30/login-with-third-account/" class="post-title-link" itemprop="url">第三方账号登陆还是自主账号登录</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2018-10-30 21:16:39" itemprop="dateCreated datePublished" datetime="2018-10-30T21:16:39+00:00">2018-10-30</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/10/30/login-with-third-account/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/30/login-with-third-account/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先来看一下自主账号体系与第三方账号登录体系的利弊（注：文中的“第三方”指微博、QQ、人人等平台）：</p>
+<ul>
+<li><p><strong>对用户</strong></p>
+<p>  对用户而言，第三方账号登录带来最大的好处就是方便。
+  一方面可以省去一个注册流程，另一方面也不用费心去记各种账号密码，可以用微博等账号一号走遍天下。
+  另外通过微博、QQ等平台可以更容易地对好友进行分享并与好友实现互动。
+  这些好处让许多比较“懒”的用户会更倾向于用第三方账号体系登录。</p>
+<p>  而第三方账号登录带来的一个巨大问题就是隐私安全问题。
+  虽然现在第三方账号登录普遍使用OAuth技术，可以让你无需将微博等第三方平台的用户名和密码提供给应用，
+  在一定程度上保证了用户名与密码的安全。
+  但通过授权该应用却可以访问用户的很多资源，比如评论、好友、生日等信息，
+  而且许多在授权时都是默认选项，用户非常容易因此就泄露了自己的信息。
+  许多应用在授权时还会默认在微博等第三方平台同步状态，这等于将你用了什么应用，
+  在应用里做了什么都公诸于众，让用户感觉毫无隐私可言（比如用了某款婚恋应用你却不想让人知道）。
+  所以对个人信息敏感的用户可能就不会选择用第三方账号登陆体系。</p>
+</li>
+<li><p><strong>对开发者</strong></p>
+<p>  对开发者而言，第三方账号登陆的好处主要是有三点，一点是提升了用户的注册转化率，
+  降低了进入的门槛。另一点就是可以利用微博、人人等平台的资源，提高自己的知名度。
+  还有就是可以省去自主登陆体系的开发工作。提升用户注册转化率是因为给了用户更方便的路径，
+  减少了因嫌注册麻烦而流失的用户；连接了微博等第三方平台，
+  可以通过信息在该平台的同步提升自己产品的曝光率，同时可以通过授权获得用户的粉丝、好友，并进行针对性的营销。</p>
+<p>  而对开发者不好的地方就是如果没有较多的授权，无法掌握用户的全部信息。
+  从某种角度而言用户还是在微博、人人等平台下，自己没有累计下用户的沉淀，
+  虽说开放是现在的主旋律，但总还是受制于各大平台，万一哪天开放的策略有变或平台以用户相要挟，开发者也没有什么太好的反击办法。</p>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2018/10/30/login-with-third-account/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="hypc">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">245</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">105</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/hypc" title="GitHub &rarr; https://github.com/hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https://hypc-pub.github.io/json-schema-tutorial/" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https://hypc-pub.github.io/redis-tutorial/" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https://hypc-pub.github.io/lua-tutorial/" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https://hypc-pub.github.io/design-patterns/" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https://hypc-pub.github.io/rfc6749/" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https://hypc-pub.github.io/django-tutorial/" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https://hypc-pub.github.io/python-style-guide/" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https://hypc-pub.github.io/volere-requirements-specification-template/" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https://hypc-pub.github.io/gopl-zh/" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https://hypc-pub.github.io/advanced-go-programming-book/" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>

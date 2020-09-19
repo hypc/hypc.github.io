@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif?v=7.4.0">
+  <link rel="mask-icon" href="/images/avatar.gif?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hypc&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hypc&#39;s blog">
+<meta name="twitter:description" content="业精于勤荒于嬉, 行成于思毁于随~">
+  <link rel="canonical" href="http://yoursite.com/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>hypc's blog</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-131598830-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hypc's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+  <div id="posts" class="posts-expand">
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/07/clear-ram-cache-and-swap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/02/07/clear-ram-cache-and-swap/" class="post-title-link" itemprop="url">在Linux上如何清除Cache和Swap</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-02-07 10:35:28" itemprop="dateCreated datePublished" datetime="2020-02-07T10:35:28+00:00">2020-02-07</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/02/07/clear-ram-cache-and-swap/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/07/clear-ram-cache-and-swap/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Linux系统中有先进的缓存机制，会针对dentry（用于VFS，加速文件路径名到inode的转换）、
+Buffer Cache（针对磁盘块的读写）和Page Cache（针对文件inode的读写）进行缓存操作，有效缩短 I/O系统调用（比如read、write）的时间。
+但当进行了大量文件操作之后，缓存会把内存资源基本用光，导致系统缓慢，使用swap空间，影响了性能，这时就需要清理缓存了。</p>
+<h2 id="如何清除Cache"><a href="#如何清除Cache" class="headerlink" title="如何清除Cache"></a>如何清除Cache</h2><p>在清除Cache之前，先执行<a href="https://man.linuxde.net/sync" target="_blank" rel="noopener">sync</a>命令将缓冲区的数据写入磁盘，
+然后通过向文件<code>/proc/sys/vm/drop_caches</code>写入值<code>1</code>、<code>2</code>或<code>3</code>的方式来清除Cache：</p>
+<p><em>注意：文件<code>/proc/sys/vm/drop_caches</code>只有在进行写操作时才会触发清除cache操作</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 仅清除页面缓存（PageCache）</span></span><br><span class="line">sync; <span class="built_in">echo</span> 1 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"><span class="comment"># 2. 清除目录项和inode</span></span><br><span class="line">sync; <span class="built_in">echo</span> 2 &gt; /proc/sys/vm/drop_caches</span><br><span class="line"><span class="comment"># 3. 清除页面缓存，目录项和inode</span></span><br><span class="line">sync; <span class="built_in">echo</span> 3 &gt; /proc/sys/vm/drop_caches</span><br></pre></td></tr></table></figure>
+<p>第一条命令是最安全的，它只会清除页面缓存，一般情况下，我们只需要执行第一条命令即可。
+在生产环境中，不建议执行第三条命令，除非你明确知道你需要执行什么。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/02/07/clear-ram-cache-and-swap/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/postgres-group-prerows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/01/21/postgres-group-prerows/" class="post-title-link" itemprop="url">Postgres分组统计后取前几行</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-21 11:37:59" itemprop="dateCreated datePublished" datetime="2020-01-21T11:37:59+00:00">2020-01-21</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/21/postgres-group-prerows/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/21/postgres-group-prerows/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>使用<code>ROW_NUMBER() OVER()</code>来实现此功能，语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROW_NUMBER() OVER([PARTITION BY col1] ORDER BY col2 [DESC])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ROW_NUMBER: 为返回的记录定义行编号</li>
+<li>PARTITION BY col1: 根据字段col1进行分组</li>
+<li>ORDER BY col2: 按字段col2进行排序</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/01/21/postgres-group-prerows/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/21/calibre-auto-cover/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/01/21/calibre-auto-cover/" class="post-title-link" itemprop="url">Calibre一键生成封面</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-21 11:06:25" itemprop="dateCreated datePublished" datetime="2020-01-21T11:06:25+00:00">2020-01-21</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/21/calibre-auto-cover/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/21/calibre-auto-cover/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>刚刚写了个爬虫，抓取了infoq上的电子书：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">minibooks/</span><br><span class="line">    |-- AI前线特刊：AI领域2017进展总结/</span><br><span class="line">    |   |-- AI前线特刊：AI领域2017进展总结.pdf</span><br><span class="line">    |   |-- cover.jpg</span><br><span class="line">    |   |-- metadata.json</span><br><span class="line">    |   |-- metadata.opf</span><br><span class="line">    |-- AI商业化下的技术演进/</span><br><span class="line">    |   |-- AI商业化下的技术演进.pdf</span><br><span class="line">    |   |-- cover.jpg</span><br><span class="line">    |   |-- metadata.json</span><br><span class="line">    |   |-- metadata.opf</span><br><span class="line">    |-- CNUTCon特刊：智能时代运维最佳实践/</span><br><span class="line">    |   |-- CNUTCon特刊：智能时代运维最佳实践.pdf</span><br><span class="line">    |   |-- cover.jpg</span><br><span class="line">    |   |-- metadata.json</span><br><span class="line">    |   |-- metadata.opf</span><br><span class="line">    |-- Cloud 2.0时代，华为云的技术探秘与实践/</span><br><span class="line">    |   |-- Cloud 2.0时代，华为云的技术探秘与实践.pdf</span><br><span class="line">    |   |-- cover.jpg</span><br><span class="line">    |   |-- metadata.json</span><br><span class="line">    |   |-- metadata.opf</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/01/21/calibre-auto-cover/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/14/docker-redash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/01/14/docker-redash/" class="post-title-link" itemprop="url">使用Docker快速搭建Redash服务</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-14 09:41:32" itemprop="dateCreated datePublished" datetime="2020-01-14T09:41:32+00:00">2020-01-14</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/14/docker-redash/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/14/docker-redash/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://redash.io/" target="_blank" rel="noopener">Redash</a>是一款开源的BI工具，提供了基于web的数据库查询和数据可视化功能。</p>
+<video width="720" autoplay loop muted>
+    <source src="/images/redash-intro-720.mp4" type="video/mp4">
+</video>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/01/14/docker-redash/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/02/greenplum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/01/02/greenplum/" class="post-title-link" itemprop="url">GreenPlum</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2020-01-02 10:29:41" itemprop="dateCreated datePublished" datetime="2020-01-02T10:29:41+00:00">2020-01-02</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/01/02/greenplum/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/02/greenplum/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://greenplum.org/" target="_blank" rel="noopener">Greenplum</a>数据库，一个用于分析、机器学习和人工智能的开源大规模并行数据平台。</p>
+<ul>
+<li><strong>一次打包到处运行的平台</strong>：不管是裸机、私有云还是公有云。不受限于硬件环境和平台，用户可以灵活的选择最适合自己的方案，迁移代价低。
+硬件环境的普适性，提供了极大的灵活性，解放了硬件平台的制约和绑定，为客户解决了后顾之忧。
+使用 Greenplum 可以在其间无缝迁移，开发、运维人员不需要学习新的数据库处理技术。</li>
+<li><strong>处理和分析各种数据源的数据的平台</strong>：支持各种数据源，包括 Hadoop、HIVE、HBase、S3、Gemfire、各种数据库和文件等，不需要移动数据，
+避免了数据加载的复杂性，和其带来的数据不一致的问题。</li>
+<li><strong>支持各种数据格式的平台</strong>：不管是结构化、半结构化（XML、JSON、KV）还是非结构化，譬如文本数据、GIS数据、图数据等。</li>
+<li><strong>具有强大内核的平台</strong>：Greenplum 具有强大的内核技术，包括数据水平分布、并行查询执行、专业优化器、线性扩展能力、多态存储、资源管理、高可用、高速数据加载等。</li>
+<li><strong>具备强大灵活性和可扩展性的平台</strong>： 支持扩展（Extension）、自定义类型和函数、PXF和外部表技术。
+可以使用多种语言实现用户自定义函数和聚集，包括 PL/Python、PL/R、PL/Java、PL/Perl、PL/PGSQL 和 C 等。</li>
+<li><strong>支持标准的平台</strong>：支持SQL、JDBC和ODBC等行业标准。经过半个多世纪的发展，SQL 成为了数据平台的万向头，
+向上可以连接各种 BI工具、可视化工具和数据分析工具，向下可以连接各种ETL工具、各种数据源和各种格式的数据等。</li>
+<li><strong>集成数据分析平台</strong>：支持商业智能（BI）、文本、GIS、图、图像、流式数据处理等。
+通过Pivotal开源的 Apache 顶级项目 MADlib，Greenplum 可以在数据内部运行 50 多种数据分析和机器学习算法。
+MADlib 提供 SQL 接口进行数据分析，大大降低了数据分析的门槛；MADlib 内建于数据库内，使用 MPP 的优势，提高了分析的效率；
+MADlib可以在全量数据而不是抽样数据上进行分析，提高了精度。</li>
+<li><strong>开放源代码且持续大力投入的平台</strong>： 2017年 Pivotal 在 github 的开源贡献列表中全球排名第四左右。采用开源方案，不担心后门问题和被锁定问题。开源还可以构建更好的生态。</li>
+<li><strong>采用敏捷软件开发方法开发的平台</strong>：Greenplum 采用敏捷方法开发，实现了快速迭代、持续发布和质量内建。
+2017年 Greenplum 发布了10个版本，以前发布一个版本需要1个月左右，现在只需要十几个小时。</li>
+<li><strong>具备企业级稳定性的平台</strong>：Greenplum 经过十多年发展，有大量活跃客户，大量数百节点集群为全球2000强企业生产系统提供服务，稳定性非常高。</li>
+<li><strong>具备成熟生态系统的平台</strong>：Greenplum 生态非常完善，有大量的合作伙伴。</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/01/02/greenplum/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/xmllint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/30/xmllint/" class="post-title-link" itemprop="url">使用xmllint处理xml</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-30 10:02:19" itemprop="dateCreated datePublished" datetime="2019-12-30T10:02:19+00:00">2019-12-30</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/12/30/xmllint/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/30/xmllint/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://xmlsoft.org/xmllint.html" target="_blank" rel="noopener">xmllint</a>是一个命令行xml工具。</p>
+<h2 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h2><p>使用<code>--format</code>参数格式化文件。</p>
+<p>假设有文件<code>books.xml</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">books</span>&gt;</span><span class="tag">&lt;<span class="name">book</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span><span class="tag">&lt;<span class="name">book-name</span>&gt;</span>习惯的力量<span class="tag">&lt;/<span class="name">book-name</span>&gt;</span><span class="tag">&lt;<span class="name">authors</span>&gt;</span><span class="tag">&lt;<span class="name">author</span>&gt;</span>查尔斯·都希格<span class="tag">&lt;/<span class="name">author</span>&gt;</span><span class="tag">&lt;/<span class="name">authors</span>&gt;</span><span class="tag">&lt;/<span class="name">book</span>&gt;</span><span class="tag">&lt;<span class="name">book</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span><span class="tag">&lt;<span class="name">book-name</span>&gt;</span>从0到1<span class="tag">&lt;/<span class="name">book-name</span>&gt;</span><span class="tag">&lt;<span class="name">authors</span>&gt;</span><span class="tag">&lt;<span class="name">author</span>&gt;</span>彼得·蒂尔<span class="tag">&lt;/<span class="name">author</span>&gt;</span><span class="tag">&lt;<span class="name">author</span>&gt;</span>布莱克·马斯特斯<span class="tag">&lt;/<span class="name">author</span>&gt;</span><span class="tag">&lt;/<span class="name">authors</span>&gt;</span><span class="tag">&lt;/<span class="name">book</span>&gt;</span><span class="tag">&lt;/<span class="name">books</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>执行命令<code>xmllint --format books.xml</code>，得到如下结果：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">books</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">book</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">book-name</span>&gt;</span>习惯的力量<span class="tag">&lt;/<span class="name">book-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">authors</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">author</span>&gt;</span>查尔斯·都希格<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">authors</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">book</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">book-name</span>&gt;</span>从0到1<span class="tag">&lt;/<span class="name">book-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">authors</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">author</span>&gt;</span>彼得·蒂尔<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">author</span>&gt;</span>布莱克·马斯特斯<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">authors</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">books</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/12/30/xmllint/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/git-stats/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/11/git-stats/" class="post-title-link" itemprop="url">Git代码统计</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-11 16:38:26" itemprop="dateCreated datePublished" datetime="2019-12-11T16:38:26+00:00">2019-12-11</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/12/11/git-stats/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/11/git-stats/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">git-<span class="function"><span class="title">stats</span></span>()&#123;</span><br><span class="line">    <span class="built_in">local</span> since=1970-01-01</span><br><span class="line">    <span class="built_in">local</span> until=3000-01-01</span><br><span class="line">    <span class="keyword">if</span> [[ -n <span class="string">"<span class="variable">$1</span>"</span> ]]; <span class="keyword">then</span></span><br><span class="line">        since=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">if</span> [[ -n <span class="string">"<span class="variable">$2</span>"</span> ]]; <span class="keyword">then</span></span><br><span class="line">        until=<span class="variable">$2</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    git <span class="built_in">log</span> --format=<span class="string">'%aN'</span> --since=<span class="variable">$&#123;since&#125;</span> --until=<span class="variable">$&#123;until&#125;</span> | sort -u | <span class="keyword">while</span> <span class="built_in">read</span> author; <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"<span class="variable">$&#123;author&#125;</span>,"</span></span><br><span class="line">        git <span class="built_in">log</span> --author=<span class="string">"<span class="variable">$&#123;author&#125;</span>"</span> --pretty=tformat: --numstat --since=<span class="variable">$&#123;since&#125;</span> --until=<span class="variable">$&#123;until&#125;</span> \</span><br><span class="line">            | awk <span class="string">'&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf "%s,%s,%s\n", add, subs, loc &#125;'</span> -</span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/10/shell-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/10/shell-array/" class="post-title-link" itemprop="url">Shell数组</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-12-10 09:44:09" itemprop="dateCreated datePublished" datetime="2019-12-10T09:44:09+00:00">2019-12-10</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/12/10/shell-array/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/10/shell-array/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p><strong>定义数组</strong></p>
+<p>数组使用小括号括起，元素之间使用空格分隔：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ arr=(1 2 3 4 5 6)</span><br></pre></td></tr></table></figure>
+<p><strong>获取数组长度</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;#arr[*]&#125;</span></span><br><span class="line">6</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;#arr[@]&#125;</span></span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+<p><strong>读取元素</strong></p>
+<p>数组下标从<code>0</code>开始，若数组对应下标无元素，输出位空。下标使用<code>*</code>或<code>@</code>输出整个数组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;arr[0]&#125;</span></span><br><span class="line">1</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;arr[1]&#125;</span></span><br><span class="line">2</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;arr[2]&#125;</span></span><br><span class="line">3</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;arr[10]&#125;</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;arr[*]&#125;</span></span><br><span class="line">1 2 3 4 5 6</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;arr[@]&#125;</span></span><br><span class="line">1 2 3 4 5 6</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/12/10/shell-array/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/25/office2016-convert-to-vol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/25/office2016-convert-to-vol/" class="post-title-link" itemprop="url">Office2016零售版转VOL版</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-25 16:17:05" itemprop="dateCreated datePublished" datetime="2019-11-25T16:17:05+00:00">2019-11-25</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/11/25/office2016-convert-to-vol/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/25/office2016-convert-to-vol/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>将下列文本另存为bat文件，运行即可：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">ECHO</span> OFF</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">exist</span> "<span class="variable">%ProgramFiles%</span>\Microsoft Office\Office16\ospp.vbs" (</span><br><span class="line">    <span class="built_in">cd</span> /d "<span class="variable">%ProgramFiles%</span>\Microsoft Office\Office16"</span><br><span class="line">)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">exist</span> "<span class="variable">%ProgramFiles(x86)%</span>\Microsoft Office\Office16\ospp.vbs" (</span><br><span class="line">    <span class="built_in">cd</span> /d "<span class="variable">%ProgramFiles(x86)%</span>\Microsoft Office\Office16"</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">:WH</span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"><span class="built_in">echo</span> ----------------------------------------------</span><br><span class="line"><span class="built_in">echo</span> <span class="number">1</span>. 零售版 Office Pro Plus <span class="number">2016</span> 转化为<span class="built_in">VOL</span>版</span><br><span class="line"><span class="built_in">echo</span> <span class="number">2</span>. 零售版 Office Visio Pro <span class="number">2016</span> 转化为<span class="built_in">VOL</span>版</span><br><span class="line"><span class="built_in">echo</span> <span class="number">3</span>. 零售版 Office Project Pro <span class="number">2016</span> 转化为<span class="built_in">VOL</span>版</span><br><span class="line"><span class="built_in">echo</span> ----------------------------------------------</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> /p tsk="请选择（<span class="number">1</span>-<span class="number">3</span>）: "</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">defined</span> tsk <span class="keyword">goto</span>:err</span><br><span class="line"><span class="keyword">if</span> <span class="variable">%tsk%</span>==<span class="number">1</span> <span class="keyword">goto</span>:convert_office</span><br><span class="line"><span class="keyword">if</span> <span class="variable">%tsk%</span>==<span class="number">2</span> <span class="keyword">goto</span>:convert_visio</span><br><span class="line"><span class="keyword">if</span> <span class="variable">%tsk%</span>==<span class="number">3</span> <span class="keyword">goto</span>:convert_project</span><br><span class="line"></span><br><span class="line">:err</span><br><span class="line"><span class="keyword">goto</span> :WH</span><br><span class="line"></span><br><span class="line">:convert_office</span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">Convert</span> Office2016</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%x</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> /b ..\root\Licenses16\proplusvl_kms*.xrm-ms') <span class="keyword">do</span> (</span><br><span class="line">    cscript ospp.vbs /inslic:"..\root\Licenses16\<span class="variable">%%x</span>" &gt;<span class="built_in">nul</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%x</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> /b ..\root\Licenses16\proplusvl_mak*.xrm-ms') <span class="keyword">do</span> (</span><br><span class="line">    cscript ospp.vbs /inslic:"..\root\Licenses16\<span class="variable">%%x</span>" &gt;<span class="built_in">nul</span></span><br><span class="line">)</span><br><span class="line">cscript ospp.vbs /inpkey:XQNVK-<span class="number">8</span>JYDB-WJ9W3-YJ8YR-WFG99</span><br><span class="line"><span class="keyword">goto</span> :end</span><br><span class="line"></span><br><span class="line">:convert_visio</span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">Convert</span> Visio2016</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%x</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> /b ..\root\Licenses16\visio???vl_kms*.xrm-ms') <span class="keyword">do</span> (</span><br><span class="line">    cscript ospp.vbs /inslic:"..\root\Licenses16\<span class="variable">%%x</span>" &gt;<span class="built_in">nul</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%x</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> /b ..\root\Licenses16\visio???vl_mak*.xrm-ms') <span class="keyword">do</span> (</span><br><span class="line">    cscript ospp.vbs /inslic:"..\root\Licenses16\<span class="variable">%%x</span>" &gt;<span class="built_in">nul</span></span><br><span class="line">)</span><br><span class="line">cscript ospp.vbs /inpkey:PD3PC-RHNGV-FXJ29-<span class="number">8</span>JK7D-RJRJK</span><br><span class="line"><span class="keyword">goto</span> :end</span><br><span class="line"></span><br><span class="line">:convert_project</span><br><span class="line"><span class="built_in">cls</span></span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">Convert</span> Project2016</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%x</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> /b ..\root\Licenses16\project???vl_kms*.xrm-ms') <span class="keyword">do</span> (</span><br><span class="line">    cscript ospp.vbs /inslic:"..\root\Licenses16\<span class="variable">%%x</span>" &gt;<span class="built_in">nul</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">for</span> /f <span class="variable">%%x</span> <span class="keyword">in</span> ('<span class="built_in">dir</span> /b ..\root\Licenses16\project???vl_mak*.xrm-ms') <span class="keyword">do</span> (</span><br><span class="line">    cscript ospp.vbs /inslic:"..\root\Licenses16\<span class="variable">%%x</span>" &gt;<span class="built_in">nul</span></span><br><span class="line">)</span><br><span class="line">cscript ospp.vbs /inpkey:YG9NW-<span class="number">3</span>K39V-<span class="number">2</span>T3HJ-<span class="number">93</span>F3Q-G83KT</span><br><span class="line"><span class="keyword">goto</span> :end</span><br><span class="line"></span><br><span class="line">:end</span><br><span class="line"><span class="built_in">pause</span> &gt;<span class="built_in">nul</span></span><br><span class="line"><span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/kafka-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/15/kafka-introduction/" class="post-title-link" itemprop="url">Kafka入门</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-15 14:42:42" itemprop="dateCreated datePublished" datetime="2019-11-15T14:42:42+00:00">2019-11-15</time>
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/11/15/kafka-introduction/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/15/kafka-introduction/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Kafka简介"><a href="#Kafka简介" class="headerlink" title="Kafka简介"></a>Kafka简介</h2><p><a href="https://kafka.apache.org/" target="_blank" rel="noopener">Kafka</a>是一个高吞吐量、分布式的发布-订阅消息系统。</p>
+<p><a href="https://kafka.apache.org/" target="_blank" rel="noopener">Kafka</a>是一款开源的、轻量级的、分布式、可分区和具有复制备份的（Replicated）、
+基于<a href="https://zookeeper.apache.org/" target="_blank" rel="noopener">ZooKeeper</a>协调管理的分布式流平台的功能强大的消息系统。
+与传统的消息系统相比，<a href="https://kafka.apache.org/" target="_blank" rel="noopener">Kafka</a>能够很好地处理活跃的流数据，使得数据在各个子系统中高性能、低延迟地不停流转。</p>
+<p><a href="https://kafka.apache.org/" target="_blank" rel="noopener">Kafka</a>作为一个分布式流处理平台，具备以下三个特性：</p>
+<ul>
+<li>能够允许发布和订阅流数据</li>
+<li>存储流数据时提供相应的容错机制</li>
+<li>当流数据到达时能够被及时处理</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/11/15/kafka-introduction/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="hypc">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">245</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">105</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/hypc" title="GitHub &rarr; https://github.com/hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https://hypc-pub.github.io/json-schema-tutorial/" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https://hypc-pub.github.io/redis-tutorial/" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https://hypc-pub.github.io/lua-tutorial/" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https://hypc-pub.github.io/design-patterns/" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https://hypc-pub.github.io/rfc6749/" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https://hypc-pub.github.io/django-tutorial/" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https://hypc-pub.github.io/python-style-guide/" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https://hypc-pub.github.io/volere-requirements-specification-template/" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https://hypc-pub.github.io/gopl-zh/" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https://hypc-pub.github.io/advanced-go-programming-book/" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+</body>
+</html>
