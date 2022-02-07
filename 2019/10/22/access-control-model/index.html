@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="一般来说，我们在设计与人有交互的系统时，如果涉及到多用户能对同类资源进行操作的时候，就会有区分权限的需求了。 ACL(Access Control List)ACL是最早也是最基本的一种访问控制机制， 它的原理非常简单：每一项资源，都配有一个列表，这个列表记录的就是哪些用户可以对这项资源执行CRUD中的那些操作。 当系统试图访问这项资源时，会首先检查这个列表中是否有关于当前用户的访问权限，从而确定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="权限访问控制模型">
+<meta property="og:url" content="https://hypc.github.io/2019/10/22/access-control-model/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="一般来说，我们在设计与人有交互的系统时，如果涉及到多用户能对同类资源进行操作的时候，就会有区分权限的需求了。 ACL(Access Control List)ACL是最早也是最基本的一种访问控制机制， 它的原理非常简单：每一项资源，都配有一个列表，这个列表记录的就是哪些用户可以对这项资源执行CRUD中的那些操作。 当系统试图访问这项资源时，会首先检查这个列表中是否有关于当前用户的访问权限，从而确定">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-10-22T05:05:33.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.192Z">
+<meta property="article:author" content="hypc">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2019/10/22/access-control-model/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>权限访问控制模型 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2019/10/22/access-control-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          权限访问控制模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-22 13:05:33" itemprop="dateCreated datePublished" datetime="2019-10-22T13:05:33+08:00">2019-10-22</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/10/22/access-control-model/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2019/10/22/access-control-model/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>一般来说，我们在设计与人有交互的系统时，如果涉及到多用户能对同类资源进行操作的时候，就会有区分权限的需求了。</p>
+<h2 id="ACL-Access-Control-List"><a href="#ACL-Access-Control-List" class="headerlink" title="ACL(Access Control List)"></a>ACL(Access Control List)</h2><p><code>ACL</code>是最早也是最基本的一种访问控制机制，
+它的原理非常简单：每一项资源，都配有一个列表，这个列表记录的就是哪些用户可以对这项资源执行<code>CRUD</code>中的那些操作。
+当系统试图访问这项资源时，会首先检查这个列表中是否有关于当前用户的访问权限，从而确定当前用户可否执行相应的操作。</p>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Alice -&gt; read:article, update:article</span><br><span class="line">Bob   -&gt; read:article, del:article</span><br></pre></td></tr></table></figure>
+<p>通过ACL表，我们可以很容易的使用程序判断出用户的权限。我们在设计<code>RESTFUL</code>接口时，权限可以设计为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Alice -&gt; GET /article, PUT /article</span><br><span class="line">Bob   -&gt; GET /article, DELETE /article</span><br></pre></td></tr></table></figure>
+<p><code>ACL</code>缺点也是很明显的，首先需要维护大量的访问权限列表，它在性能上有明显的缺陷。
+另外，对于拥有大量用户与众多资源的应用，管理访问控制列表本身就变成非常繁重的工作。</p>
+<a id="more"></a>
+<h2 id="DAC-Discretionary-Access-Control"><a href="#DAC-Discretionary-Access-Control" class="headerlink" title="DAC(Discretionary Access Control)"></a>DAC(Discretionary Access Control)</h2><p>被操作对象，根据访问控制规则，来判断操作主体可对操作对象做哪些操作，比如只读或者是可写的权限。
+而自主的含义，则是拥有某种权限的用户，可以把权限赋予其他用户。</p>
+<p>这种设计最常见的应用就是文件系统的权限设计，如微软的NTFS。</p>
+<p>DAC最大缺陷就是对权限控制比较分散，不便于管理，比如无法简单地将一组文件设置统一的权限开放给指定的一群用户。</p>
+<h2 id="MAC-Mandatory-Access-Control"><a href="#MAC-Mandatory-Access-Control" class="headerlink" title="MAC(Mandatory Access Control)"></a>MAC(Mandatory Access Control)</h2><p>MAC是为了弥补DAC权限控制过于分散的问题而诞生的。
+在MAC的设计中，每一个对象都都有一些权限标识，每个用户同样也会有一些权限标识，
+而用户能否对该对象进行操作取决于双方的权限标识的关系，这个限制判断通常是由系统硬性限制的。</p>
+<p>MAC非常适合机密机构或者其他等级观念强烈的行业，如军事系统，但对于类似商业服务系统，则因为不够灵活而不能适用。</p>
+<h2 id="RBAC-Role-Based-Access-Control"><a href="#RBAC-Role-Based-Access-Control" class="headerlink" title="RBAC(Role-Based Access Control)"></a>RBAC(Role-Based Access Control)</h2><p><code>RBAC</code>是把用户按角色进行归类，通过用户的角色来确定用户能否针对某项资源进行某项操作。
+<code>RBAC</code>相对于ACL最大的优势就是它简化了用户与权限的管理，通过对用户进行分类，使得角色与权限关联起来，而用户与权限变成了间接关联。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ArticleEditor -&gt; read:article, update:article</span><br><span class="line">ArticleAdmin  -&gt; read:article, update:article, del:article</span><br><span class="line"></span><br><span class="line">Alice -&gt; ArticleEditor</span><br><span class="line">Bob   -&gt; ArticleAdmin</span><br><span class="line">Lily  -&gt; ArticleEditor</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>但是它也有自身的缺点，那就是由于权限是以角色为载体分配的，如果某一角色下的个别用户需要进行特别的权限定制，
+如同加入一些其他角色的小部分权限或去除当前角色的一些权限时，RBAC就无能为力了，因为RBAC对权限的分配是角色为单位的。</p>
+<h2 id="ABAC-Attribute-Based-Access-Control"><a href="#ABAC-Attribute-Based-Access-Control" class="headerlink" title="ABAC(Attribute-Based Access Control)"></a>ABAC(Attribute-Based Access Control)</h2><p>不同于常见的将用户通过某种方式关联到权限的方式，
+ABAC则是通过动态计算一个或一组属性是否满足某种条件来进行授权判断的（可以编写简单的逻辑）。
+属性通常来说分为四类：用户属性（如用户年龄），环境属性（如当前时间），操作属性（如读取）和对象属性（如一篇文章，又称资源属性），
+所以理论上能够实现非常灵活的权限控制，几乎能满足所有类型的需求。</p>
+<p>例如：</p>
+<ol>
+<li>一个用户可以查看它所在部门内部的文档；</li>
+<li>一个用户可以编辑一个处于草稿阶段的文档；</li>
+<li>早上9点上班之前，禁止用户查看任何文档；</li>
+</ol>
+<p>由此可以看出<code>ABAC</code>非常的灵活，但是实现也是非常的难。
+这其中涉及到逻辑的动态执行，数据动态过滤等，更加具体就是动态拼接SQL语句（使用ORM的话就是动态组装对应ORM的查询语句）。
+根据配置的规则，最后解析出来可能是各种Sql语句：<code>&lt;</code>、<code>&gt;</code>、<code>=</code>、<code>like</code>、<code>in</code>、<code>not in</code>等等。</p>
+<p>所以，<code>ABAC</code>的缺点非常明显，那就是它的复杂性。
+每次都要解析规则，对程序的性能也造成的影响，就算使用缓存，命中的概率也是非常的小，因为很多因素都是动态的。</p>
+<p>所以，如果需要根据属性做权限判断的场景不是很多的话，建议使用<code>RBAC</code>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/10/15/similarity/" rel="prev" title="字符串相似度">
+      <i class="fa fa-chevron-left"></i> 字符串相似度
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/30/python-type/" rel="next" title="Python：使用type动态构建类">
+      Python：使用type动态构建类 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL-Access-Control-List"><span class="nav-number">1.</span> <span class="nav-text">ACL(Access Control List)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAC-Discretionary-Access-Control"><span class="nav-number">2.</span> <span class="nav-text">DAC(Discretionary Access Control)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-Mandatory-Access-Control"><span class="nav-number">3.</span> <span class="nav-text">MAC(Mandatory Access Control)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RBAC-Role-Based-Access-Control"><span class="nav-number">4.</span> <span class="nav-text">RBAC(Role-Based Access Control)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ABAC-Attribute-Based-Access-Control"><span class="nav-number">5.</span> <span class="nav-text">ABAC(Attribute-Based Access Control)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2019/10/22/access-control-model/";
+    this.page.identifier = "/2019/10/22/access-control-model/";
+    this.page.title = "权限访问控制模型";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

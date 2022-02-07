@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="想做好前端很难，做出可扩展的前端，从而让多个团队可以同时投身于一项复杂的大型产品项目就更难了。本文将介绍前端领域最近的一项变革：单体前端架构正在过渡到许多较小、较易管理的前端架构。我们还会展示这种新的体系结构怎样提升前端团队的效率和表现。除了讨论这种新趋势的好处与代价外，我们还将介绍一些可行的实现方案，并深入分析一个完整的微前端应用案例。 微服务近年来大受欢迎，许多组织转向了微服务以克服大型单体后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】微前端">
+<meta property="og:url" content="https://hypc.github.io/2021/04/16/micro-frontends/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="想做好前端很难，做出可扩展的前端，从而让多个团队可以同时投身于一项复杂的大型产品项目就更难了。本文将介绍前端领域最近的一项变革：单体前端架构正在过渡到许多较小、较易管理的前端架构。我们还会展示这种新的体系结构怎样提升前端团队的效率和表现。除了讨论这种新趋势的好处与代价外，我们还将介绍一些可行的实现方案，并深入分析一个完整的微前端应用案例。 微服务近年来大受欢迎，许多组织转向了微服务以克服大型单体后">
+<meta property="og:locale">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-1.jpeg">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-2.jpeg">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-3.jpeg">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-4.jpeg">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-5.jpeg">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-6.jpeg">
+<meta property="og:image" content="https://hypc.github.io/images/micro-frontends-7.jpeg">
+<meta property="article:published_time" content="2021-04-16T13:31:44.000Z">
+<meta property="article:modified_time" content="2021-06-05T13:20:32.961Z">
+<meta property="article:author" content="hypc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hypc.github.io/images/micro-frontends-1.jpeg">
+
+<link rel="canonical" href="https://hypc.github.io/2021/04/16/micro-frontends/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>【转载】微前端 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2021/04/16/micro-frontends/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【转载】微前端
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-16 21:31:44" itemprop="dateCreated datePublished" datetime="2021-04-16T21:31:44+08:00">2021-04-16</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/16/micro-frontends/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2021/04/16/micro-frontends/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>想做好前端很难，做出可扩展的前端，从而让多个团队可以同时投身于一项复杂的大型产品项目就更难了。本文将介绍前端领域最近的一项变革：单体前端架构正在过渡到许多较小、较易管理的前端架构。我们还会展示这种新的体系结构怎样提升前端团队的效率和表现。除了讨论这种新趋势的好处与代价外，我们还将介绍一些可行的实现方案，并深入分析一个完整的微前端应用案例。</p>
+<p>微服务近年来大受欢迎，许多组织转向了微服务以克服大型单体后端架构的局限。但虽然微服务在服务端很流行，很多企业在前端代码库上仍然在沿用问题多多的单体架构。</p>
+<p>也许你想构建一个渐进式或响应式的 Web 应用，但却找不到一种将这些功能集成进现有代码中的简单途径；也许你想尝试 JavaScript 语言的新功能（或者是其他可以编译为 JS 的某种语言），但你却无法将关键的构建工具融入已有的构建流程；或者你只是想扩展开发流程，让多个团队可以同时开发一种产品，但现有单体架构中的耦合度与复杂性让团队间的合作变得磕磕绊绊。这些都是很现实的问题，都会影响你们向客户交付高质量体验的能力。</p>
+<h2 id="微前端的定义"><a href="#微前端的定义" class="headerlink" title="微前端的定义"></a>微前端的定义</h2><p>最近业界越来越关注复杂的现代化 Web 开发需要怎样的整体架构和组织结构这个问题。于是我们开始看到单体前端正在分解为更小、更简单的模块，这些模块可以各自独立开发、测试和部署，而它们组合在一起仍然对客户表现为一件单一完整的产品。我们将这种技术称为微前端，其定义为：</p>
+<blockquote>
+<p>“微前端是一种架构风格，其中众多独立交付的前端应用组合成一个大型整体。”</p>
+</blockquote>
+<p>在 ThoughtWorks TechRadar 2016 年第 11 期中，我们将微前端列入了“组织应评估的技术”之列；不久后我们将其提升为“可尝试”级别，最后将其列入“应采用”之列。换句话说，我们认为它是经受住了考验的方法，企业在需要时就应该采用它。详情请点击此处<a target="_blank" rel="noopener" href="https://www.thoughtworks.com/radar/techniques/micro-frontends">链接</a>。</p>
+<span id="more"></span>
+
+<p><img src="/images/micro-frontends-1.jpeg"></p>
+<p>我们认为微前端的主要优势有：</p>
+<ul>
+<li>更小，更紧密且更易维护的代码库。</li>
+<li>组织更具扩展能力，其团队更加独立自治。</li>
+<li>能够以更加增量式的风格来升级、更新前端，甚至重写部分前端代码。</li>
+</ul>
+<p>这些核心优势与微服务的优势基本一致，这也不是什么巧合。</p>
+<p>当然，软件架构领域没有免费的午餐——一切都要付出代价。一些微前端实现可能导致重复依赖，使用户不得不下载更多内容。此外，大幅提升的团队自治水平可能会让各个团队的工作愈加分裂。只不过我们认为这些风险都能控制在合理水平上，微前端终究还是利大于弊的。</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>我们不会从具体的技术方法或实施细节角度来定义微前端，而是重点关注它的属性和好处。</p>
+<h3 id="增量升级"><a href="#增量升级" class="headerlink" title="增量升级"></a>增量升级</h3><p>对于许多组织来说，追求增量升级就是他们迈向微前端的第一步。对他们来说，老式的大型单体前端要么是用老旧的技术栈打造的，要么就充斥着匆忙写成的代码，已经到了该重写整个前端的时候了。一次性重写整个系统风险很大，我们更倾向一点一点换掉老的应用，同时在不受单体架构拖累的前提下为客户不断提供新功能。</p>
+<p>为了做到这一点，解决方案往往就是微前端架构了。一旦某个团队掌握了在几乎不影响旧世界的同时为生产环境引入新功能的诀窍，其他团队就会纷纷效仿。现有代码仍然需要继续维护下去，但在某些情况下还要继续添加新功能，现在总算有了解决方案。</p>
+<p>到最后，我们就能更随心所欲地改动产品的各个部分，并逐渐升级我们的架构、依赖关系和用户体验。当主框架发生重大变化时每个微前端模块都可以按需升级，不需要整体下线或一次性升级所有内容。如果我们想要尝试新的技术或互动模式，也能在隔离度更好的环境下做试验。</p>
+<h3 id="简洁、解耦的代码库"><a href="#简洁、解耦的代码库" class="headerlink" title="简洁、解耦的代码库"></a>简洁、解耦的代码库</h3><p>微前端体系下，每个小模块的代码库要比一个单体前端的代码库小很多。对开发者来说这些较小的代码库处理起来更简单方便。而且微前端还能避免无关组件之间不必要的耦合，让代码更简洁。我们可以在应用的限界上下文处划出更明显的界限，更好地避免无意间造成的这类耦合问题。</p>
+<p>当然，只靠架构更迭本身（比如说“我们改成微前端吧”）并不能自动为以往的优质代码生成替代品。我们要做的是设法让糟糕的决策难以露头，而让正确的决策畅通无阻，从而进入迈向成功的良性循环。例如，现在很难跨越限界上下文共享域模型，所以开发者就不太可能这样做了。类似地，微前端会让开发者更审慎地把握数据和事件在应用的各个部分之间流动的方式，其实就算没有微前端我们本来也应该这样做的！</p>
+<h3 id="独立部署"><a href="#独立部署" class="headerlink" title="独立部署"></a>独立部署</h3><p>就像微服务一样，微前端的一大优势就是可独立部署的能力。这种能力会缩减每次部署涉及的范围，从而降低了风险。不管你的前端代码是在哪里托管，怎样托管，各个微前端都应该有自己的持续交付管道；这些管道可以将微前端构建、测试并部署到生产环境中。我们在部署各个微前端时几乎不用考虑其他代码库或管道的状态；就算旧的单体架构采用了固定、手动的按季发布周期，或者隔壁的团队在他们的主分支里塞进了一个半成品或失败的功能，也不影响我们的工作。如果某个微前端已准备好投入生产，那么它就能顺利变为产品，且这一过程完全由开发和维护它的团队主导。</p>
+<p><img src="/images/micro-frontends-2.jpeg"></p>
+<h3 id="自治团队"><a href="#自治团队" class="headerlink" title="自治团队"></a>自治团队</h3><p>解藕代码库、分离发布周期还能带来一个高层次的好处，那就是大幅提升团队的独立性；一支独立的团队可以自主完成从产品构思到最终发布的完整流程，有足够的能力独立向客户交付价值，从而可以更快、更高效地工作。为了实现这一目标需要围绕垂直业务功能，而非技术功能来打造团队。一种简单的方法是根据最终用户将看到的内容来划分产品模块，让每个微前端都封装应用的某个页面，并分配给一个团队完整负责。相比围绕技术或“横向”问题（如样式、表单或验证）打造的团队相比，这种团队能有更高的凝聚力。</p>
+<p><img src="/images/micro-frontends-3.jpeg"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>简而言之，微前端是将庞大复杂的整体分割为更小、更易于管理的模块，然后明确它们之间的依赖关系。我们的技术决策、代码库、团队和发布流程都应该彼此独立，无需过多协调工作就能自主运行并发展。</p>
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>假设要做一个食品外卖的网站。乍一看这种网站好像很好做，但想要做好需要在诸多细节上下足功夫：</p>
+<ul>
+<li>应该有一个引导页面，让顾客浏览并搜索餐馆。顾客应该能按照一系列参数（包括价格、菜品或订购历史等）来搜索并过滤餐馆。</li>
+<li>每家餐馆都要有自己的页面，页面中要展示菜单，允许客户自主选餐，还要有折扣、套餐和特殊要求选项。</li>
+<li>顾客应该有自己的主页，可以用来查看订单历史、跟踪外卖进度并自定义付款选项</li>
+</ul>
+<p><img src="/images/micro-frontends-4.jpeg"></p>
+<p>每个页面都非常复杂，都应该分配一个专门团队来负责，并且每个团队都应该有足够的独立性。各个团队都应该能独立开发、测试、部署和维护自己的代码，而不会与其他团队发生冲突或需要其他团队配合。但在客户这里，整个网站仍然应该是一个无缝的整体。</p>
+<p>下面我们就会围绕这个案例来展示代码与场景示例。</p>
+<h2 id="集成方法"><a href="#集成方法" class="headerlink" title="集成方法"></a>集成方法</h2><p>前文对微前端的定义相当松散，所以有很多方法都可以划入这个范畴。本节将展示一些示例并讨论它们的优劣。这些方法在架构上有共通之处——通常应用中的每个页面都有一个微前端，还有一个容器应用，它有以下功能：</p>
+<ul>
+<li>呈现常见的页面元素，如页眉和页脚。</li>
+<li>解决了身份认证和跳转等跨领域问题。</li>
+<li>在页面上集成多个微前端，并告诉各个微前端该何时何地呈现自己。</li>
+</ul>
+<p><img src="/images/micro-frontends-5.jpeg"></p>
+<h3 id="服务器端模板组合"><a href="#服务器端模板组合" class="headerlink" title="服务器端模板组合"></a>服务器端模板组合</h3><p>先来介绍一种非常新颖的前端开发方法——就是在服务器上使用多个模板或片段呈现 HTML。首先我们要有一个 index.html，其中包含所有常见的页面元素；然后使用服务器端包含从 HTML 片段文件中插入的特定页面内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">dir</span>=<span class="string">&quot;ltr&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Feed me<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>🍽 Feed me<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--# include file=&quot;$PAGE.html&quot; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们使用 Nginx 提供此文件，通过匹配正在请求的 URL 来配置 <code>$PAGE</code> 变量：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">8080</span>;</span><br><span class="line">    <span class="attribute">server_name</span> localhost;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line">    <span class="attribute">ssi</span> <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Redirect / to /browse</span></span><br><span class="line">    <span class="attribute">rewrite</span><span class="regexp"> ^/$</span> http://localhost:8080/browse <span class="literal">redirect</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Decide which HTML fragment to insert based on the URL</span></span><br><span class="line">    <span class="attribute">location</span> /browse &#123;</span><br><span class="line">      <span class="attribute">set</span> $PAGE <span class="string">&#x27;browse&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">location</span> /order &#123;</span><br><span class="line">      <span class="attribute">set</span> $PAGE <span class="string">&#x27;order&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">location</span> /profile &#123;</span><br><span class="line">      <span class="attribute">set</span> $PAGE <span class="string">&#x27;profile&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># All locations should render through index.html</span></span><br><span class="line">    error_page <span class="number">404</span> /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是相当标准的服务器端组合方法。它之所以可以算作微前端，是因为我们可以由此来分割代码，让每部分代码代表一个自包含的域概念，并由一个独立的团队负责。这里没有展示各个 HTML 片段文件最终如何在 Web 服务器上呈现，实际上它们都有自己的部署管道，改动某个页面并不会影响其他内容。</p>
+<p>想要更高独立性的话，可以为每个微前端单独安排一个服务器负责呈现和服务，再安排一个服务器专门向其他服务器发出请求。如果能缓存好各个响应就不会增大延迟。</p>
+<p><img src="/images/micro-frontends-6.jpeg"></p>
+<h3 id="构建时集成"><a href="#构建时集成" class="headerlink" title="构建时集成"></a>构建时集成</h3><p>还有一种方法是将每个微前端作为一个包来发布，并让容器应用将它们全部作为库依赖包含进去。下面展示了容器的 package.json 查找本文示例应用的方法：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;@feed-me/container&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;A food delivery web app&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;@feed-me/browse-restaurants&quot;</span>: <span class="string">&quot;^1.2.3&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;@feed-me/order-food&quot;</span>: <span class="string">&quot;^4.5.6&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;@feed-me/user-profile&quot;</span>: <span class="string">&quot;^7.8.9&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种办法初看上去挺不错。它通常会生成一个可部署的 Javascript 包，允许我们从各种应用中删除常见的重复依赖。但这意味着我们修改产品的任何部分时都必须重新编译和发布所有微前端。这种齐步走的发布流程在微服务里已经够让我们好受了，所以我们强烈建议不要用它来实现微前端架构。我们好不容易在开发和测试阶段实现了解耦和独立，可别再在发布阶段又绕回去了。我们得在运行时中也集成微前端。</p>
+<h3 id="通过iframe在运行时集成"><a href="#通过iframe在运行时集成" class="headerlink" title="通过iframe在运行时集成"></a>通过iframe在运行时集成</h3><p>想要在浏览器中组合应用，一种最简单的方法就是用 iframe。iframe 可以轻松地用一系列独立的子页面构建整个页面。它们的样式和全局变量也能充分隔离，不会互相干扰。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Feed me!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to Feed me!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">&quot;micro-frontend-container&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> microFrontendsByRoute = &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/&#x27;</span>: <span class="string">&#x27;https://browse.example.com/index.html&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/order-food&#x27;</span>: <span class="string">&#x27;https://order.example.com/index.html&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/user-profile&#x27;</span>: <span class="string">&#x27;https://profile.example.com/index.html&#x27;</span>,</span></span><br><span class="line"><span class="javascript">      &#125;;</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;micro-frontend-container&#x27;</span>);</span></span><br><span class="line"><span class="javascript">      iframe.src = microFrontendsByRoute[<span class="built_in">window</span>.location.pathname];</span></span><br><span class="line"><span class="javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>就像前文提到的服务器端包含方法一样，用 iframe 构建页面并不是一种激动人心的新技术。但只要我们能精心分割好应用并组建好团队，那么用 iframe 就能实现前面提到的一系列好处。</p>
+<p>很多人不喜欢 iframe，它也的确有一些缺陷。上面提到的简单隔离方式确实降低了它的灵活性。用 iframe 在应用的各个部分之间构建集成可能会很困难，从而让路由、历史记录和深层链接变得更加复杂；它还会影响页面的响应速度。</p>
+<h3 id="通过-JavaScript-在运行时集成"><a href="#通过-JavaScript-在运行时集成" class="headerlink" title="通过 JavaScript 在运行时集成"></a>通过 JavaScript 在运行时集成</h3><p>这个方法非常灵活，应用广泛。每个微前端都使用<code>&lt;script&gt;</code>标记包含在页面上，并在加载时暴露全局函数作为其入口点。接下来容器应用决定应该加载哪个微前端，并调用相关函数来告诉微前端该何时何地呈现自己。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Feed me!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to Feed me!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- These scripts don&#x27;t render anything immediately --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Instead they attach entry-point functions to `window` --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://browse.example.com/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://order.example.com/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://profile.example.com/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;micro-frontend-root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// These global functions are attached to window by the above scripts</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> microFrontendsByRoute = &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/&#x27;</span>: <span class="built_in">window</span>.renderBrowseRestaurants,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/order-food&#x27;</span>: <span class="built_in">window</span>.renderOrderFood,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/user-profile&#x27;</span>: <span class="built_in">window</span>.renderUserProfile,</span></span><br><span class="line"><span class="javascript">      &#125;;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> renderFunction = microFrontendsByRoute[<span class="built_in">window</span>.location.pathname];</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// Having determined the entry-point function, we now call it,</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// giving it the ID of the element where it should render itself</span></span></span><br><span class="line"><span class="javascript">      renderFunction(<span class="string">&#x27;micro-frontend-root&#x27;</span>);</span></span><br><span class="line"><span class="javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面是一个简单的示例，展示了基本的技巧。相比构建时集成，这里我们可以独立部署各个 <code>bundle.js</code> 文件。相比 iframe，我们在构建微前端之间的集成时有充分的灵活度。我们可以用多种方式扩展上述代码，例如按需下载各个 JavaScript 包，或者在呈现微前端时传递出入数据。</p>
+<p>这种方法同时具备灵活性与独立可部署能力，是我们的首选方案。后文将详细探讨这个方法。</p>
+<h3 id="通过-Web-组件在运行时集成"><a href="#通过-Web-组件在运行时集成" class="headerlink" title="通过 Web 组件在运行时集成"></a>通过 Web 组件在运行时集成</h3><p>之前方法的一个变体是为每个微前端定义用于容器实例化的 HTML 自定义元素，而非定义要调用的容器的全局函数。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Feed me!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to Feed me!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- These scripts don&#x27;t render anything immediately --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- Instead they each define a custom element type --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://browse.example.com/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://order.example.com/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://profile.example.com/bundle.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;micro-frontend-root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// These element types are defined by the above scripts</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> webComponentsByRoute = &#123;</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/&#x27;</span>: <span class="string">&#x27;micro-frontend-browse-restaurants&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/order-food&#x27;</span>: <span class="string">&#x27;micro-frontend-order-food&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        <span class="string">&#x27;/user-profile&#x27;</span>: <span class="string">&#x27;micro-frontend-user-profile&#x27;</span>,</span></span><br><span class="line"><span class="javascript">      &#125;;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> webComponentType = webComponentsByRoute[<span class="built_in">window</span>.location.pathname];</span></span><br><span class="line"><span class="javascript"></span></span><br><span class="line"><span class="javascript">      <span class="comment">// Having determined the right web component custom element type,</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// we now create an instance of it and attach it to the document</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> root = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;micro-frontend-root&#x27;</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> webComponent = <span class="built_in">document</span>.createElement(webComponentType);</span></span><br><span class="line"><span class="javascript">      root.appendChild(webComponent);</span></span><br><span class="line"><span class="javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>最终结果与前面的示例很像，主要区别在于这里以“Web 组件方式”操作。如果你喜欢 Web 组件规范，喜欢使用浏览器提供的功能，那么这也是个不错的选择。如果你更喜欢在容器应用和微前端之间定义自己的接口，那么前面的示例可能更合适。</p>
+<h2 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h2><p>CSS 本质上是一种全局、继承和级联的语言，传统 CSS 也没有模块系统、命名空间或封装；有些功能现在也可用了，但往往缺乏浏览器支持。在微前端领域，这些问题往往变得更为严重。例如，如果一个团队的微前端有一个样式表，上面写着 <code>h2 &#123; color: black; &#125;</code>，另一个微前端的样式表却写着 <code>h2 &#123; color: blue; &#125;</code>，并且这两个选择器都附加到了同一个页面，后果就很严重了！这类问题古已有之，但在微前端体系中由于这些选择器是由不同团队在不同时间编写的，而且代码可能分散在不同的存储库中，所以就更难发现了。</p>
+<p>多年来业界发明了很多方法来更好地管理 CSS。有些人会使用严格的命名约定（例如<code>BEM规范</code>）以确保选择器只在正确的位置起作用。还有人会使用<code>SASS</code>之类的预处理器，其嵌套的选择器可以用作一种命名空间。一种较新的方法是使用<code>CSS模块</code>或某种<code>CSS-in-JS</code>库，以编程方式应用所有样式，确保样式只会直接应用在开发者想要的位置上。此外还有<code>shadow DOM</code>，它也提供样式隔离。</p>
+<p>具体用哪种方法并不重要，只要让开发者可以独立编写样式，然后各个样式集成到同一个应用中时不起冲突就行了。</p>
+<h2 id="共享组件库"><a href="#共享组件库" class="headerlink" title="共享组件库"></a>共享组件库</h2><p>前文提到微前端的视觉一致性是很重要的。一种实现方法是开发一个共享的、可重用的 UI 组件库。创建这样一个库的主要好处是通过重用代码和来减少工作量，同时实现视觉一致性。此外，这个组件库可以当作样式指南来用，它可以是开发者和设计人员之间的一个很好的协作桥梁。</p>
+<p>但最容易犯的一个错误就是过早地搞出来一大堆组件。我们都想创建一个基础框架，其中包含所有应用所需的所有常见视觉效果。但其实我们很难提前判断组件应该用什么 API，结果很多组件都是在白费功夫。所以我们更愿意让团队在需要的时候再去创建自己的组件，就算因此产生了一些重复工作也没关系。应该顺其自然，等组件的 API 都确定下来以后再把重复代码收集到共享库里，这样就不会徒劳无功了。</p>
+<p>最常见的共享组件是“无声”的视觉基本元素，如图标、标签和按钮等。我们还可以共享可能包含大量 UI 逻辑的复杂组件，例如自动完成、下拉搜索字段等；或者是可排序、可过滤的分页表。但是，请确保共享组件仅包含 UI 逻辑，而不包含业务或域逻辑。将域逻辑放入共享库会给应用之间带来高度耦合，改动起来也更困难。例如，一般来说不该共享 ProductTable，因为它会包含关于“产品”的定义及表现的各种内容。这种域建模和业务逻辑应该属于微前端的应用代码，不应该放到共享库里。</p>
+<p>作为一种内部共享库来说，它的所有权和管理也自然存在一些棘手的问题。一种管理模式是将其视为共享资产，让“每个人”都拥有它——实践中这通常意味着没人能真正拥有它。这个共享库很快就会变成一堆不一致的代码集合，也没有明确的约定或技术愿景。反过来说，如果共享库的开发工作完全中心化，那么组件的创建者与使用者之间就会严重脱节。最好的模式应该是允许所有人为库做贡献，但要有一个保管人（一个人或一个团队）负责确保这些贡献的质量、一致性和有效性。维护共享库需要强大的技术技能，还需要能协调众多团队的管理技能。</p>
+<h2 id="跨应用通信"><a href="#跨应用通信" class="headerlink" title="跨应用通信"></a>跨应用通信</h2><p>关于微前端最常见的一个问题是如何让这些微前端互相通信。一般来说，我们建议尽可能减少这类通信需求，因为它通常会重新引入我们本想避免的耦合度。</p>
+<p>换句话说，某种程度的跨应用通信是必要的。自定义事件允许微前端之间间接通信，从而尽量减少直接耦合；但它也会让各个微前端之间已有的合约更难确定和增强。另一种方法是将回调和数据向下传递的 React 模型（这里是从容器应用向下传递到微前端），它能让模块之间的合约更加明确。第三种方法是使用地址栏作为通信机制，我们将在后面详细介绍。</p>
+<p>如果你在使用 redux，常见方案是为整个应用提供单个全局共享存储。但如果每个微前端都是自包含的应用，那么它们都应该有自己的 redux 存储。Redux 文档甚至给出了“在大型应用中将 Redux 应用隔离为组件”的说明。</p>
+<p>无论选择哪种方法，我们都希望微前端可以彼此发送消息或事件来通信，同时避免任何共享状态。就像在微服务之间共享数据库一样，一旦我们共享了数据结构和域模型就会引入大量的耦合，改动起来也会更困难。</p>
+<p>这里也有几种不错的方案选项。最重要的是要时刻考虑你正在引入怎样的耦合，以及如何持续维持模块之间的合约。就像微服务之间的集成一样，你需要在不同应用和团队之间协调升级流程，才能对集成做出重大改动。</p>
+<p>你还应该考虑如何自动验证集成的工作状态。一种方法是功能测试，但它们的实施和维护成本很高。或者你可以实现某种形式的消费者驱动合约，这样一来，无需在浏览器中集成全部微前端并运行应用，就能让每个微前端确定其他微前端需要哪些内容。</p>
+<h2 id="后端通信"><a href="#后端通信" class="headerlink" title="后端通信"></a>后端通信</h2><p>前端应用开发倒是分配给各个独立团队了，可后端呢？这里就是全栈团队的价值所在了，他们从可视代码到 API 开发及数据库和基础架构代码都能自己搞定。有一种不错的模式叫BFF模式，其中每个前端应用都有一个对应的后端，后者只用来满足前者的需求。</p>
+<p>这里有很多变量需要考虑。BFF 可能是自包含的，具有自己的业务逻辑和数据库，或者它可能只是下游服务的聚合器。负责微前端及其 BFF 的团队是否应该负责一部分下游服务也是个问题。如果微前端只有一个与之对话的 API，并且该 API 相当稳定，那么可能就不用构建 BFF 了。这里的指导原则是，构建某个微前端的团队不应该依赖其他团队为他们构建内容。因此，如果每个添加到微前端的新功能都需要改动后端，那么让同一个团队负责 BFF 就很合适了。</p>
+<p><img src="/images/micro-frontends-7.jpeg"></p>
+<p>另一个常见问题是，如何通过服务器对微前端应用的用户进行身份验证和授权操作？显然，客户应该只需进行一次身份验证过程，因此身份验证往往是跨领域问题，应该由容器应用负责。容器可能有某种登录形式，我们通过它获得某种令牌。该令牌将由容器控制，并且可以在初始化时注入各个微前端。最后，微前端可以把令牌及其发送的请求发给服务器，而服务器可以按需完成验证操作。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在测试方面，单体前端和微前端之间没有太大区别。一般来说在单体前端上使用的测试策略都能用在各个微前端上；也就是说每个微前端都应该有自己的自动化全面测试套件，以确保代码的质量和正确性。</p>
+<p>不一样的是各种微前端与容器应用的集成测试。可以使用你最喜欢的功能/端到端测试工具（例如 Selenium 或 Cypress）来做这部分测试；应该使用单元测试来覆盖你的低级业务逻辑和呈现逻辑，然后使用功能测试来验证页面是否正确组装。例如，你可以在特定 URL 上加载完全集成的应用，并用硬编码标题来在页面上声明相关的微前端。</p>
+<p>如果有跨越不同微前端的用户操作，那么就可以使用功能测试来覆盖它们。但记住功能测试的重点是验证前端的集成，而非每个微前端的内部业务逻辑，后者应该已经被单元测试覆盖了。如上所述，消费者驱动的合同可以用来直接指定微前端之间的交互，而不会破坏集成环境和功能测试。</p>
+<hr>
+<ul>
+<li>译文: <a target="_blank" rel="noopener" href="https://www.infoq.cn/article/03*BeU3zQegIbIytRsX9">https://www.infoq.cn/article/03*BeU3zQegIbIytRsX9</a></li>
+<li>英文原文: <a target="_blank" rel="noopener" href="https://martinfowler.com/articles/micro-frontends.html">https://martinfowler.com/articles/micro-frontends.html</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/13/docker-pulsar/" rel="prev" title="使用Docker部署Pulsar">
+      <i class="fa fa-chevron-left"></i> 使用Docker部署Pulsar
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/21/nginx-port-in-redirect/" rel="next" title="nginx的port_in_redirect配置">
+      nginx的port_in_redirect配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%89%8D%E7%AB%AF%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">微前端的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">优势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E5%8D%87%E7%BA%A7"><span class="nav-number">2.1.</span> <span class="nav-text">增量升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E6%B4%81%E3%80%81%E8%A7%A3%E8%80%A6%E7%9A%84%E4%BB%A3%E7%A0%81%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">简洁、解耦的代码库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%83%A8%E7%BD%B2"><span class="nav-number">2.3.</span> <span class="nav-text">独立部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E6%B2%BB%E5%9B%A2%E9%98%9F"><span class="nav-number">2.4.</span> <span class="nav-text">自治团队</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">2.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">集成方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E6%A8%A1%E6%9D%BF%E7%BB%84%E5%90%88"><span class="nav-number">4.1.</span> <span class="nav-text">服务器端模板组合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E6%97%B6%E9%9B%86%E6%88%90"><span class="nav-number">4.2.</span> <span class="nav-text">构建时集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87iframe%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E9%9B%86%E6%88%90"><span class="nav-number">4.3.</span> <span class="nav-text">通过iframe在运行时集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-JavaScript-%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E9%9B%86%E6%88%90"><span class="nav-number">4.4.</span> <span class="nav-text">通过 JavaScript 在运行时集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-Web-%E7%BB%84%E4%BB%B6%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E9%9B%86%E6%88%90"><span class="nav-number">4.5.</span> <span class="nav-text">通过 Web 组件在运行时集成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E7%BB%84%E4%BB%B6%E5%BA%93"><span class="nav-number">6.</span> <span class="nav-text">共享组件库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%BA%94%E7%94%A8%E9%80%9A%E4%BF%A1"><span class="nav-number">7.</span> <span class="nav-text">跨应用通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E9%80%9A%E4%BF%A1"><span class="nav-number">8.</span> <span class="nav-text">后端通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">9.</span> <span class="nav-text">测试</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2021/04/16/micro-frontends/";
+    this.page.identifier = "/2021/04/16/micro-frontends/";
+    this.page.title = "【转载】微前端";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

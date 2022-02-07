@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="基础Reflect Metadata 是 ES7 的一个提案，它主要用来在声明的时候添加和读取元数据。TypeScript 在 1.5+ 的版本已经支持它，你只需要：  npm i reflect-metadata --save。 在 tsconfig.json 里配置 emitDecoratorMetadata 选项。  Reflect Metadata 的 API 可以用于类或者类的属性上，如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】Reflect Metadata">
+<meta property="og:url" content="https://hypc.github.io/2021/04/29/typescript-metadata/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="基础Reflect Metadata 是 ES7 的一个提案，它主要用来在声明的时候添加和读取元数据。TypeScript 在 1.5+ 的版本已经支持它，你只需要：  npm i reflect-metadata --save。 在 tsconfig.json 里配置 emitDecoratorMetadata 选项。  Reflect Metadata 的 API 可以用于类或者类的属性上，如">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-04-29T11:14:20.000Z">
+<meta property="article:modified_time" content="2021-06-05T13:20:15.774Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="typescript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2021/04/29/typescript-metadata/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>【转载】Reflect Metadata | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2021/04/29/typescript-metadata/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【转载】Reflect Metadata
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-29 19:14:20" itemprop="dateCreated datePublished" datetime="2021-04-29T19:14:20+08:00">2021-04-29</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/29/typescript-metadata/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2021/04/29/typescript-metadata/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>Reflect Metadata 是 ES7 的一个提案，它主要用来在声明的时候添加和读取元数据。TypeScript 在 1.5+ 的版本已经支持它，你只需要：</p>
+<ul>
+<li><code>npm i reflect-metadata --save</code>。</li>
+<li>在 <code>tsconfig.json</code> 里配置 <code>emitDecoratorMetadata</code> 选项。</li>
+</ul>
+<p>Reflect Metadata 的 API 可以用于类或者类的属性上，如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">metadata</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  metadataKey: <span class="built_in">any</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">  metadataValue: <span class="built_in">any</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>): </span>&#123;</span><br><span class="line">  (target: <span class="built_in">Function</span>): <span class="built_in">void</span>;</span><br><span class="line">  (target: <span class="built_in">Object</span>, <span class="attr">propertyKey</span>: <span class="built_in">string</span> | symbol): <span class="built_in">void</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p><code>Reflect.metadata</code> 当作 <code>Decorator</code> 使用，当修饰类时，在类上添加元数据，当修饰类属性时，在类原型的属性上添加元数据，如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Reflect</span>.metadata(<span class="string">&#x27;inClass&#x27;</span>, <span class="string">&#x27;A&#x27;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Reflect</span>.metadata(<span class="string">&#x27;inMethod&#x27;</span>, <span class="string">&#x27;B&#x27;</span>)</span><br><span class="line">  <span class="keyword">public</span> hello(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Reflect</span>.getMetadata(<span class="string">&#x27;inClass&#x27;</span>, Test)); <span class="comment">// &#x27;A&#x27;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Reflect</span>.getMetadata(<span class="string">&#x27;inMethod&#x27;</span>, <span class="keyword">new</span> Test(), <span class="string">&#x27;hello&#x27;</span>)); <span class="comment">// &#x27;B&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>它具有诸多使用场景。</p>
+<h2 id="获取类型信息"><a href="#获取类型信息" class="headerlink" title="获取类型信息"></a>获取类型信息</h2><p>譬如在 <a target="_blank" rel="noopener" href="https://github.com/kaorun343/vue-property-decorator"><code>vue-property-decorator</code></a> 6.1 及其以下版本中，通过使用 <code>Reflect.getMetadata</code> API，<code>Prop</code> Decorator 能获取属性类型传至 Vue，简要代码如下：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Prop</span>(<span class="params"></span>): <span class="title">PropertyDecorator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">target, key: <span class="built_in">string</span></span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">type</span> = <span class="built_in">Reflect</span>.getMetadata(<span class="string">&#x27;design:type&#x27;</span>, target, key);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;key&#125;</span> type: <span class="subst">$&#123;<span class="keyword">type</span>.name&#125;</span>`</span>);</span><br><span class="line">    <span class="comment">// other...</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Prop</span>()</span><br><span class="line">  <span class="keyword">public</span> Aprop!: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行代码可在控制台看到 <code>Aprop type: string</code>。除能获取属性类型外，通过 <code>Reflect.getMetadata(&quot;design:paramtypes&quot;, target, key)</code> 和 <code>Reflect.getMetadata(&quot;design:returntype&quot;, target, key)</code> 可以分别获取函数参数类型和返回值类型。</p>
+<h2 id="自定义-metadataKey"><a href="#自定义-metadataKey" class="headerlink" title="自定义 metadataKey"></a>自定义 <code>metadataKey</code></h2><p>除能获取类型信息外，常用于自定义 <code>metadataKey</code>，并在合适的时机获取它的值，示例如下：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">classDecorator</span>(<span class="params"></span>): <span class="title">ClassDecorator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">target</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 在类上定义元数据，key 为 `classMetaData`，value 为 `a`</span></span><br><span class="line">    <span class="built_in">Reflect</span>.defineMetadata(<span class="string">&#x27;classMetaData&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, target);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">methodDecorator</span>(<span class="params"></span>): <span class="title">MethodDecorator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">target, key, descriptor</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 在类的原型属性 &#x27;someMethod&#x27; 上定义元数据，key 为 `methodMetaData`，value 为 `b`</span></span><br><span class="line">    <span class="built_in">Reflect</span>.defineMetadata(<span class="string">&#x27;methodMetaData&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, target, key);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@classDecorator</span>()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">  <span class="meta">@methodDecorator</span>()</span><br><span class="line">  <span class="function"><span class="title">someMethod</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Reflect</span>.getMetadata(<span class="string">&#x27;classMetaData&#x27;</span>, SomeClass); <span class="comment">// &#x27;a&#x27;</span></span><br><span class="line"><span class="built_in">Reflect</span>.getMetadata(<span class="string">&#x27;methodMetaData&#x27;</span>, <span class="keyword">new</span> SomeClass(), <span class="string">&#x27;someMethod&#x27;</span>); <span class="comment">// &#x27;b&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="控制反转和依赖注入"><a href="#控制反转和依赖注入" class="headerlink" title="控制反转和依赖注入"></a>控制反转和依赖注入</h3><p>在 Angular 2+ 的版本中，<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000008626680">控制反转与依赖注入</a>便是基于此实现，现在，我们来实现一个简单版：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Constructor&lt;T = <span class="built_in">any</span>&gt; = <span class="keyword">new</span> (...args: <span class="built_in">any</span>[]) =&gt; T;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Injectable = (): <span class="function"><span class="params">ClassDecorator</span> =&gt;</span> <span class="function"><span class="params">target</span> =&gt;</span> &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OtherService</span> </span>&#123;</span><br><span class="line">  a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"><span class="keyword">public</span> <span class="keyword">readonly</span> otherService: OtherService</span>)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">testMethod</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.otherService.a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Factory = &lt;T&gt;(target: Constructor&lt;T&gt;): <span class="function"><span class="params">T</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 获取所有注入的服务</span></span><br><span class="line">  <span class="keyword">const</span> providers = <span class="built_in">Reflect</span>.getMetadata(<span class="string">&#x27;design:paramtypes&#x27;</span>, target); <span class="comment">// [OtherService]</span></span><br><span class="line">  <span class="keyword">const</span> args = providers.map(<span class="function">(<span class="params">provider: Constructor</span>) =&gt;</span> <span class="keyword">new</span> provider());</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> target(...args);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Factory(TestService).testMethod(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller-与-Get-的实现"><a href="#Controller-与-Get-的实现" class="headerlink" title="Controller 与 Get 的实现"></a>Controller 与 Get 的实现</h3><p>如果你在使用 TypeScript 开发 Node 应用，相信你对 <code>Controller</code>、<code>Get</code>、<code>POST</code> 这些 Decorator，并不陌生：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;/test&#x27;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SomeClass</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Get</span>(<span class="string">&#x27;/a&#x27;</span>)</span><br><span class="line">  <span class="function"><span class="title">someGetMethod</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello world&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Post</span>(<span class="string">&#x27;/b&#x27;</span>)</span><br><span class="line">  <span class="function"><span class="title">somePostMethod</span>(<span class="params"></span>)</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些 Decorator 也是基于 <code>Reflect Metadata</code> 实现，这次，我们将 <code>metadataKey</code> 定义在 <code>descriptor</code> 的 <code>value</code> 上：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> METHOD_METADATA = <span class="string">&#x27;method&#x27;</span>；</span><br><span class="line"><span class="keyword">const</span> PATH_METADATA = <span class="string">&#x27;path&#x27;</span>；</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Controller = (path: <span class="built_in">string</span>): <span class="function"><span class="params">ClassDecorator</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">target</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">Reflect</span>.defineMetadata(PATH_METADATA, path, target);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createMappingDecorator = <span class="function">(<span class="params">method: <span class="built_in">string</span></span>) =&gt;</span> (path: <span class="built_in">string</span>): <span class="function"><span class="params">MethodDecorator</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">target, key, descriptor</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">Reflect</span>.defineMetadata(PATH_METADATA, path, descriptor.value);</span><br><span class="line">    <span class="built_in">Reflect</span>.defineMetadata(METHOD_METADATA, method, descriptor.value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Get = createMappingDecorator(<span class="string">&#x27;GET&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> Post = createMappingDecorator(<span class="string">&#x27;POST&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>接着，创建一个函数，映射出 <code>route</code>：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mapRoute</span>(<span class="params">instance: <span class="built_in">Object</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> prototype = <span class="built_in">Object</span>.getPrototypeOf(instance);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 筛选出类的 methodName</span></span><br><span class="line">  <span class="keyword">const</span> methodsNames = <span class="built_in">Object</span>.getOwnPropertyNames(prototype)</span><br><span class="line">                              .filter(<span class="function"><span class="params">item</span> =&gt;</span> !isConstructor(item) &amp;&amp; isFunction(prototype[item]))；</span><br><span class="line">  <span class="keyword">return</span> methodsNames.map(<span class="function"><span class="params">methodName</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> fn = prototype[methodName];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出定义的 metadata</span></span><br><span class="line">    <span class="keyword">const</span> route = <span class="built_in">Reflect</span>.getMetadata(PATH_METADATA, fn);</span><br><span class="line">    <span class="keyword">const</span> method = <span class="built_in">Reflect</span>.getMetadata(METHOD_METADATA, fn)；</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      route,</span><br><span class="line">      method,</span><br><span class="line">      fn,</span><br><span class="line">      methodName</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>因此，我们可以得到一些有用的信息：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Reflect</span>.getMetadata(PATH_METADATA, SomeClass); <span class="comment">// &#x27;/test&#x27;</span></span><br><span class="line"></span><br><span class="line">mapRoute(<span class="keyword">new</span> SomeClass());</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * [&#123;</span></span><br><span class="line"><span class="comment"> *    route: &#x27;/a&#x27;,</span></span><br><span class="line"><span class="comment"> *    method: &#x27;GET&#x27;,</span></span><br><span class="line"><span class="comment"> *    fn: someGetMethod() &#123; ... &#125;,</span></span><br><span class="line"><span class="comment"> *    methodName: &#x27;someGetMethod&#x27;</span></span><br><span class="line"><span class="comment"> *  &#125;,&#123;</span></span><br><span class="line"><span class="comment"> *    route: &#x27;/b&#x27;,</span></span><br><span class="line"><span class="comment"> *    method: &#x27;POST&#x27;,</span></span><br><span class="line"><span class="comment"> *    fn: somePostMethod() &#123; ... &#125;,</span></span><br><span class="line"><span class="comment"> *    methodName: &#x27;somePostMethod&#x27;</span></span><br><span class="line"><span class="comment"> * &#125;]</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，只需把 <code>route</code> 相关信息绑在 <code>express</code> 或者 <code>koa</code> 上就 ok 了。</p>
+<hr>
+<ul>
+<li>原文：<a target="_blank" rel="noopener" href="https://jkchao.github.io/typescript-book-chinese/tips/metadata.html">https://jkchao.github.io/typescript-book-chinese/tips/metadata.html</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/typescript/" rel="tag"># typescript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/24/how-to-read-the-source-code/" rel="prev" title="怎么阅读源代码">
+      <i class="fa fa-chevron-left"></i> 怎么阅读源代码
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/11/docker-portainer/" rel="next" title="使用Docker部署Portainer系统">
+      使用Docker部署Portainer系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">获取类型信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-metadataKey"><span class="nav-number">3.</span> <span class="nav-text">自定义 metadataKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">4.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-number">4.1.</span> <span class="nav-text">控制反转和依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-%E4%B8%8E-Get-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.</span> <span class="nav-text">Controller 与 Get 的实现</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2021/04/29/typescript-metadata/";
+    this.page.identifier = "/2021/04/29/typescript-metadata/";
+    this.page.title = "【转载】Reflect Metadata";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

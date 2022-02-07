@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。 它由RFC2616规范定义的，并得到RFC2518、RFC2817、RFC2295、RFC2774、RFC4918等规范扩展。 1xx: 信息   消息 描述     100 Continue 服务器仅接收到部分请求，但是一旦服务器并没有拒绝该请求，客户端应该继续发送其余的请求。   101 S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP状态码">
+<meta property="og:url" content="https://hypc.github.io/2018/08/31/http-status/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。 它由RFC2616规范定义的，并得到RFC2518、RFC2817、RFC2295、RFC2774、RFC4918等规范扩展。 1xx: 信息   消息 描述     100 Continue 服务器仅接收到部分请求，但是一旦服务器并没有拒绝该请求，客户端应该继续发送其余的请求。   101 S">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-31T07:11:14.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.208Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2018/08/31/http-status/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>HTTP状态码 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2018/08/31/http-status/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP状态码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-31 15:11:14" itemprop="dateCreated datePublished" datetime="2018-08-31T15:11:14+08:00">2018-08-31</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/08/31/http-status/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/08/31/http-status/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>HTTP状态码（HTTP Status Code）是用以表示网页服务器HTTP响应状态的3位数字代码。
+它由<a href="https://tools.ietf.org/html/rfc2616" target="_blank" rel="noopener">RFC2616</a>规范定义的，并得到<a href="https://tools.ietf.org/html/rfc2518" target="_blank" rel="noopener">RFC2518</a>、<a href="https://tools.ietf.org/html/rfc2817" target="_blank" rel="noopener">RFC2817</a>、<a href="https://tools.ietf.org/html/rfc2295" target="_blank" rel="noopener">RFC2295</a>、<a href="https://tools.ietf.org/html/rfc2774" target="_blank" rel="noopener">RFC2774</a>、<a href="https://tools.ietf.org/html/rfc4918" target="_blank" rel="noopener">RFC4918</a>等规范扩展。</p>
+<h2 id="1xx-信息"><a href="#1xx-信息" class="headerlink" title="1xx: 信息"></a>1xx: 信息</h2><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 Continue</td>
+<td>服务器仅接收到部分请求，但是一旦服务器并没有拒绝该请求，客户端应该继续发送其余的请求。</td>
+</tr>
+<tr>
+<td>101 Switching Protocols</td>
+<td>服务器转换协议：服务器将遵从客户的请求转换到另外一种协议。</td>
+</tr>
+<tr>
+<td>102 Processing</td>
+<td>由WebDAV（<a href="https://tools.ietf.org/html/rfc2518" target="_blank" rel="noopener">RFC2518</a>）扩展的状态码，代表处理将被继续执行。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2xx-成功"><a href="#2xx-成功" class="headerlink" title="2xx: 成功"></a>2xx: 成功</h2><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200 OK</td>
+<td>请求成功（其后是对GET和POST请求的应答文档。）</td>
+</tr>
+<tr>
+<td>201 Created</td>
+<td>请求被创建完成，同时新的资源被创建。</td>
+</tr>
+<tr>
+<td>202 Accepted</td>
+<td>供处理的请求已被接受，但是处理未完成。</td>
+</tr>
+<tr>
+<td>203 Non-authoritative Information</td>
+<td>文档已经正常地返回，但一些应答头可能不正确，因为使用的是文档的拷贝。</td>
+</tr>
+<tr>
+<td>204 No Content</td>
+<td>没有新文档。浏览器应该继续显示原来的文档。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新，这个状态代码是很有用的。</td>
+</tr>
+<tr>
+<td>205 Reset Content</td>
+<td>没有新文档。但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容。</td>
+</tr>
+<tr>
+<td>206 Partial Content</td>
+<td>客户发送了一个带有Range头的GET请求，服务器完成了它。</td>
+</tr>
+<tr>
+<td>207 Multi-Status</td>
+<td>由WebDAV(<a href="https://tools.ietf.org/html/rfc2518" target="_blank" rel="noopener">RFC2518</a>)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h2 id="3xx-重定向"><a href="#3xx-重定向" class="headerlink" title="3xx: 重定向"></a>3xx: 重定向</h2><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>300 Multiple Choices</td>
+<td>多重选择。链接列表。用户可以选择某链接到达目的地。最多允许五个地址。</td>
+</tr>
+<tr>
+<td>301 Moved Permanently</td>
+<td>所请求的页面已经转移至新的url。</td>
+</tr>
+<tr>
+<td>302 Found</td>
+<td>所请求的页面已经临时转移至新的url。</td>
+</tr>
+<tr>
+<td>303 See Other</td>
+<td>所请求的页面可在别的url下被找到。</td>
+</tr>
+<tr>
+<td>304 Not Modified</td>
+<td>未按预期修改文档。客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。</td>
+</tr>
+<tr>
+<td>305 Use Proxy</td>
+<td>客户请求的文档应该通过Location头所指明的代理服务器提取。</td>
+</tr>
+<tr>
+<td>306 Unused</td>
+<td>此代码被用于前一版本。目前已不再使用，但是代码依然被保留。</td>
+</tr>
+<tr>
+<td>307 Temporary Redirect</td>
+<td>被请求的页面已经临时移至新的url。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4xx-客户端错误"><a href="#4xx-客户端错误" class="headerlink" title="4xx: 客户端错误"></a>4xx: 客户端错误</h2><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400 Bad Request</td>
+<td>服务器未能理解请求。</td>
+</tr>
+<tr>
+<td>401 Unauthorized</td>
+<td>被请求的页面需要用户名和密码。</td>
+</tr>
+<tr>
+<td>402 Payment Required</td>
+<td>此代码尚无法使用。</td>
+</tr>
+<tr>
+<td>403 Forbidden</td>
+<td>对被请求页面的访问被禁止。</td>
+</tr>
+<tr>
+<td>404 Not Found</td>
+<td>服务器无法找到被请求的页面。</td>
+</tr>
+<tr>
+<td>405 Method Not Allowed</td>
+<td>请求中指定的方法不被允许。</td>
+</tr>
+<tr>
+<td>406 Not Acceptable</td>
+<td>服务器生成的响应无法被客户端所接受。</td>
+</tr>
+<tr>
+<td>407 Proxy Authentication Required</td>
+<td>用户必须首先使用代理服务器进行验证，这样请求才会被处理。</td>
+</tr>
+<tr>
+<td>408 Request Timeout</td>
+<td>请求超出了服务器的等待时间。</td>
+</tr>
+<tr>
+<td>409 Conflict</td>
+<td>由于冲突，请求无法被完成。</td>
+</tr>
+<tr>
+<td>410 Gone</td>
+<td>被请求的页面不可用。</td>
+</tr>
+<tr>
+<td>411 Length Required</td>
+<td>“Content-Length” 未被定义。如果无此内容，服务器不会接受请求。</td>
+</tr>
+<tr>
+<td>412 Precondition Failed</td>
+<td>请求中的前提条件被服务器评估为失败。</td>
+</tr>
+<tr>
+<td>413 Request Entity Too Large</td>
+<td>由于所请求的实体的太大，服务器不会接受请求。</td>
+</tr>
+<tr>
+<td>414 Request-url Too Long</td>
+<td>由于url太长，服务器不会接受请求。当post请求被转换为带有很长的查询信息的get请求时，就会发生这种情况。</td>
+</tr>
+<tr>
+<td>415 Unsupported Media Type</td>
+<td>由于媒介类型不被支持，服务器不会接受请求。</td>
+</tr>
+<tr>
+<td>416 Requested Range Not Satisfiable</td>
+<td>服务器不能满足客户在请求中指定的Range头。</td>
+</tr>
+<tr>
+<td>417 Expectation Failed</td>
+<td>在请求头 Expect 中指定的预期内容无法被服务器满足，或者这个服务器是一个代理服务器，它有明显的证据证明在当前路由的下一个节点上，Expect 的内容无法被满足。</td>
+</tr>
+<tr>
+<td>421 too many connections</td>
+<td>从当前客户端所在的IP地址到服务器的连接数超过了服务器许可的最大范围。通常，这里的IP地址指的是从服务器上看到的客户端地址（比如用户的网关或者代理服务器地址）。在这种情况下，连接数的计算可能涉及到不止一个终端用户。</td>
+</tr>
+<tr>
+<td>422 Unprocessable Entity</td>
+<td>请求格式正确，但是由于含有语义错误，无法响应。（<a href="https://tools.ietf.org/html/rfc4918" target="_blank" rel="noopener">RFC4918</a> WebDAV）</td>
+</tr>
+<tr>
+<td>423 Locked</td>
+<td>当前资源被锁定。（<a href="https://tools.ietf.org/html/rfc4918" target="_blank" rel="noopener">RFC4918</a> WebDAV）</td>
+</tr>
+<tr>
+<td>424 Failed Dependency</td>
+<td>由于之前的某个请求发生的错误，导致当前请求失败，例如 PROPPATCH。（<a href="https://tools.ietf.org/html/rfc4918" target="_blank" rel="noopener">RFC4918</a> WebDAV）</td>
+</tr>
+<tr>
+<td>425 Unordered Collection</td>
+<td>在WebDav Advanced Collections 草案中定义，但是未出现在《WebDAV 顺序集协议》（<a href="https://tools.ietf.org/html/rfc3658" target="_blank" rel="noopener">RFC3658</a>）中。</td>
+</tr>
+<tr>
+<td>426 Upgrade Required</td>
+<td>客户端应当切换到TLS/1.0。（<a href="https://tools.ietf.org/html/rfc2817" target="_blank" rel="noopener">RFC2817</a>）</td>
+</tr>
+<tr>
+<td>449 Retry With</td>
+<td>由微软扩展，代表请求应当在执行完适当的操作后进行重试。</td>
+</tr>
+<tr>
+<td>451 Unavailable For Legal Reasons</td>
+<td>该请求因法律原因不可用。（<a href="https://tools.ietf.org/html/rfc7725" target="_blank" rel="noopener">RFC7725</a>）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5xx-服务器错误"><a href="#5xx-服务器错误" class="headerlink" title="5xx: 服务器错误"></a>5xx: 服务器错误</h2><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500 Internal Server Error</td>
+<td>请求未完成。服务器遇到不可预知的情况。</td>
+</tr>
+<tr>
+<td>501 Not Implemented</td>
+<td>请求未完成。服务器不支持所请求的功能。</td>
+</tr>
+<tr>
+<td>502 Bad Gateway</td>
+<td>请求未完成。服务器从上游服务器收到一个无效的响应。</td>
+</tr>
+<tr>
+<td>503 Service Unavailable</td>
+<td>请求未完成。服务器临时过载或当机。</td>
+</tr>
+<tr>
+<td>504 Gateway Timeout</td>
+<td>网关超时。</td>
+</tr>
+<tr>
+<td>505 HTTP Version Not Supported</td>
+<td>服务器不支持请求中指明的HTTP协议版本。</td>
+</tr>
+<tr>
+<td>506 Variant Also Negotiates</td>
+<td>由《透明内容协商协议》（<a href="https://tools.ietf.org/html/rfc2295" target="_blank" rel="noopener">RFC2295</a>）扩展，代表服务器存在内部配置错误：被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。</td>
+</tr>
+<tr>
+<td>507 Insufficient Storage</td>
+<td>服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。WebDAV（<a href="https://tools.ietf.org/html/rfc4918" target="_blank" rel="noopener">RFC4918</a>）</td>
+</tr>
+<tr>
+<td>509 Bandwidth Limit Exceeded</td>
+<td>服务器达到带宽限制。这不是一个官方的状态码，但是仍被广泛使用。</td>
+</tr>
+<tr>
+<td>510 Not Extended</td>
+<td>获取资源所需要的策略并没有被满足。（<a href="https://tools.ietf.org/html/rfc2774" target="_blank" rel="noopener">RFC2774</a>）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6xx-服务器错误"><a href="#6xx-服务器错误" class="headerlink" title="6xx: 服务器错误"></a>6xx: 服务器错误</h2><table>
+<thead>
+<tr>
+<th>消息</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>600 Unparseable Response Headers</td>
+<td>源站没有返回响应头部，只返回实体内容</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/http/" rel="tag"># http</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/19/centos-update-kernel/" rel="prev" title="Centos7安装并使用新内核">
+      <i class="fa fa-chevron-left"></i> Centos7安装并使用新内核
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/04/python-date-range/" rel="next" title="Python：获取两个日期中间的日期、月份或年">
+      Python：获取两个日期中间的日期、月份或年 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1xx-%E4%BF%A1%E6%81%AF"><span class="nav-number">1.</span> <span class="nav-text">1xx: 信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2xx-%E6%88%90%E5%8A%9F"><span class="nav-number">2.</span> <span class="nav-text">2xx: 成功</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3xx-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">3.</span> <span class="nav-text">3xx: 重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4xx-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF"><span class="nav-number">4.</span> <span class="nav-text">4xx: 客户端错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5xx-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%94%99%E8%AF%AF"><span class="nav-number">5.</span> <span class="nav-text">5xx: 服务器错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6xx-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%94%99%E8%AF%AF"><span class="nav-number">6.</span> <span class="nav-text">6xx: 服务器错误</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2018/08/31/http-status/";
+    this.page.identifier = "/2018/08/31/http-status/";
+    this.page.title = "HTTP状态码";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="开发 从小事做起，然后再扩展  无论是创建一个新的系统，还是添加功能到现有的系统中，我总是从一个简单到几乎没有任何所需功能的版本启动，然后再一步一步地解决问题，直到满意为止。  我从来没有妄想过能够一步登天。相反，我一边开发一边学习，同时新掌握的信息还可以用于解决方案中。  我很喜欢John Gall的这句话：“复杂系统总是源于简单系统的演化。”  一次只改变一件事  当我们在开发时，碰到测试失败">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】10+年程序员总结的20+条经验教训">
+<meta property="og:url" content="https://hypc.github.io/2018/09/25/20plus-tips-programmer/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="开发 从小事做起，然后再扩展  无论是创建一个新的系统，还是添加功能到现有的系统中，我总是从一个简单到几乎没有任何所需功能的版本启动，然后再一步一步地解决问题，直到满意为止。  我从来没有妄想过能够一步登天。相反，我一边开发一边学习，同时新掌握的信息还可以用于解决方案中。  我很喜欢John Gall的这句话：“复杂系统总是源于简单系统的演化。”  一次只改变一件事  当我们在开发时，碰到测试失败">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-25T01:54:41.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.191Z">
+<meta property="article:author" content="hypc">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2018/09/25/20plus-tips-programmer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>【转载】10+年程序员总结的20+条经验教训 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2018/09/25/20plus-tips-programmer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【转载】10+年程序员总结的20+条经验教训
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-25 09:54:41" itemprop="dateCreated datePublished" datetime="2018-09-25T09:54:41+08:00">2018-09-25</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/25/20plus-tips-programmer/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/09/25/20plus-tips-programmer/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><ol>
+<li><p><strong>从小事做起，然后再扩展</strong></p>
+<p> 无论是创建一个新的系统，还是添加功能到现有的系统中，我总是从一个简单到几乎没有任何所需功能的版本启动，然后再一步一步地解决问题，直到满意为止。
+ 我从来没有妄想过能够一步登天。相反，我一边开发一边学习，同时新掌握的信息还可以用于解决方案中。</p>
+<p> 我很喜欢John Gall的这句话：“复杂系统总是源于简单系统的演化。”</p>
+</li>
+<li><p><strong>一次只改变一件事</strong></p>
+<p> 当我们在开发时，碰到测试失败和功能无效的情况，如果你一次只研究一个问题，那将会更容易找到问题的关键。
+ 换言之，就是使用短迭代。必须确保这个问题解决之后，再转移到另一个问题上。这适用于向下提交。如果在你添加新功能之前需要先重构代码，那么先提交重构，然后再添加新的功能。</p>
+</li>
+<li><p><strong>尽早地添加日志记录和错误处理</strong></p>
+<p> 在开发新系统时，我做的第一件事就是添加日志和错误处理，因为这两者从一开始就非常有用。如果系统不能照常工作，
+ 那么你就需要知道程序中发生了什么——这是日志的作用。错误处理也是如此——错误和异常越早处理越好。</p>
+</li>
+<li><p><strong>每一行新代码必须至少执行一次</strong></p>
+<p> 在你真正完成一个功能之前，你必须对它进行测试。不然，你怎么知道它是不是按照你的想法在执行呢？
+ 通常情况下，最好的方法是通过自动测试，但并非总是如此。不过，不管怎么说，每一行新代码必须至少执行一次。</p>
+</li>
+<li><p><strong>在整体测试之前先进行模块测试</strong></p>
+<p> 先进行部分模块测试可以节省时间。通常说来，我们在整合不同的模块时也会出现问题，例如模块之间的接口不匹配。
+ 但是如果我们能够信任各个组件的话，那么跟踪集成问题就会变得简单得多。</p>
+</li>
+<li><p><strong>所有事情所花费的时间总是比你预期的要长</strong></p>
+<p> 特别是在编程中，即使一切进展顺利，我们也很难对功能所需的时间做出正确的预算。并且，开发软件时碰到各种意想不到的问题是非常常见的。</p>
+<p> 侯世达定律其实道出了真谛：做事所花费的时间总是比你预期的要长，即使你在预期中已经考虑了侯世达定律。</p>
+</li>
+<li><p><strong>先了解现有的代码</strong></p>
+<p> 大多数的编码都需要以某种方式改变现有的代码。即使是新功能，也需要适应现有的程序。
+ 所以，在你加进去新的内容前，首先需要了解当前的解决方案。否则，你一不小心就很有可能会打破现有的功能。
+ 这意味着，阅读代码和编写代码都是必要的技能。这也是为什么看似微小的变化仍可能需要很长时间才能解决的原因之一——你首先必须了解上下文。</p>
+</li>
+<li><p><strong>阅读和运行</strong></p>
+<p> 幸运的是，对于理解代码，我们有两种互补的方法。你可以阅读代码，也可以运行代码。运行代码的确是个非常棒的好方法。所以，请确保充分利用这两种方法。</p>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><ol start="9">
+<li><p><strong>bug总是难免的</strong></p>
+<p> 我不喜欢那些宣称软件开发可以“一蹴而就”的高谈阔论。不论你再怎么费尽心机，bug总是难免的。最好能够做成可以快速故障排除、修复bug和部署修复的系统。</p>
+</li>
+<li><p><strong>解决故障报告</strong></p>
+<p>每个开发人员都应该花时间去处理来自客户的故障报告，并修复bug。
+这能让你更好地理解客户的意图，明白如何使用系统，知道排除故障的难易程度，了解系统的设计情况。这也是为自己的开发成果负责的好方法。</p>
+</li>
+<li><p><strong>重现问题</strong></p>
+<p>修复bug的第一步就是重现问题。然后你得确保修复之后，问题能够彻彻底底地消失。这样一个简单的规则可以确保你不会误将非问题当作是问题，并确保解决方案真的能够奏效。</p>
+</li>
+<li><p><strong>修复已知错误，然后再看看有没有遗漏的地方</strong></p>
+<p>有时候，可能同时存在着几个不同的问题。它们之间的互相作用，可能会让你毫无头绪，束手无策。
+不要纠结于搞清楚发生了什么，先去解决所有已知的问题，然后再看看还有什么不对的地方。</p>
+</li>
+<li><p><strong>没有巧合</strong></p>
+<p>在测试和故障排除时，不要相信会出现什么巧合。就像你改变了定时器的值，那么就会改变系统重启的频率。
+所以一切都并非是巧合。添加新功能，另一个不相干的功能变慢了？这绝对不是巧合。相反，是你应该仔细调查的内容。</p>
+</li>
+<li><p><strong>关联时间戳</strong></p>
+<p>在故障排除时，事件的时间戳可以作为你的好帮手。寻找偶数增量。
+例如，如果系统重启了，并且刚刚发出过一个3000毫秒左右的请求，那么可能是触发了某个定时器，才导致出现重启的动作。</p>
+</li>
+</ol>
+<h2 id="团队合作"><a href="#团队合作" class="headerlink" title="团队合作"></a>团队合作</h2><ol start="15">
+<li><p><strong>面对面的交流最有效</strong></p>
+<p>当我们需要讨论如何解决问题时，那么面对面的交流比视频、打电话和电子邮件都要好。</p>
+</li>
+<li><p><strong>橡皮鸭法</strong></p>
+<p>遇到你绞尽脑汁也解决不了的问题时，不妨找一个同事，然后将问题解释给他们听。
+很多时候，当你在叙述时，即使你的同事一言不发，你可能也会突然灵光乍现找到问题的关键。</p>
+</li>
+<li><p><strong>问问题</strong></p>
+<p>阅读和运行代码往往非常有助于指出代码的目的和它的工作原理。但是如果你有机会咨询那些更为了解的人（例如原来的程序员），那么千万不要错过。</p>
+</li>
+<li><p><strong>共享荣誉</strong></p>
+<p>不要贪图荣誉，该是谁的就是谁的。例如：“Marcus想出了这个主意……”（如果真是他想的话），而不要说“我们想出的……”。</p>
+</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol start="19">
+<li><p><strong>尝试</strong></p>
+<p>如果你不知道某种编程语言功能的工作原理，那么不妨写一个小程序来理解它是如何工作的。
+这同样适用于测试你正在开发的系统。如果我将参数设置为-1，会发生什么？当我在重启系统时，如果服务当掉，会发生什么？以此来研究它的工作原理。</p>
+</li>
+<li><p><strong>带着问题睡觉</strong></p>
+<p>如果你正在解决一个很难的问题，那么不妨带着问题睡觉。
+有科学研究表明，这样做虽然你表明上并没有在主动思考，但你的潜意思却这么做了。其结果就是，第二天再去研究问题，解决方案已经呼之欲出了。</p>
+</li>
+<li><p><strong>跳槽</strong></p>
+<p>不要害怕跳槽。和不同的人共事，开发不同的产品，感受不同的公司文化是非常有意思的。</p>
+</li>
+<li><p><strong>不断学习</strong></p>
+<p>我们需要不断地学习和了解软件开发。你可以尝试不同的编程语言和工具，阅读软件开发的书籍，接受MOOC课程。相信我，量变才能达到质的飞跃，这些小小的学习积累，终有一天会大大地提高你的知识和能力。</p>
+</li>
+</ol>
+<p>译文链接：<a href="http://www.codeceo.com/article/10-years-20-tips-programmer.html" target="_blank" rel="noopener">http://www.codeceo.com/article/10-years-20-tips-programmer.html</a>
+英文原文：<a href="http://henrikwarne.com/2015/04/16/lessons-learned-in-software-development/" target="_blank" rel="noopener">Lessons Learned in Software Development</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/25/docker-build/" rel="prev" title="Docker：镜像构建上下文">
+      <i class="fa fa-chevron-left"></i> Docker：镜像构建上下文
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/26/nginx-underscores-in-headers/" rel="next" title="Nginx：带下划线的请求头">
+      Nginx：带下划线的请求头 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91"><span class="nav-number">1.</span> <span class="nav-text">开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4"><span class="nav-number">2.</span> <span class="nav-text">故障排除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E5%90%88%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">团队合作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2018/09/25/20plus-tips-programmer/";
+    this.page.identifier = "/2018/09/25/20plus-tips-programmer/";
+    this.page.title = "【转载】10+年程序员总结的20+条经验教训";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

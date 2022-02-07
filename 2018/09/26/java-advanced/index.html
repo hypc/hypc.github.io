@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Java虽然入门要容易, 然而要精通它, 要成为专家却很难. 主要原因是Java所涉及的技术面比较宽, 人的精力总是有限的. 有些Java方面的技术是必须要要掌握的, 钻研得越深入越好, 比如多线程技术. 基础阶段基础阶段, 可能需要经历1-2年吧. 这个时段, 应该多写一些基础的小程序(自己动手写的越多越好). 计算机是一门实践性很强的学科, 自己动手的东西, 记忆非常深刻, 效果要胜过读好多书">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】Java进阶">
+<meta property="og:url" content="https://hypc.github.io/2018/09/26/java-advanced/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="Java虽然入门要容易, 然而要精通它, 要成为专家却很难. 主要原因是Java所涉及的技术面比较宽, 人的精力总是有限的. 有些Java方面的技术是必须要要掌握的, 钻研得越深入越好, 比如多线程技术. 基础阶段基础阶段, 可能需要经历1-2年吧. 这个时段, 应该多写一些基础的小程序(自己动手写的越多越好). 计算机是一门实践性很强的学科, 自己动手的东西, 记忆非常深刻, 效果要胜过读好多书">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-26T01:29:47.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.209Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2018/09/26/java-advanced/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>【转载】Java进阶 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2018/09/26/java-advanced/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【转载】Java进阶
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-26 09:29:47" itemprop="dateCreated datePublished" datetime="2018-09-26T09:29:47+08:00">2018-09-26</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/26/java-advanced/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/09/26/java-advanced/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Java虽然入门要容易, 然而要精通它, 要成为专家却很难. 主要原因是Java所涉及的技术面比较宽, 人的精力总是有限的. 有些Java方面的技术是必须要要掌握的, 钻研得越深入越好, 比如多线程技术.</p>
+<h2 id="基础阶段"><a href="#基础阶段" class="headerlink" title="基础阶段"></a>基础阶段</h2><p>基础阶段, 可能需要经历1-2年吧. 这个时段, 应该多写一些基础的小程序(自己动手写的越多越好). 计算机是一门实践性很强的学科, 自己动手的东西, 记忆非常深刻, 效果要胜过读好多书. 当然, 学Java基础的时候, 书籍的选择也非常重要, 好的书籍事半功倍, 能让你打个非常好的基础. 而差的书籍, 很容易将你带入歧途, 多走很多弯路. 书籍不在多, 而在乎读得精(有些书, 你读十遍都不为过). 我记得我学Java的第一本书是<thinking in java>的中文版, 网上有很多人都建议不要把这本书作为第一本的入门教程来看, 太难. 我却想在此极力推荐它, 这本书确实是本经典之作. 而且书中确实讲的也是Java中的一些基础技术, 没有什么太难的东西, 只不过比较厚, 学习周期比较长, 所以很多人中途会选择放弃. 其实, 这本书是一本难得的入门教程, 对Java一些基础的东西, 讲得很全, 而且也很清晰, 更重要的是, 这本书能让你养成很多好的编程习惯, 例子也很多. 建议你把大部分的例子自己去实现一遍.  我的亲身经历, 我记得当时认真的看了2遍, 花了大概7个月的时间, 不过真的有很好的效果. 另外一个教程, 就是&lt;Java核心技术&gt;卷一, 卷二的话可以不必要买. 卷一看完, 自己再钻研一下, 就已经能达到卷二的高度了:). 到那时, 你就会觉得看卷二没啥意思, 感觉浪费钱了. 还有一个, 就是张孝祥的Java视频, 看视频有个好处, 就是比看书的记忆要深刻, 还有很多你可以跟着视频的演示同步操作. 张孝祥的Java视频对初学者来说, 确实很有作用. 总结起来: 看这些资料的时候, 一定要多写例子, 写的越多越好!</thinking></p>
+<a id="more"></a>
+<h2 id="中级阶段"><a href="#中级阶段" class="headerlink" title="中级阶段"></a>中级阶段</h2><p>中级阶段, 是一个更漫长的时期, 能否突破此阶段, 跟个人的努力和天资有着很大的关系. 你不得不承认, 同样一门新技术, 有些人一个月领悟到的东西, 比你一年的都多. 这就是天资, 程序员是一个需要天才的工作. 我想, 很多人听说李一男吧, 此君就是这样的人物, 三个月的时间就能解决好大一帮人几年解决不了的问题, 给华为某部门带来了很多的收益. 哦, 这是题外话了, 与此篇的主题无关, 只是本人偶尔的感慨而已:).  这个阶段, 就需要研究很多专题性的东西了, 比如: IO的实现原理, 多线程和Java的线程模型, 网络编程, swing, RMI, reflect, EJB, JDBC等等很多很多的专题技术, 钻研得越深越好. 为了更好的提高, 研究的更深入, 你需要经常到网络上搜索资料, 这个时候往往一本书起不来很大的作用. 选一个JDK版本吧, 目前建议选用1.6, 多多研究它, 尤其是源代码(尽量! 就是尽自己最大的努力, 虽然研究透是不可能滴). 比如说: util, collection, io, nio, concurrent等等包. 可能有人会反对我说, 不是有API文档吗, 为什么还要研究这么多的源代码? 错了, 有API文档, 你仅仅只是知道怎么用而已, 而认真仔细的研读这些大牛的源码, 你就会深入更高的一个阶层, 自己的编码, 设计都会有很大的提高. 如果有能力和精力, 我建议你把JDK的每一行代码都熟悉一遍, 绝对只有好处, 没有坏处! 而且你会有些意外的收获, 比如, 当你仔细地读完concurrent包的时候(不多, 好像总共是86个类吧), 你就会对Doug Lea佩服得五体投地. 这个时候最忌碰到难题就去寻找帮助, 去网上找答案! 先把自己的脑袋想破吧, 或者等你的老板拿着砍刀冲过来要把你杀了, 再去寻求帮助吧. 对于专题的学习, 英文原版的阅读是非常必要的, 看的越多越好, 多上上IBM的developer, SUN的网站吧, 当然Javaeye也很不错:), 有很多大牛, 呵呵.</p>
+<p>这个时候, 你应该建立自己的代码库了, 你应该自己去研究很多有意思的东西了. 从一个200多M的文件中寻找一个字段, 最坏情况(在文件的末尾咯)也只需要1秒左右的时间, 你知道吗?  这个阶段, 有很多很多类似的有趣的东西可以供你去研究, 你需要更多地关注性能, 规范性, 多解决一些疑难问题. 需要学会所有的调试技术, 运用各种性能工具, 还有JDK附带的很多工具, 这些你都要熟练得跟屠夫操刀一样. 也可以看看<effective java>, 这本书总结的也不错, 对写高效稳定的Java程序有些帮助. 也可以看看模式方面的东西, 但是我建议模式不要滥用, 非得要用的时候才用, 模式往往会把问题搞复杂:). 总结起来: 这个阶段是一个由点延伸到面的过程, 经过不断的学习, 演变成全面的深入! Java技术中你没什么盲点了, 还能解决很多性能问题和疑难问题, 你就成了一个合格的程序员了! :)  [要想成为优秀程序员, 还得对数据库和操作系统很精通.</effective></p>
+<h2 id="高级阶段"><a href="#高级阶段" class="headerlink" title="高级阶段"></a>高级阶段</h2><p>高级阶段, 我就不敢妄言了. 呵呵, 我感觉自己也是处于中级阶段吧. 也是根据自己的一些经验, 谈谈自己的理解吧:</p>
+<p>这个阶段, 需要研究各种框架, Spring, struts, Junit, Hibernate, iBatis, Jboss, Tomcat, snmp4j等等, 我觉得这个时候, 只要是用Java实现的经典框架, 你都可以去研究. ——在此申明一下, 我的意思不是说会用. 光会用其实是远远不够的, 你可以选择自己喜欢钻研的框架, 去好好研究一下, 兴趣是最好的老师嘛.</p>
+<p>建议开始的时候, 研究Junit和Struts吧, 小一点, 里面都采用了很多的模式, 呵呵, 可以熟悉一下, 尽量想想人家为什么这么做. 我建议主要的精力可以花在spring和jboss上, 尤其是jboss,  经典中的经典, 设计, 性能, 多线程, 资源管理等等, 你从中可以学到的东西简直是太多了. 而且它还有一本写得很好的参考书, 叫&lt;Jboss管理与开发核心技术&gt;, 英文方面的资料也是非常的多. 在工作中如果有机会参与架构的设计, 业务问题的讨论, 一定想方设法杀进去! 这对自己的设计能力, 以及对设计如何运用在业务上有很大的帮助. 毕竟, 程序都是为了更好地实现用户的业务的. 这个时候, 需要更多看看软件工程和UML方面的资料, 或者自己主持一个项目玩玩, 不一定非得出去拉项目赚钱(能赚钱当然更好), 不管成功或失败, 都是很宝贵的经验, 都能提高很多!</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/26/nginx-underscores-in-headers/" rel="prev" title="Nginx：带下划线的请求头">
+      <i class="fa fa-chevron-left"></i> Nginx：带下划线的请求头
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/26/js-interface/" rel="next" title="JavaScript：模仿接口">
+      JavaScript：模仿接口 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">基础阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E7%BA%A7%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">中级阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E9%98%B6%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">高级阶段</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2018/09/26/java-advanced/";
+    this.page.identifier = "/2018/09/26/java-advanced/";
+    this.page.title = "【转载】Java进阶";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

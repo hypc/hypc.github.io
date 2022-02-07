@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="面向对象的特征有哪些方面？ 访问修饰符public、private、protected以及不写（默认）时的区别？ String是最基本的数据类型吗？ float f&#x3D;3.4;是否正确？ short s1 &#x3D; 1; s1 &#x3D; s1 + 1;有错吗?short s1 &#x3D; 1; s1 +&#x3D; 1;有错吗？ Java有没有goto？ int和Integer有什么区别？ &amp;和&amp;&amp;的区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试题">
+<meta property="og:url" content="https://hypc.github.io/2018/11/10/java-interview-questions/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="面向对象的特征有哪些方面？ 访问修饰符public、private、protected以及不写（默认）时的区别？ String是最基本的数据类型吗？ float f&#x3D;3.4;是否正确？ short s1 &#x3D; 1; s1 &#x3D; s1 + 1;有错吗?short s1 &#x3D; 1; s1 +&#x3D; 1;有错吗？ Java有没有goto？ int和Integer有什么区别？ &amp;和&amp;&amp;的区">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-11-10T01:50:33.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.209Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2018/11/10/java-interview-questions/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Java面试题 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2018/11/10/java-interview-questions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java面试题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-10 09:50:33" itemprop="dateCreated datePublished" datetime="2018-11-10T09:50:33+08:00">2018-11-10</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/11/10/java-interview-questions/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/11/10/java-interview-questions/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ol>
+<li>面向对象的特征有哪些方面？</li>
+<li>访问修饰符<code>public</code>、<code>private</code>、<code>protected</code>以及不写（默认）时的区别？</li>
+<li><code>String</code>是最基本的数据类型吗？</li>
+<li><code>float f=3.4;</code>是否正确？</li>
+<li><code>short s1 = 1; s1 = s1 + 1;</code>有错吗?<code>short s1 = 1; s1 += 1;</code>有错吗？</li>
+<li>Java有没有<code>goto</code>？</li>
+<li><code>int</code>和<code>Integer</code>有什么区别？</li>
+<li><code>&amp;</code>和<code>&amp;&amp;</code>的区别？</li>
+<li>解释内存中的栈(stack)、堆(heap)和静态区(static area)的用法。</li>
+<li><code>Math.round(11.5)</code> 等于多少？<code>Math.round(-11.5)</code>等于多少？</li>
+<li><code>switch</code>是否能作用在<code>byte</code>上，是否能作用在<code>long</code>上，是否能作用在<code>String</code>上？</li>
+<li>用最有效率的方法计算2乘以8？</li>
+<li>数组有没有<code>length()</code>方法？<code>String</code>有没有<code>length()</code>方法？</li>
+<li>在Java中，如何跳出当前的多重嵌套循环？</li>
+<li>构造器（constructor）是否可被重写（override）？</li>
+<li>两个对象值相同(<code>x.equals(y) == true</code>)，但却可有不同的hash code，这句话对不对？</li>
+<li>是否可以继承<code>String</code>类？</li>
+<li>当一个对象被当作参数传递到一个方法后，此方法可改变这个对象的属性，并可返回变化后的结果，那么这里到底是值传递还是引用传递？</li>
+<li><code>String</code>和<code>StringBuilder</code>、<code>StringBuffer</code>的区别？</li>
+<li>重载（Overload）和重写（Override）的区别。重载的方法能否根据返回类型进行区分？<a id="more"></a></li>
+<li>描述一下JVM加载class文件的原理机制？</li>
+<li><code>char</code>型变量中能不能存贮一个中文汉字，为什么？</li>
+<li>抽象类（abstract class）和接口（interface）有什么异同？</li>
+<li>静态嵌套类(Static Nested Class)和内部类（Inner Class）的不同？</li>
+<li>Java中会存在内存泄漏吗，请简单描述。</li>
+<li>抽象的（abstract）方法是否可同时是静态的（static）,是否可同时是本地方法（native），是否可同时被<code>synchronized</code>修饰？</li>
+<li>阐述静态变量和实例变量的区别。</li>
+<li>是否可以从一个静态（static）方法内部发出对非静态（non-static）方法的调用？</li>
+<li>如何实现对象克隆？</li>
+<li><code>String s = new String(&quot;xyz&quot;);</code>创建了几个字符串对象？</li>
+<li>接口是否可继承（extends）接口？抽象类是否可实现（implements）接口？抽象类是否可继承具体类（concrete class）？</li>
+<li>一个<code>.java</code>源文件中是否可以包含多个类（不是内部类）？有什么限制？</li>
+<li>Anonymous Inner Class(匿名内部类)是否可以继承其它类？是否可以实现接口？</li>
+<li>内部类可以引用它的包含类（外部类）的成员吗？有没有什么限制？</li>
+<li>Java中的<code>final</code>关键字有哪些用法？</li>
+<li>数据类型之间的转换：</li>
+<li>如何实现字符串的反转及替换？</li>
+<li>怎样将<code>GB2312</code>编码的字符串转换为<code>ISO-8859-1</code>编码的字符串？</li>
+<li>日期和时间：</li>
+<li>打印昨天的当前时刻。</li>
+<li>比较一下Java和JavaSciprt。</li>
+<li>什么时候用断言（assert）？</li>
+<li><code>Error</code>和<code>Exception</code>有什么区别？</li>
+<li><code>try{}</code>里有一个<code>return</code>语句，那么紧跟在这个<code>try</code>后的<code>finally{}</code>里的代码会不会被执行，什么时候被执行，在<code>return</code>前还是后?</li>
+<li>Java语言如何进行异常处理，关键字：<code>throws</code>、<code>throw</code>、<code>try</code>、<code>catch</code>、<code>finally</code>分别如何使用？</li>
+<li>运行时异常与受检异常有何异同？</li>
+<li>列出一些你常见的运行时异常？</li>
+<li>阐述<code>final</code>、<code>finally</code>、<code>finalize</code>的区别。</li>
+<li><code>List</code>、<code>Set</code>、<code>Map</code>是否继承自<code>Collection</code>接口？</li>
+<li>阐述<code>ArrayList</code>、<code>Vector</code>、<code>LinkedList</code>的存储性能和特性。</li>
+<li><code>Collection</code>和<code>Collections</code>的区别？</li>
+<li><code>List</code>、<code>Map</code>、<code>Set</code>三个接口存取元素时，各有什么特点？</li>
+<li><code>TreeMap</code>和<code>TreeSet</code>在排序时如何比较元素？<code>Collections</code>工具类中的<code>sort()</code>方法如何比较元素？</li>
+<li><code>Thread</code>类的<code>sleep()</code>方法和对象的<code>wait()</code>方法都可以让线程暂停执行，它们有什么区别?</li>
+<li>线程的<code>sleep()</code>方法和<code>yield()</code>方法有什么区别？</li>
+<li>当一个线程进入一个对象的<code>synchronized</code>方法A之后，其它线程是否可进入此对象的<code>synchronized</code>方法B？</li>
+<li>请说出与线程同步以及线程调度相关的方法。</li>
+<li>编写多线程程序有几种实现方式？</li>
+<li><code>synchronized</code>关键字的用法？</li>
+<li>举例说明同步和异步。</li>
+<li>启动一个线程是调用<code>run()</code>还是<code>start()</code>方法？</li>
+<li>什么是线程池（thread pool）？</li>
+<li>线程的基本状态以及状态之间的关系？</li>
+<li>简述<code>synchronized</code>和<code>java.util.concurrent.locks.Lock</code>的异同？</li>
+<li>Java中如何实现序列化，有什么意义？</li>
+<li>Java中有几种类型的流？</li>
+<li>写一个方法，输入一个文件名和一个字符串，统计这个字符串在这个文件中出现的次数。</li>
+<li>如何用Java代码列出一个目录下所有的文件？</li>
+<li>用Java的套接字编程实现一个多线程的回显（echo）服务器。</li>
+<li>XML文档定义有几种形式？它们之间有何本质区别？解析XML文档有哪几种方式？</li>
+<li>你在项目中哪些地方用到了XML？</li>
+<li>阐述JDBC操作数据库的步骤。</li>
+<li><code>Statement</code>和<code>PreparedStatement</code>有什么区别？哪个性能更好？</li>
+<li>使用JDBC操作数据库时，如何提升读取数据的性能？如何提升更新数据的性能？</li>
+<li>在进行数据库编程时，连接池有什么作用？</li>
+<li>什么是DAO模式？</li>
+<li>事务的ACID是指什么？</li>
+<li>JDBC中如何进行事务处理？</li>
+<li>JDBC能否处理Blob和Clob？</li>
+<li>简述正则表达式及其用途。</li>
+<li>Java中是如何支持正则表达式操作的？</li>
+<li>获得一个类的类对象有哪些方式？</li>
+<li>如何通过反射创建对象？</li>
+<li>如何通过反射获取和设置对象私有字段的值？</li>
+<li>如何通过反射调用对象的方法？</li>
+<li>简述一下面向对象的”六原则一法则”。</li>
+<li>简述一下你了解的设计模式。</li>
+<li>用Java写一个单例类。</li>
+<li>什么是UML？</li>
+<li>UML中有哪些常用的图？</li>
+<li>用Java写一个冒泡排序。</li>
+<li>用Java写一个折半查找。</li>
+<li>阐述Servlet和CGI的区别?</li>
+<li>Servlet接口中有哪些方法？</li>
+<li>转发（forward）和重定向（redirect）的区别？</li>
+<li>JSP有哪些内置对象？作用分别是什么？</li>
+<li>get和post请求的区别？</li>
+<li>常用的Web服务器有哪些？</li>
+<li>JSP和Servlet是什么关系？</li>
+<li>讲解JSP中的四种作用域。</li>
+<li>如何实现JSP或Servlet的单线程模式？</li>
+<li>实现会话跟踪的技术有哪些？</li>
+<li>过滤器有哪些作用和用法？</li>
+<li>监听器有哪些作用和用法？</li>
+<li>web.xml文件中可以配置哪些内容？</li>
+<li>你的项目中使用过哪些JSTL标签？</li>
+<li>使用标签库有什么好处？如何自定义JSP标签？</li>
+<li>说一下表达式语言（EL）的隐式对象及其作用。</li>
+<li>表达式语言（EL）支持哪些运算符？</li>
+<li>Servlet3中的异步处理指的是什么？</li>
+<li>如何在基于Java的Web项目中实现文件上传和下载？</li>
+<li>服务器收到用户提交的表单数据，到底是调用Servlet的<code>doGet()</code>还是<code>doPost()</code>方法？</li>
+<li>JSP中的静态包含和动态包含有什么区别？</li>
+<li>Servlet中如何获取用户提交的查询参数或表单数据？</li>
+<li>Servlet中如何获取用户配置的初始化参数以及服务器上下文参数？</li>
+<li>如何设置请求的编码以及响应内容的类型？</li>
+<li>解释一下网络应用的模式及其特点。</li>
+<li>什么是Web Service（Web服务）？</li>
+<li>概念解释：SOAP、WSDL、UDDI。</li>
+<li>Java规范中和Web Service相关的规范有哪些？</li>
+<li>介绍一下你了解的Java领域的Web Service框架。</li>
+<li>什么是ORM？</li>
+<li>持久层设计要考虑的问题有哪些？你用过的持久层框架有哪些？</li>
+<li>Hibernate中<code>SessionFactory</code>是线程安全的吗？<code>Session</code>是线程安全的吗（两个线程能够共享同一个<code>Session</code>吗）？</li>
+<li>Hibernate中<code>Session</code>的<code>load</code>和<code>get</code>方法的区别是什么？</li>
+<li><code>Session</code>的<code>save()</code>、<code>update()</code>、<code>merge()</code>、<code>lock()</code>、<code>saveOrUpdate()</code>和<code>persist()</code>方法分别是做什么的？有什么区别？</li>
+<li>阐述<code>Session</code>加载实体对象的过程。</li>
+<li><code>Query</code>接口的<code>list</code>方法和<code>iterate</code>方法有什么区别？</li>
+<li>Hibernate如何实现分页查询？</li>
+<li>锁机制有什么用？简述Hibernate的悲观锁和乐观锁机制。</li>
+<li>阐述实体对象的三种状态以及转换关系。</li>
+<li>如何理解Hibernate的延迟加载机制？在实际应用中，延迟加载与<code>Session</code>关闭的矛盾是如何处理的？</li>
+<li>举一个多对多关联的例子，并说明如何实现多对多关联映射。</li>
+<li>谈一下你对继承映射的理解。</li>
+<li>简述Hibernate常见优化策略。</li>
+<li>谈一谈Hibernate的一级缓存、二级缓存和查询缓存。</li>
+<li>Hibernate中<code>DetachedCriteria</code>类是做什么的？</li>
+<li><code>@OneToMany</code>注解的<code>mappedBy</code>属性有什么作用？</li>
+<li>MyBatis中使用<code>#</code>和<code>$</code>书写占位符有什么区别？</li>
+<li>解释一下MyBatis中命名空间（namespace）的作用。</li>
+<li>MyBatis中的动态SQL是什么意思？</li>
+<li>什么是IoC和DI？DI是如何实现的？</li>
+<li>Spring中Bean的作用域有哪些？</li>
+<li>解释一下什么叫AOP（面向切面编程）？</li>
+<li>你是如何理解”横切关注”这个概念的？</li>
+<li>你如何理解AOP中的连接点（Joinpoint）、切点（Pointcut）、增强（Advice）、引介（Introduction）、织入（Weaving）、切面（Aspect）这些概念？</li>
+<li>Spring中自动装配的方式有哪些？</li>
+<li>Spring中如何使用注解来配置Bean？有哪些相关的注解？</li>
+<li>Spring支持的事务管理类型有哪些？你在项目中使用哪种方式？</li>
+<li>如何在Web项目中配置Spring的IoC容器？</li>
+<li>如何在Web项目中配置Spring MVC？</li>
+<li>Spring MVC的工作原理是怎样的？</li>
+<li>如何在Spring IoC容器中配置数据源？</li>
+<li>如何配置配置事务增强？</li>
+<li>选择使用Spring框架的原因（Spring框架为企业级开发带来的好处有哪些）？</li>
+<li>Spring IoC容器配置Bean的方式？</li>
+<li>阐述Spring框架中Bean的生命周期？</li>
+<li>依赖注入时如何注入集合属性？</li>
+<li>Spring中的自动装配有哪些限制？</li>
+<li>在Web项目中如何获得Spring的IoC容器？</li>
+<li>大型网站在架构上应当考虑哪些问题？</li>
+<li>你用过的网站前端优化的技术有哪些？</li>
+<li>你使用过的应用服务器优化技术有哪些？</li>
+<li>什么是XSS？什么是SQL注入？什么是CSRF？</li>
+<li>什么是领域模型(domain model)？贫血模型(anaemic domain model)和充血模型(rich domain model)有什么区别？</li>
+<li>谈一谈测试驱动开发（TDD）的好处以及你的理解。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/01/talking-about-study/" rel="prev" title="论学习">
+      <i class="fa fa-chevron-left"></i> 论学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/12/redesign/" rel="next" title="重新设计的原因">
+      重新设计的原因 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2018/11/10/java-interview-questions/";
+    this.page.identifier = "/2018/11/10/java-interview-questions/";
+    this.page.title = "Java面试题";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

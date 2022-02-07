@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Verdaccio是一个 Node.js创建的轻量的私有npm proxy registry。 Run ServerRun server with local storagedocker-compose.yaml文件内容如下： 12345678910111213141516version: &amp;#x27;3.7&amp;#x27;services:  verdaccio:    image: verdacc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Docker搭建Verdaccio服务">
+<meta property="og:url" content="https://hypc.github.io/2021/06/17/docker-verdaccio-2/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="Verdaccio是一个 Node.js创建的轻量的私有npm proxy registry。 Run ServerRun server with local storagedocker-compose.yaml文件内容如下： 12345678910111213141516version: &amp;#x27;3.7&amp;#x27;services:  verdaccio:    image: verdacc">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-06-17T06:10:27.000Z">
+<meta property="article:modified_time" content="2021-06-18T14:18:16.131Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="verdaccio">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2021/06/17/docker-verdaccio-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>使用Docker搭建Verdaccio服务 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2021/06/17/docker-verdaccio-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Docker搭建Verdaccio服务
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-17 14:10:27" itemprop="dateCreated datePublished" datetime="2021-06-17T14:10:27+08:00">2021-06-17</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/06/17/docker-verdaccio-2/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2021/06/17/docker-verdaccio-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://verdaccio.org/">Verdaccio</a>是一个 Node.js创建的轻量的私有<code>npm proxy registry</code>。</p>
+<h2 id="Run-Server"><a href="#Run-Server" class="headerlink" title="Run Server"></a>Run Server</h2><h3 id="Run-server-with-local-storage"><a href="#Run-server-with-local-storage" class="headerlink" title="Run server with local storage"></a>Run server with local storage</h3><p><code>docker-compose.yaml</code>文件内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">verdaccio:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">verdaccio/verdaccio</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.verdaccio.rule=Host(`verdaccio.yourdomain.com`)</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.verdaccio.entrypoints=websecure</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.verdaccio.service=verdaccio</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.services.verdaccio.loadbalancer.server.port=4873</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">storage:/verdaccio/storage</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">storage:</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，使用下面命令启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="Run-server-with-s3-minio"><a href="#Run-server-with-s3-minio" class="headerlink" title="Run server with s3 (minio)"></a>Run server with s3 (minio)</h3><div class="tabs" id=""><ul class="nav-tabs"><li class="tab active"><a href="#-1">Dockerfile</a></li><li class="tab"><a href="#-2">config.yaml</a></li><li class="tab"><a href="#-3">docker-compose.yaml</a></li></ul><div class="tab-content"><div class="tab-pane active" id="-1"><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> verdaccio/verdaccio</span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> root</span><br><span class="line"><span class="keyword">ENV</span> NODE_ENV=production</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> npm <span class="built_in">set</span> registry https://registry.npm.taobao.org/ \</span></span><br><span class="line"><span class="bash">    &amp;&amp; npm install -g verdaccio-aws-s3-storage \</span></span><br><span class="line"><span class="bash">    &amp;&amp; ln -s /usr/<span class="built_in">local</span>/lib/node_modules/verdaccio-aws-s3-storage /verdaccio/plugins/verdaccio-aws-s3-storage</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> config.yaml /verdaccio/conf/config.yaml</span></span><br><span class="line"><span class="keyword">USER</span> verdaccio</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="-2"><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This is the config file used for the docker images.</span></span><br><span class="line"><span class="comment"># It allows all users to do anything, so don&#x27;t use it on production systems.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Do not configure host and port under `listen` in this file</span></span><br><span class="line"><span class="comment"># as it will be ignored when using docker.</span></span><br><span class="line"><span class="comment"># see https://verdaccio.org/docs/en/docker#docker-and-custom-port-configuration</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Look here for more config file examples:</span></span><br><span class="line"><span class="comment"># https://github.com/verdaccio/verdaccio/tree/master/conf</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># path to a directory with all packages</span></span><br><span class="line"><span class="attr">storage:</span> <span class="string">/verdaccio/storage/data</span></span><br><span class="line"><span class="comment"># path to a directory with plugins to include</span></span><br><span class="line"><span class="attr">plugins:</span> <span class="string">/verdaccio/plugins</span></span><br><span class="line"></span><br><span class="line"><span class="attr">web:</span></span><br><span class="line">  <span class="comment"># WebUI is enabled as default, if you want disable it, just uncomment this line</span></span><br><span class="line">  <span class="comment">#enable: false</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Verdaccio</span></span><br><span class="line">  <span class="comment"># comment out to disable gravatar support</span></span><br><span class="line">  <span class="attr">gravatar:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># by default packages are ordercer ascendant (asc|desc)</span></span><br><span class="line">  <span class="comment"># sort_packages: asc</span></span><br><span class="line">  <span class="comment"># darkMode: true</span></span><br><span class="line">  <span class="comment"># logo: http://somedomain/somelogo.png</span></span><br><span class="line">  <span class="comment"># favicon: http://somedomain/favicon.ico | /path/favicon.ico</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># translate your registry, api i18n not available yet</span></span><br><span class="line"><span class="comment"># i18n:</span></span><br><span class="line"><span class="comment"># list of the available translations https://github.com/verdaccio/ui/tree/master/i18n/translations</span></span><br><span class="line"><span class="comment">#   web: en-US</span></span><br><span class="line"></span><br><span class="line"><span class="attr">auth:</span></span><br><span class="line">  <span class="attr">htpasswd:</span></span><br><span class="line">    <span class="attr">file:</span> <span class="string">/verdaccio/storage/htpasswd</span></span><br><span class="line">    <span class="comment"># Maximum amount of users allowed to register, defaults to &quot;+infinity&quot;.</span></span><br><span class="line">    <span class="comment"># You can set this to -1 to disable registration.</span></span><br><span class="line">    <span class="comment"># max_users: 1000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># a list of other known repositories we can talk to</span></span><br><span class="line"><span class="attr">uplinks:</span></span><br><span class="line">  <span class="attr">npmjs:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">https://registry.npmjs.org/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">packages:</span></span><br><span class="line">  <span class="string">&#x27;@*/*&#x27;</span><span class="string">:</span></span><br><span class="line">    <span class="comment"># scoped packages</span></span><br><span class="line">    <span class="attr">access:</span> <span class="string">$all</span></span><br><span class="line">    <span class="attr">publish:</span> <span class="string">$authenticated</span></span><br><span class="line">    <span class="attr">unpublish:</span> <span class="string">$authenticated</span></span><br><span class="line">    <span class="attr">proxy:</span> <span class="string">npmjs</span></span><br><span class="line"></span><br><span class="line">  <span class="string">&#x27;**&#x27;</span><span class="string">:</span></span><br><span class="line">    <span class="attr">proxy:</span> <span class="string">npmjs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># You can specify HTTP/1.1 server keep alive timeout in seconds for incoming connections.</span></span><br><span class="line"><span class="comment"># A value of 0 makes the http server behave similarly to Node.js versions prior to 8.0.0, which did not have a keep-alive timeout.</span></span><br><span class="line"><span class="comment"># WORKAROUND: Through given configuration you can workaround following issue https://github.com/verdaccio/verdaccio/issues/301. Set to 0 in case 60 is not enough.</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">keepAliveTimeout:</span> <span class="number">60</span></span><br><span class="line"></span><br><span class="line"><span class="attr">middlewares:</span></span><br><span class="line">  <span class="attr">audit:</span></span><br><span class="line">    <span class="attr">enabled:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># log settings</span></span><br><span class="line"><span class="attr">logs:</span> &#123; <span class="attr">type:</span> <span class="string">stdout</span>, <span class="attr">format:</span> <span class="string">pretty</span>, <span class="attr">level:</span> <span class="string">http</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#experiments:</span></span><br><span class="line"><span class="comment">#  # support for npm token command</span></span><br><span class="line"><span class="comment">#  token: false</span></span><br><span class="line"><span class="comment">#  # enable tarball URL redirect for hosting tarball with a different server, the tarball_url_redirect can be a template string</span></span><br><span class="line"><span class="comment">#  tarball_url_redirect: &#x27;https://mycdn.com/verdaccio/$&#123;packageName&#125;/$&#123;filename&#125;&#x27;</span></span><br><span class="line"><span class="comment">#  # the tarball_url_redirect can be a function, takes packageName and filename and returns the url, when working with a js configuration file</span></span><br><span class="line"><span class="comment">#  tarball_url_redirect(packageName, filename) &#123;</span></span><br><span class="line"><span class="comment">#    const signedUrl = // generate a signed url</span></span><br><span class="line"><span class="comment">#    return signedUrl;</span></span><br><span class="line"><span class="comment">#  &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This affect the web and api (not developed yet)</span></span><br><span class="line"><span class="comment">#i18n:</span></span><br><span class="line"><span class="comment">#web: en-US</span></span><br><span class="line"></span><br><span class="line"><span class="attr">store:</span></span><br><span class="line">  <span class="attr">aws-s3-storage:</span></span><br><span class="line">    <span class="attr">bucket:</span> <span class="string">verdaccio</span></span><br><span class="line">    <span class="comment"># keyPrefix: some-prefix # optional, has the effect of nesting all files in a subdirectory</span></span><br><span class="line">    <span class="comment"># region: us-west-2 # optional, will use aws s3&#x27;s default behavior if not specified</span></span><br><span class="line">    <span class="attr">endpoint:</span> <span class="string">https://minio.yourdomain.com</span> <span class="comment"># optional, will use aws s3&#x27;s default behavior if not specified</span></span><br><span class="line">    <span class="attr">s3ForcePathStyle:</span> <span class="literal">true</span> <span class="comment"># optional, will use path style URLs for S3 objects</span></span><br><span class="line">    <span class="attr">tarballACL:</span> <span class="string">private</span> <span class="comment"># optional, use public-read to work with CDN like Amazon CloudFront</span></span><br><span class="line">    <span class="attr">accessKeyId:</span> <span class="string">pEPnuTGrb7fKm7bdFEcydE85ZXNrzKr4</span> <span class="comment"># optional, aws accessKeyId for private S3 bucket</span></span><br><span class="line">    <span class="attr">secretAccessKey:</span> <span class="string">k5K8RVMpBeRDtiTxEvWk9oFWTySYYwwP</span> <span class="comment"># optional, aws secretAccessKey for private S3 bucket</span></span><br><span class="line">    <span class="comment"># sessionToken: your-session-token # optional, aws sessionToken for private S3 bucket</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="-3"><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.7&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">verdaccio:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">verdaccio</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.verdaccio.rule=Host(`verdaccio.yourdomain.com`)</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.verdaccio.entrypoints=websecure</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.verdaccio.service=verdaccio</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.services.verdaccio.loadbalancer.server.port=4873</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">storage:/verdaccio/storage</span></span><br><span class="line">  <span class="attr">minio:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">minio/minio</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.minio.rule=Host(`minio.yourdomain.com`)</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.minio.entrypoints=websecure</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.routers.minio.service=minio</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">traefik.http.services.minio.loadbalancer.server.port=9000</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">server</span> <span class="string">/data</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MINIO_ROOT_USER=pEPnuTGrb7fKm7bdFEcydE85ZXNrzKr4</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MINIO_ROOT_PASSWORD=k5K8RVMpBeRDtiTxEvWk9oFWTySYYwwP</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">minio-data:/data</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">storage:</span></span><br><span class="line">  <span class="attr">minio-data:</span></span><br></pre></td></tr></table></figure></div></div></div>
+
+<p>最后，使用下面命令启动服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d --build</span><br></pre></td></tr></table></figure>
+
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># npm设置源</span></span><br><span class="line">npm <span class="built_in">set</span> registry https://verdaccio.yourdomain.com/</span><br><span class="line"><span class="comment"># 注册账号</span></span><br><span class="line">npm adduser --registry https://verdaccio.yourdomain.com/</span><br><span class="line"><span class="comment"># 修改密码</span></span><br><span class="line">npm profile <span class="built_in">set</span> password --registry https://verdaccio.yourdomain.com/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登陆</span></span><br><span class="line">npm login --registry https://verdaccio.yourdomain.com/</span><br><span class="line"><span class="comment"># 发布</span></span><br><span class="line">npm publish --registry https://verdaccio.yourdomain.com/</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/npm/" rel="tag"># npm</a>
+              <a href="/tags/verdaccio/" rel="tag"># verdaccio</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/08/k6/" rel="prev" title="k6">
+      <i class="fa fa-chevron-left"></i> k6
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/17/hexo-tag-plugins/" rel="next" title="Tag Plugins">
+      Tag Plugins <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-Server"><span class="nav-number">1.</span> <span class="nav-text">Run Server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server-with-local-storage"><span class="nav-number">1.1.</span> <span class="nav-text">Run server with local storage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server-with-s3-minio"><span class="nav-number">1.2.</span> <span class="nav-text">Run server with s3 (minio)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">2.</span> <span class="nav-text">Usage</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2021/06/17/docker-verdaccio-2/";
+    this.page.identifier = "/2021/06/17/docker-verdaccio-2/";
+    this.page.title = "使用Docker搭建Verdaccio服务";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

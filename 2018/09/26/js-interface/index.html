@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="JavaScript中模仿接口的三种方法：注释法、属性检查法和鸭式辩型法。没有哪种技术是完整的，但三者结合使用基本上可以令人满意。 用注释描述接口用注释模仿接口是最简单的方法，但效果却是最差的。 这种方法模仿其他面向对象语言中的做法，使用了interface和implements关键字， 但把它们放在注释中，以免引起语法错误。下面的示例演示了如何把这些关键字添加到代码中以描述所要求的方法： 123">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript：模仿接口">
+<meta property="og:url" content="https://hypc.github.io/2018/09/26/js-interface/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="JavaScript中模仿接口的三种方法：注释法、属性检查法和鸭式辩型法。没有哪种技术是完整的，但三者结合使用基本上可以令人满意。 用注释描述接口用注释模仿接口是最简单的方法，但效果却是最差的。 这种方法模仿其他面向对象语言中的做法，使用了interface和implements关键字， 但把它们放在注释中，以免引起语法错误。下面的示例演示了如何把这些关键字添加到代码中以描述所要求的方法： 123">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-26T01:46:40.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.210Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2018/09/26/js-interface/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>JavaScript：模仿接口 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2018/09/26/js-interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript：模仿接口
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-26 09:46:40" itemprop="dateCreated datePublished" datetime="2018-09-26T09:46:40+08:00">2018-09-26</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/09/26/js-interface/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/09/26/js-interface/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>JavaScript中模仿接口的三种方法：注释法、属性检查法和鸭式辩型法。没有哪种技术是完整的，但三者结合使用基本上可以令人满意。</p>
+<h2 id="用注释描述接口"><a href="#用注释描述接口" class="headerlink" title="用注释描述接口"></a>用注释描述接口</h2><p>用注释模仿接口是最简单的方法，但效果却是最差的。
+这种方法模仿其他面向对象语言中的做法，使用了<code>interface</code>和<code>implements</code>关键字，
+但把它们放在注释中，以免引起语法错误。下面的示例演示了如何把这些关键字添加到代码中以描述所要求的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    interface Composite &#123;</span></span><br><span class="line"><span class="comment">        function add(child);</span></span><br><span class="line"><span class="comment">        function remove(child);</span></span><br><span class="line"><span class="comment">        function getChild(index);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    interface FormItem &#123;</span></span><br><span class="line"><span class="comment">        function save();</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// implements Composite, FormItem</span></span><br><span class="line"><span class="keyword">var</span> CompositeForm = <span class="function"><span class="keyword">function</span>(<span class="params">id, method, action</span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Implement the Composite interface.</span></span><br><span class="line"></span><br><span class="line">CompositeForm.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params">child</span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line">CompositeForm.prototype.remove = <span class="function"><span class="keyword">function</span>(<span class="params">child</span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line">CompositeForm.prototype.getChild = <span class="function"><span class="keyword">function</span>(<span class="params">index</span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Implement the FormItem interface.</span></span><br><span class="line"></span><br><span class="line">CompositeForm.prototype.save = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这种模仿并不是很好。它没有为确保CompositeForm真正实现了正确的方法集而进行检查，也不会抛出错误以告知程序员程序中有错误。
+说到底它只要还是属于程序文档范畴。在这种做法中，对接口约定的遵守完全依靠自觉。</p>
+<p>尽管如此。这种方法也有其优点。它易于实现，不需要额外的类或函数。
+它可以提高代码的课重用性，因为现在哪些类实现的接口都有说明，程序员可以把它们与实现了同样接口的类互换使用。
+这种方法并不影响文件尺寸或执行速度，因为它所使用的注释可以在对代码进行部署时不费吹灰之力地予以剔除。
+但是，由于不会提供错误信息，它对测试和调试没有什么帮助。</p>
+<a id="more"></a>
+<h2 id="用属性检查模仿接口"><a href="#用属性检查模仿接口" class="headerlink" title="用属性检查模仿接口"></a>用属性检查模仿接口</h2><p>第二种方法更严谨一点。所有类都明确地声明自己实现了那些接口，那些想与这些类打交道的对象可以针对这些声明进行检查。
+那些接口自身仍然只是注释，但现在你可以通过检查一个属性得知某个自称实现了什么借口：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    interface Composite &#123;</span></span><br><span class="line"><span class="comment">        function add(child);</span></span><br><span class="line"><span class="comment">        function remove(child);</span></span><br><span class="line"><span class="comment">        function getChild(index);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    interface FormItem &#123;</span></span><br><span class="line"><span class="comment">        function save();</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> CompositeForm = <span class="function"><span class="keyword">function</span>(<span class="params">id, method, action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.implementsInterfaces = [<span class="string">'Composite'</span>, <span class="string">'FormItem'</span>];</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addForm</span>(<span class="params">formInstance</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!implements(formInstance, <span class="string">'Composite'</span>, <span class="string">'FormItem'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Object does not implement a required interface."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// The implements function, which checks to see if an object declares</span></span><br><span class="line"><span class="comment">// that itimplaments the required interfaces.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">implements</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Looping through all arguments after the first one.</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> interfaceName = <span class="built_in">arguments</span>[i];</span><br><span class="line">        <span class="keyword">var</span> interfaceFound = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; object.implementsInterfaces.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(object.implementsInterfaces[j] === interfaceName) &#123;</span><br><span class="line">                interfaceFound = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!interfaceFound) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// An interface was not found.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，CompositeForm宣称自己实现了Composite和FormItem这两个接口，
+其做法是把这两个接口的名称加入一个名为implementsInterfaces的数组。类显式声明自己支持什么接口。
+任何一个要求其参数属于特定类型的函数都可以对这个属性进行检查，并在所需要接口未在声明之列时抛出一个错误。</p>
+<p>这种方法有几个优点。它对类所实现的接口提供了文档说明。
+如果需要的接口不在一个类宣称的接口之列，你会看到错误消息。通过利用这些错误，你可以强迫其他程序员声明这些接口。</p>
+<p>这种方法的主要缺点在于它并非确保类真正实现了自称实现的接口。你只知道它是否说自己实现了接口。
+在创建一个类时声明它实现了一个接口，但后来在实现该接口所规定的方法时却漏掉其中某一个，这一种错误很常见。
+此时所有类型检查都能通过，但那个方法却并不存在，这将在代码中埋下一个隐患。另外，显式声明类所支持的接口也需要一些额外工作。</p>
+<h2 id="用鸭式辩型法模仿接口"><a href="#用鸭式辩型法模仿接口" class="headerlink" title="用鸭式辩型法模仿接口"></a>用鸭式辩型法模仿接口</h2><p>其实，类是否声明自己支持哪些接口并不重要，只要它具有这些接口中的方法就行。
+鸭式辩型（这个名称来自James Whitecomb Riley的名言：“像鸭子一样走里并且嘎嘎叫的就是鸭子”）正是基于这样的认识。
+它把对象实现的方法集作为判断它是不是某个类的实例的唯一标准。这种技术在检查一个类是否实现了某个接口时也可大显身手。
+这种方法背后的观点很简单：如果对象具有与接口定义的方法同名的所以方法，那么就可以认为它实现了这个接口。你可以用一个辅助函数来确保对象具有所以必需的方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Interfaces</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Composite = <span class="keyword">new</span> Interface(<span class="string">'Composite'</span>, [<span class="string">'add'</span>, <span class="string">'remove'</span>, <span class="string">'getChild'</span>]);</span><br><span class="line"><span class="keyword">var</span> FormItem = <span class="keyword">new</span> Interface(<span class="string">'FormItem'</span>, [<span class="string">'save'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// CompositeForm class</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> CompositeForm = <span class="function"><span class="keyword">function</span>(<span class="params">id, method, action</span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addForm</span>(<span class="params">formInstance</span>) </span>&#123;</span><br><span class="line">    ensureImplements(formInstance, Composite, FormItem);</span><br><span class="line">    <span class="comment">// This function will throw an error if a required method is not implemented.</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>与另外两种方法不同，这种方法并不借助于注释。其各个方面都是可以强制实施的。
+ensureImplements函数需要至少两个参数。第一个参数是想要检查的对象。其余参数是据以对那个对象进行检查的接口。
+该函数检查其第一个参数代表的对象是否实现了那些接口所声明的所有方法。
+如果发现的漏掉了任何一个方法，它就会抛出错误，其中包含了所缺少的那个方法和未被正确实现的接口的名称等有用信息。
+这种检查可以用在代码中任何需要确保某个对象实现了某个接口的地方。在本例中，addForm函数仅当一个表单对象支持所有必要的方法时才会对其执行添加操作。</p>
+<p>尽管鸭式辩型可能是上述三种方法中最有用的一种，但它也有缺点。在这种方法中，类并不声明自己实现了哪些接口，
+这降低了代码的可重用性，并且也缺乏其他两种方法那样的自我描述性。
+它需要使用一个辅助类（Interface）和一个辅助函数（ensureImplements）。而且，它只关心方法的名称，并不检查其参数的名称、数目或类型。</p>
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><p>一般可综合使用第一种和第三种方法。用注释声明类支持的接口，从而提高代码的可读性及其文档的完整性。
+用辅助类<code>Interface</code>及其类方法<code>Interface.ensureImplaments</code>来对对象实现的方法进行显式检查，如果对象未能通过检查，这个方法将返回一条有用的消息。</p>
+<p>下面是一个Interface类的定义：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Contructor.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Interface = <span class="function"><span class="keyword">function</span>(<span class="params">name, methods</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length != <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Interface constructor called with "</span> + <span class="built_in">arguments</span>.length + <span class="string">" arguments, but expected exactly 2."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> name !== <span class="string">"string"</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Interface constructor expects name to be passed in as a string."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.methods = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; methods.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> methods[i] !== <span class="string">"string"</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Interface constructor expects method names to be passed in as a string."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.methods.push(methods[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Static class method.</span></span><br><span class="line"></span><br><span class="line">Interface.ensureImplements = <span class="function"><span class="keyword">function</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Function Interface.ensureImplements called with "</span> + <span class="built_in">arguments</span>.length + <span class="string">" arguments, but expected at least 2."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> interface = <span class="built_in">arguments</span>[i];</span><br><span class="line">        <span class="keyword">if</span>(interface.constructor !== Interface) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Function Interface.ensureImplements expects arguments two and above to be instances of Interface."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; interface.methods.length; j ++) &#123;</span><br><span class="line">            <span class="keyword">var</span> method = interface.methods[j];</span><br><span class="line">            <span class="keyword">if</span>(!object[method] || <span class="keyword">typeof</span> object[method] !== <span class="string">"function"</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Function Interface.ensureImplements: object does not implement the "</span> + interface.name + <span class="string">" interface. Method "</span> + method + <span class="string">" was not found."</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从中可以看到，该类的所有方法对其参数都有严格的要求，如果参数未能通过检查，将导致错误抛出。
+我们特地加入这种检查的目的在于：如果没有错误被抛出，那么你可以肯定接口已经得到了正确的声明和实现。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/26/java-advanced/" rel="prev" title="【转载】Java进阶">
+      <i class="fa fa-chevron-left"></i> 【转载】Java进阶
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/26/docker-zabbix/" rel="next" title="使用Docker部署zabbix服务">
+      使用Docker部署zabbix服务 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%A8%E9%87%8A%E6%8F%8F%E8%BF%B0%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">用注释描述接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%B1%9E%E6%80%A7%E6%A3%80%E6%9F%A5%E6%A8%A1%E4%BB%BF%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">用属性检查模仿接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E9%B8%AD%E5%BC%8F%E8%BE%A9%E5%9E%8B%E6%B3%95%E6%A8%A1%E4%BB%BF%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">用鸭式辩型法模仿接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90"><span class="nav-number">4.</span> <span class="nav-text">推荐</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2018/09/26/js-interface/";
+    this.page.identifier = "/2018/09/26/js-interface/";
+    this.page.title = "JavaScript：模仿接口";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

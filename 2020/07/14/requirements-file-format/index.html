@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Requirements文件是包含需要使用pip install安装的项目列表文件。 Requirements文件的每一行都是一条要安装的内容，就像pip install的参数一样，支持以下形式： 12345[[--option]...]&lt;requirement specifier&gt; [; markers] [[--option]...]&lt;archive url&#x2F;path&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Requirements File Format">
+<meta property="og:url" content="https://hypc.github.io/2020/07/14/requirements-file-format/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="Requirements文件是包含需要使用pip install安装的项目列表文件。 Requirements文件的每一行都是一条要安装的内容，就像pip install的参数一样，支持以下形式： 12345[[--option]...]&lt;requirement specifier&gt; [; markers] [[--option]...]&lt;archive url&#x2F;path&gt;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-14T12:28:24.000Z">
+<meta property="article:modified_time" content="2020-07-18T15:09:13.162Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pip">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2020/07/14/requirements-file-format/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Requirements File Format | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2020/07/14/requirements-file-format/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Requirements File Format
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-14 20:28:24" itemprop="dateCreated datePublished" datetime="2020-07-14T20:28:24+08:00">2020-07-14</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/07/14/requirements-file-format/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2020/07/14/requirements-file-format/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>Requirements</code>文件是包含需要使用<code>pip install</code>安装的项目列表文件。</p>
+<p><code>Requirements</code>文件的每一行都是一条要安装的内容，就像<code>pip install</code>的参数一样，支持以下形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[[--option]...]</span><br><span class="line">&lt;requirement specifier&gt; [; markers] [[--option]...]</span><br><span class="line">&lt;archive url/path&gt;</span><br><span class="line">[-e] &lt;local project path&gt;</span><br><span class="line">[-e] &lt;vcs project url&gt;</span><br></pre></td></tr></table></figure>
+<p>可以使用<code>#</code>来表示注释，行尾以<code>\</code>表示折行。</p>
+<a id="more"></a>
+<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><ul>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-index-url" target="_blank" rel="noopener">-i, –index-url</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-extra-index-url" target="_blank" rel="noopener">–extra-index-url</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-no-index" target="_blank" rel="noopener">–no-index</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-constraint" target="_blank" rel="noopener">-c, –constraint</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-requirement" target="_blank" rel="noopener">-r, –requirement</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-editable" target="_blank" rel="noopener">-e, –editable</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-find-links" target="_blank" rel="noopener">-f, –find-links</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-no-binary" target="_blank" rel="noopener">–no-binary</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-only-binary" target="_blank" rel="noopener">–only-binary</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-require-hashes" target="_blank" rel="noopener">–require-hashes</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip_install/#install-pre" target="_blank" rel="noopener">–pre</a></li>
+<li><a href="https://pip.pypa.io/en/stable/reference/pip/#trusted-host" target="_blank" rel="noopener">–trusted-host</a></li>
+</ul>
+<h2 id="Requirement-Specifiers"><a href="#Requirement-Specifiers" class="headerlink" title="Requirement Specifiers"></a>Requirement Specifiers</h2><p><code>requirement specifier</code>由项目名称和可选的<a href="https://www.python.org/dev/peps/pep-0440/#version-specifiers" target="_blank" rel="noopener">版本说明</a>组成。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SomeProject</span><br><span class="line">SomeProject == 1.3</span><br><span class="line">SomeProject &gt;=1.2,&lt;2.0</span><br><span class="line">SomeProject[foo, bar]</span><br><span class="line">SomeProject~=1.4.2</span><br></pre></td></tr></table></figure>
+<p>从6.0开始，pip支持<a href="https://www.python.org/dev/peps/pep-0508/#environment-markers" target="_blank" rel="noopener">environment markers</a>。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SomeProject ==5.4 ; python_version &lt; &apos;2.7&apos;</span><br><span class="line">SomeProject; sys_platform == &apos;win32&apos;</span><br></pre></td></tr></table></figure>
+<p>从19.1开始，pip支持<a href="https://www.python.org/dev/peps/pep-0440/#direct-references" target="_blank" rel="noopener">direct references</a>，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip @ file:///localbuilds/pip-1.3.1.zip</span><br><span class="line">pip @ https://github.com/pypa/pip/archive/1.3.1.zip#sha1=da9234ee9982d4bbb3c72346a6de940a148ea686</span><br><span class="line">pip @ git+https://github.com/pypa/pip.git@7921be1537eac1e97bc40179a57f0349c2aee67d</span><br><span class="line">pip @ git+https://github.com/pypa/pip.git@1.3.1#7921be1537eac1e97bc40179a57f0349c2aee67d</span><br></pre></td></tr></table></figure>
+<p>从7.0版开始，pip支持通过<code>requirements file</code>控制为<code>setup.py</code>提供的命令行选项。</p>
+<p><code>--global-option</code>和<code>--install-option</code>选项用于将选项传递给<code>setup.py</code>。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FooProject &gt;= 1.2 --global-option=&quot;--no-user-cfg&quot; \</span><br><span class="line">                  --install-option=&quot;--prefix=&apos;/usr/local&apos;&quot; \</span><br><span class="line">                  --install-option=&quot;--no-compile&quot;</span><br></pre></td></tr></table></figure>
+<p>相当于运行了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py --no-user-cfg install --prefix=<span class="string">'/usr/local'</span> --no-compile</span><br></pre></td></tr></table></figure>
+<h2 id="Archives"><a href="#Archives" class="headerlink" title="Archives"></a>Archives</h2><p>archive url/path.</p>
+<h2 id="Local-Project-Path"><a href="#Local-Project-Path" class="headerlink" title="Local Project Path"></a>Local Project Path</h2><p>local project path.</p>
+<h2 id="Vcs-Project-Url"><a href="#Vcs-Project-Url" class="headerlink" title="Vcs Project Url"></a>Vcs Project Url</h2><p>pip支持从<code>Git</code>，<code>Mercurial</code>，<code>Subversion</code>和<code>Bazaar</code>安装，并使用URL前缀<code>git+</code>，<code>hg+</code>，<code>svn+</code>和<code>bzr+</code>检测VCS的类型。</p>
+<p><strong>Git</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[-e] git+http://git.example.com/MyProject#egg=MyProject</span><br><span class="line">[-e] git+https://git.example.com/MyProject#egg=MyProject</span><br><span class="line">[-e] git+ssh://git.example.com/MyProject#egg=MyProject</span><br><span class="line">[-e] git+file:///home/user/projects/MyProject#egg=MyProject</span><br></pre></td></tr></table></figure>
+<p><strong>Mercurial</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[-e] hg+http://hg.myproject.org/MyProject#egg=MyProject</span><br><span class="line">[-e] hg+https://hg.myproject.org/MyProject#egg=MyProject</span><br><span class="line">[-e] hg+ssh://hg.myproject.org/MyProject#egg=MyProject</span><br><span class="line">[-e] hg+file:///home/user/projects/MyProject#egg=MyProject</span><br></pre></td></tr></table></figure>
+<p><strong>Subversion</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[-e] svn+https://svn.example.com/MyProject#egg=MyProject</span><br><span class="line">[-e] svn+ssh://svn.example.com/MyProject#egg=MyProject</span><br><span class="line">[-e] svn+ssh://user@svn.example.com/MyProject#egg=MyProject</span><br></pre></td></tr></table></figure>
+<p><strong>Bazaar</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[-e] bzr+http://bzr.example.com/MyProject/trunk#egg=MyProject</span><br><span class="line">[-e] bzr+sftp://user@example.com/MyProject/trunk#egg=MyProject</span><br><span class="line">[-e] bzr+ssh://user@example.com/MyProject/trunk#egg=MyProject</span><br><span class="line">[-e] bzr+ftp://user@example.com/MyProject/trunk#egg=MyProject</span><br><span class="line">[-e] bzr+lp:MyProject#egg=MyProject</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/pip/" rel="tag"># pip</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/07/typescript-date/" rel="prev" title="TypeScript扩展Date对象">
+      <i class="fa fa-chevron-left"></i> TypeScript扩展Date对象
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/22/python-faker/" rel="next" title="Python Faker">
+      Python Faker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Options"><span class="nav-number">1.</span> <span class="nav-text">Options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Requirement-Specifiers"><span class="nav-number">2.</span> <span class="nav-text">Requirement Specifiers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Archives"><span class="nav-number">3.</span> <span class="nav-text">Archives</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Local-Project-Path"><span class="nav-number">4.</span> <span class="nav-text">Local Project Path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vcs-Project-Url"><span class="nav-number">5.</span> <span class="nav-text">Vcs Project Url</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2020/07/14/requirements-file-format/";
+    this.page.identifier = "/2020/07/14/requirements-file-format/";
+    this.page.title = "Requirements File Format";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

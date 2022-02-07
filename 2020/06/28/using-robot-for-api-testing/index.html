@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="什么是APIAPI（Application Programming Interface，应用程序接口）是一些预先定义的函数，或指软件系统不同组成部分衔接的约定。  什么是API测试API测试与UI测试不同，UI测试主要关注表现层，而API测试主要关注业务逻辑层。 着重强调的是逻辑调用关系，而不是UI操作或用户感官。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Robot Framework做API测试">
+<meta property="og:url" content="https://hypc.github.io/2020/06/28/using-robot-for-api-testing/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="什么是APIAPI（Application Programming Interface，应用程序接口）是一些预先定义的函数，或指软件系统不同组成部分衔接的约定。  什么是API测试API测试与UI测试不同，UI测试主要关注表现层，而API测试主要关注业务逻辑层。 着重强调的是逻辑调用关系，而不是UI操作或用户感官。">
+<meta property="og:locale">
+<meta property="og:image" content="https://hypc.github.io/images/using-robot-for-api-testing.png">
+<meta property="og:image" content="https://hypc.github.io/images/using-robot-for-api-testing-1.png">
+<meta property="og:image" content="https://hypc.github.io/images/using-robot-for-api-testing-2.png">
+<meta property="og:image" content="https://hypc.github.io/images/using-robot-for-api-testing-3.png">
+<meta property="article:published_time" content="2020-06-28T11:24:00.000Z">
+<meta property="article:modified_time" content="2020-07-11T15:56:25.508Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="robotframework">
+<meta property="article:tag" content="testing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hypc.github.io/images/using-robot-for-api-testing.png">
+
+<link rel="canonical" href="https://hypc.github.io/2020/06/28/using-robot-for-api-testing/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>使用Robot Framework做API测试 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2020/06/28/using-robot-for-api-testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Robot Framework做API测试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-28 19:24:00" itemprop="dateCreated datePublished" datetime="2020-06-28T19:24:00+08:00">2020-06-28</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/06/28/using-robot-for-api-testing/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2020/06/28/using-robot-for-api-testing/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什么是API"><a href="#什么是API" class="headerlink" title="什么是API"></a>什么是API</h2><p>API（Application Programming Interface，应用程序接口）是一些预先定义的函数，或指软件系统不同组成部分衔接的约定。</p>
+<p><img src="/images/using-robot-for-api-testing.png" alt></p>
+<h2 id="什么是API测试"><a href="#什么是API测试" class="headerlink" title="什么是API测试"></a>什么是API测试</h2><p>API测试与UI测试不同，UI测试主要关注表现层，而API测试主要关注业务逻辑层。
+着重强调的是逻辑调用关系，而不是UI操作或用户感官。</p>
+<a id="more"></a>
+<h2 id="Get-Starting"><a href="#Get-Starting" class="headerlink" title="Get Starting"></a>Get Starting</h2><h3 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h3><p>有几个常用的库需要了解：</p>
+<ul>
+<li><a href="http://robotframework.org/robotframework/" target="_blank" rel="noopener">Robot标准库</a>: Robot已经内置的许多库，下面是一些常用的库：<ul>
+<li>BuiltIn</li>
+<li>Collections</li>
+<li>DateTime</li>
+<li>String</li>
+</ul>
+</li>
+<li><a href="http://marketsquare.github.io/robotframework-requests/" target="_blank" rel="noopener">RequestsLibrary</a>: 是一个用来发起HTTP请求的扩展库。</li>
+<li><a href="https://guykisel.github.io/robotframework-faker/" target="_blank" rel="noopener">FakerLibrary</a>: 一个用来伪造数据的扩展库。</li>
+<li><a href="https://github.com/hypc/robot-jsonschemalibrary" target="_blank" rel="noopener">JSONSchemaLibrary</a>: 一个使用jsonschema来测试json数据的扩展库。</li>
+</ul>
+<h3 id="测试项目的组织结构"><a href="#测试项目的组织结构" class="headerlink" title="测试项目的组织结构"></a>测试项目的组织结构</h3><p>如果只是进行针对少量API接口的测试，怎么写都没有什么关系。
+但如果涉及大量（数十甚至数百）接口，那么项目的组织结构就需要好好构思一下了。
+否则的话，测试用例的可维护性、可读性将会非常的差。</p>
+<p><img src="/images/using-robot-for-api-testing-1.png" alt></p>
+<h3 id="编写测试用例代码"><a href="#编写测试用例代码" class="headerlink" title="编写测试用例代码"></a>编写测试用例代码</h3><h4 id="README-rst文件"><a href="#README-rst文件" class="headerlink" title="README.rst文件"></a><code>README.rst</code>文件</h4><p>当前项目的说明性文档。</p>
+<h4 id="requirements-txt文件"><a href="#requirements-txt文件" class="headerlink" title="requirements.txt文件"></a><code>requirements.txt</code>文件</h4><p>存放运行本项目的测试用例用到的库。内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">robotframework</span><br><span class="line">robotframework-requests</span><br><span class="line">robotframework-faker</span><br><span class="line">robot-jsonschemalibrary</span><br></pre></td></tr></table></figure>
+<h4 id="tests-resources-robot文件"><a href="#tests-resources-robot文件" class="headerlink" title="tests/resources.robot文件"></a><code>tests/resources.robot</code>文件</h4><p>这个文件存放一些全局的变量、参数，以及一些通用的keywords。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*** Settings ***</span><br><span class="line">Documentation           This is a resource file.</span><br><span class="line">Library                 RequestsLibrary</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*** Variables ***</span><br><span class="line">$&#123;GITHUB_API_DOMAIN&#125;    https://api.github.com</span><br></pre></td></tr></table></figure>
+<h4 id="tests-目录"><a href="#tests-目录" class="headerlink" title="tests/*目录"></a><code>tests/*</code>目录</h4><p>这些目录下存放的都是测试用例文件，目录的创建规则如下：</p>
+<ul>
+<li>以API接口的URL进行创建目录，动态部分以<code>$</code>开头</li>
+<li>以请求方法创建测试用例文件</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li><code>GET /gists</code> –&gt; <code>/gists/get.robot</code></li>
+<li><code>GET /gists/{gist_id}</code> –&gt; <code>/gists/$gist_id/get.robot</code></li>
+<li><code>GET /repos/{owner}/{repo}/issues</code> –&gt; <code>/repos/$owner/$repo/issues/get.robot</code></li>
+</ul>
+<p>下面是<code>/repos/$owner/$repo/issues/get.robot</code>的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">*** Settings ***</span><br><span class="line">Resource                $&#123;EXECDIR&#125;/tests/resources.robot</span><br><span class="line">Library                 String</span><br><span class="line">Suite Setup             Create Session    github    $&#123;GITHUB_API_DOMAIN&#125;</span><br><span class="line">Suite Teardown          Delete All Sessions</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*** Variables ***</span><br><span class="line">$&#123;API_URI&#125;              /repos/&#123;owner&#125;/&#123;repo&#125;/issues</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*** Test Cases ***</span><br><span class="line">GET Repo Issues Success</span><br><span class="line">    $&#123;url&#125;=             Format String    $&#123;API_URI&#125;    owner=google    repo=jax</span><br><span class="line">    $&#123;resp&#125;=            Get Request    github    $&#123;url&#125;</span><br><span class="line">    Request Should Be Successful    $&#123;resp&#125;</span><br><span class="line">    Status Should Be    200    $&#123;resp&#125;</span><br><span class="line"></span><br><span class="line">GET Repo Issues Failure</span><br><span class="line">    $&#123;url&#125;=             Format String    $&#123;API_URI&#125;    owner=not_exists_user    repo=none</span><br><span class="line">    $&#123;resp&#125;=            Get Request    github    $&#123;url&#125;</span><br><span class="line">    Status Should Be    404    $&#123;resp&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="执行测试用例"><a href="#执行测试用例" class="headerlink" title="执行测试用例"></a>执行测试用例</h3><p>使用下面命令执行测试用例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">robot -d reports tests/</span><br></pre></td></tr></table></figure>
+<p>测试报告如下：</p>
+<p><img src="/images/using-robot-for-api-testing-2.png" alt></p>
+<p><img src="/images/using-robot-for-api-testing-3.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/robotframework/" rel="tag"># robotframework</a>
+              <a href="/tags/testing/" rel="tag"># testing</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/26/robot-framework/" rel="prev" title="Robot Framework">
+      <i class="fa fa-chevron-left"></i> Robot Framework
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/04/celery-beat/" rel="next" title="使用django-celery-beat处理大量任务时异常">
+      使用django-celery-beat处理大量任务时异常 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFAPI"><span class="nav-number">1.</span> <span class="nav-text">什么是API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFAPI%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">什么是API测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-Starting"><span class="nav-number">3.</span> <span class="nav-text">Get Starting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Library"><span class="nav-number">3.1.</span> <span class="nav-text">Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">测试项目的组织结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">3.3.</span> <span class="nav-text">编写测试用例代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#README-rst%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.1.</span> <span class="nav-text">README.rst文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#requirements-txt%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.2.</span> <span class="nav-text">requirements.txt文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tests-resources-robot%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.3.</span> <span class="nav-text">tests&#x2F;resources.robot文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tests-%E7%9B%AE%E5%BD%95"><span class="nav-number">3.3.4.</span> <span class="nav-text">tests&#x2F;*目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B"><span class="nav-number">3.4.</span> <span class="nav-text">执行测试用例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2020/06/28/using-robot-for-api-testing/";
+    this.page.identifier = "/2020/06/28/using-robot-for-api-testing/";
+    this.page.title = "使用Robot Framework做API测试";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

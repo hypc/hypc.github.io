@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.gif">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.gif">
+  <link rel="mask-icon" href="/images/avatar.gif" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hypc.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Color Name HEX Color     AliceBlue #F0F8FF     #F0F8FF   AntiqueWhite #FAEBD7     #FAEBD7   Aqua #00FFFF     #00FFFF   Aquamarine #7FFFD4     #7FFFD4   Azure #F0FFFF     #F0FFFF   Beige #F5F5DC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS颜色值">
+<meta property="og:url" content="https://hypc.github.io/2018/07/09/css-color/index.html">
+<meta property="og:site_name" content="hypc&#39;s blog">
+<meta property="og:description" content="Color Name HEX Color     AliceBlue #F0F8FF     #F0F8FF   AntiqueWhite #FAEBD7     #FAEBD7   Aqua #00FFFF     #00FFFF   Aquamarine #7FFFD4     #7FFFD4   Azure #F0FFFF     #F0FFFF   Beige #F5F5DC">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-07-09T08:44:07.000Z">
+<meta property="article:modified_time" content="2020-01-04T01:48:36.197Z">
+<meta property="article:author" content="hypc">
+<meta property="article:tag" content="css">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://hypc.github.io/2018/07/09/css-color/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>CSS颜色值 | hypc's blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131598830-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-131598830-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">hypc's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="https://hypc.github.io/2018/07/09/css-color/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="hypc">
+      <meta itemprop="description" content="业精于勤荒于嬉, 行成于思毁于随~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hypc's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS颜色值
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-09 16:44:07" itemprop="dateCreated datePublished" datetime="2018-07-09T16:44:07+08:00">2018-07-09</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/07/09/css-color/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="/2018/07/09/css-color/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <table>
+<thead>
+<tr>
+<th>Color Name</th>
+<th>HEX</th>
+<th>Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AliceBlue</td>
+<td>#F0F8FF     </td><td bgcolor="AliceBlue">#F0F8FF</td>
+</tr>
+<tr>
+<td>AntiqueWhite</td>
+<td>#FAEBD7     </td><td bgcolor="AntiqueWhite">#FAEBD7</td>
+</tr>
+<tr>
+<td>Aqua</td>
+<td>#00FFFF     </td><td bgcolor="Aqua">#00FFFF</td>
+</tr>
+<tr>
+<td>Aquamarine</td>
+<td>#7FFFD4     </td><td bgcolor="Aquamarine">#7FFFD4</td>
+</tr>
+<tr>
+<td>Azure</td>
+<td>#F0FFFF     </td><td bgcolor="Azure">#F0FFFF</td>
+</tr>
+<tr>
+<td>Beige</td>
+<td>#F5F5DC     </td><td bgcolor="Beige">#F5F5DC</td>
+</tr>
+<tr>
+<td>Bisque</td>
+<td>#FFE4C4     </td><td bgcolor="Bisque">#FFE4C4</td>
+</tr>
+<tr>
+<td>Black</td>
+<td>#000000     </td><td bgcolor="Black">#000000</td>
+</tr>
+<tr>
+<td>BlanchedAlmond</td>
+<td>#FFEBCD     </td><td bgcolor="BlanchedAlmond">#FFEBCD</td>
+</tr>
+<tr>
+<td>Blue</td>
+<td>#0000FF     </td><td bgcolor="Blue">#0000FF</td>
+</tr>
+<tr>
+<td>BlueViolet</td>
+<td>#8A2BE2     </td><td bgcolor="BlueViolet">#8A2BE2</td>
+</tr>
+<tr>
+<td>Brown</td>
+<td>#A52A2A     </td><td bgcolor="Brown">#A52A2A</td>
+</tr>
+<tr>
+<td>BurlyWood</td>
+<td>#DEB887     </td><td bgcolor="BurlyWood">#DEB887</td>
+</tr>
+<tr>
+<td>CadetBlue</td>
+<td>#5F9EA0     </td><td bgcolor="CadetBlue">#5F9EA0</td>
+</tr>
+<tr>
+<td>Chartreuse</td>
+<td>#7FFF00     </td><td bgcolor="Chartreuse">#7FFF00</td>
+</tr>
+<tr>
+<td>Chocolate</td>
+<td>#D2691E     </td><td bgcolor="Chocolate">#D2691E</td>
+</tr>
+<tr>
+<td>Coral</td>
+<td>#FF7F50     </td><td bgcolor="Coral">#FF7F50</td>
+</tr>
+<tr>
+<td>CornflowerBlue</td>
+<td>#6495ED     </td><td bgcolor="CornflowerBlue">#6495ED</td>
+</tr>
+<tr>
+<td>Cornsilk</td>
+<td>#FFF8DC     </td><td bgcolor="Cornsilk">#FFF8DC</td>
+</tr>
+<tr>
+<td>Crimson</td>
+<td>#DC143C     </td><td bgcolor="Crimson">#DC143C</td>
+</tr>
+<tr>
+<td>Cyan</td>
+<td>#00FFFF     </td><td bgcolor="Cyan">#00FFFF</td>
+</tr>
+<tr>
+<td>DarkBlue</td>
+<td>#00008B     </td><td bgcolor="DarkBlue">#00008B</td>
+</tr>
+<tr>
+<td>DarkCyan</td>
+<td>#008B8B     </td><td bgcolor="DarkCyan">#008B8B</td>
+</tr>
+<tr>
+<td>DarkGoldenRod</td>
+<td>#B8860B     </td><td bgcolor="DarkGoldenRod">#B8860B</td>
+</tr>
+<tr>
+<td>DarkGray</td>
+<td>#A9A9A9     </td><td bgcolor="DarkGray">#A9A9A9</td>
+</tr>
+<tr>
+<td>DarkGreen</td>
+<td>#006400     </td><td bgcolor="DarkGreen">#006400</td>
+</tr>
+<tr>
+<td>DarkKhaki</td>
+<td>#BDB76B     </td><td bgcolor="DarkKhaki">#BDB76B</td>
+</tr>
+<tr>
+<td>DarkMagenta</td>
+<td>#8B008B     </td><td bgcolor="DarkMagenta">#8B008B</td>
+</tr>
+<tr>
+<td>DarkOliveGreen</td>
+<td>#556B2F     </td><td bgcolor="DarkOliveGreen">#556B2F</td>
+</tr>
+<tr>
+<td>DarkOrange</td>
+<td>#FF8C00     </td><td bgcolor="DarkOrange">#FF8C00</td>
+</tr>
+<tr>
+<td>DarkOrchid</td>
+<td>#9932CC     </td><td bgcolor="DarkOrchid">#9932CC</td>
+</tr>
+<tr>
+<td>DarkRed</td>
+<td>#8B0000     </td><td bgcolor="DarkRed">#8B0000</td>
+</tr>
+<tr>
+<td>DarkSalmon</td>
+<td>#E9967A     </td><td bgcolor="DarkSalmon">#E9967A</td>
+</tr>
+<tr>
+<td>DarkSeaGreen</td>
+<td>#8FBC8F     </td><td bgcolor="DarkSeaGreen">#8FBC8F</td>
+</tr>
+<tr>
+<td>DarkSlateBlue</td>
+<td>#483D8B     </td><td bgcolor="DarkSlateBlue">#483D8B</td>
+</tr>
+<tr>
+<td>DarkSlateGray</td>
+<td>#2F4F4F     </td><td bgcolor="DarkSlateGray">#2F4F4F</td>
+</tr>
+<tr>
+<td>DarkTurquoise</td>
+<td>#00CED1     </td><td bgcolor="DarkTurquoise">#00CED1</td>
+</tr>
+<tr>
+<td>DarkViolet</td>
+<td>#9400D3     </td><td bgcolor="DarkViolet">#9400D3</td>
+</tr>
+<tr>
+<td>DeepPink</td>
+<td>#FF1493     </td><td bgcolor="DeepPink">#FF1493</td>
+</tr>
+<tr>
+<td>DeepSkyBlue</td>
+<td>#00BFFF     </td><td bgcolor="DeepSkyBlue">#00BFFF</td>
+</tr>
+<tr>
+<td>DimGray</td>
+<td>#696969     </td><td bgcolor="DimGray">#696969</td>
+</tr>
+<tr>
+<td>DodgerBlue</td>
+<td>#1E90FF     </td><td bgcolor="DodgerBlue">#1E90FF</td>
+</tr>
+<tr>
+<td>FireBrick</td>
+<td>#B22222     </td><td bgcolor="FireBrick">#B22222</td>
+</tr>
+<tr>
+<td>FloralWhite</td>
+<td>#FFFAF0     </td><td bgcolor="FloralWhite">#FFFAF0</td>
+</tr>
+<tr>
+<td>ForestGreen</td>
+<td>#228B22     </td><td bgcolor="ForestGreen">#228B22</td>
+</tr>
+<tr>
+<td>Fuchsia</td>
+<td>#FF00FF     </td><td bgcolor="Fuchsia">#FF00FF</td>
+</tr>
+<tr>
+<td>Gainsboro</td>
+<td>#DCDCDC     </td><td bgcolor="Gainsboro">#DCDCDC</td>
+</tr>
+<tr>
+<td>GhostWhite</td>
+<td>#F8F8FF     </td><td bgcolor="GhostWhite">#F8F8FF</td>
+</tr>
+<tr>
+<td>Gold</td>
+<td>#FFD700     </td><td bgcolor="Gold">#FFD700</td>
+</tr>
+<tr>
+<td>GoldenRod</td>
+<td>#DAA520     </td><td bgcolor="GoldenRod">#DAA520</td>
+</tr>
+<tr>
+<td>Gray</td>
+<td>#808080     </td><td bgcolor="Gray">#808080</td>
+</tr>
+<tr>
+<td>Green</td>
+<td>#008000     </td><td bgcolor="Green">#008000</td>
+</tr>
+<tr>
+<td>GreenYellow</td>
+<td>#ADFF2F     </td><td bgcolor="GreenYellow">#ADFF2F</td>
+</tr>
+<tr>
+<td>HoneyDew</td>
+<td>#F0FFF0     </td><td bgcolor="HoneyDew">#F0FFF0</td>
+</tr>
+<tr>
+<td>HotPink</td>
+<td>#FF69B4     </td><td bgcolor="HotPink">#FF69B4</td>
+</tr>
+<tr>
+<td>IndianRed</td>
+<td>#CD5C5C     </td><td bgcolor="IndianRed">#CD5C5C</td>
+</tr>
+<tr>
+<td>Indigo</td>
+<td>#4B0082     </td><td bgcolor="Indigo">#4B0082</td>
+</tr>
+<tr>
+<td>Ivory</td>
+<td>#FFFFF0     </td><td bgcolor="Ivory">#FFFFF0</td>
+</tr>
+<tr>
+<td>Khaki</td>
+<td>#F0E68C     </td><td bgcolor="Khaki">#F0E68C</td>
+</tr>
+<tr>
+<td>Lavender</td>
+<td>#E6E6FA     </td><td bgcolor="Lavender">#E6E6FA</td>
+</tr>
+<tr>
+<td>LavenderBlush</td>
+<td>#FFF0F5     </td><td bgcolor="LavenderBlush">#FFF0F5</td>
+</tr>
+<tr>
+<td>LawnGreen</td>
+<td>#7CFC00     </td><td bgcolor="LawnGreen">#7CFC00</td>
+</tr>
+<tr>
+<td>LemonChiffon</td>
+<td>#FFFACD     </td><td bgcolor="LemonChiffon">#FFFACD</td>
+</tr>
+<tr>
+<td>LightBlue</td>
+<td>#ADD8E6     </td><td bgcolor="LightBlue">#ADD8E6</td>
+</tr>
+<tr>
+<td>LightCoral</td>
+<td>#F08080     </td><td bgcolor="LightCoral">#F08080</td>
+</tr>
+<tr>
+<td>LightCyan</td>
+<td>#E0FFFF     </td><td bgcolor="LightCyan">#E0FFFF</td>
+</tr>
+<tr>
+<td>LightGoldenRodYellow</td>
+<td>#FAFAD2     </td><td bgcolor="LightGoldenRodYellow">#FAFAD2</td>
+</tr>
+<tr>
+<td>LightGray</td>
+<td>#D3D3D3     </td><td bgcolor="LightGray">#D3D3D3</td>
+</tr>
+<tr>
+<td>LightGreen</td>
+<td>#90EE90     </td><td bgcolor="LightGreen">#90EE90</td>
+</tr>
+<tr>
+<td>LightPink</td>
+<td>#FFB6C1     </td><td bgcolor="LightPink">#FFB6C1</td>
+</tr>
+<tr>
+<td>LightSalmon</td>
+<td>#FFA07A     </td><td bgcolor="LightSalmon">#FFA07A</td>
+</tr>
+<tr>
+<td>LightSeaGreen</td>
+<td>#20B2AA     </td><td bgcolor="LightSeaGreen">#20B2AA</td>
+</tr>
+<tr>
+<td>LightSkyBlue</td>
+<td>#87CEFA     </td><td bgcolor="LightSkyBlue">#87CEFA</td>
+</tr>
+<tr>
+<td>LightSlateGray</td>
+<td>#778899     </td><td bgcolor="LightSlateGray">#778899</td>
+</tr>
+<tr>
+<td>LightSteelBlue</td>
+<td>#B0C4DE     </td><td bgcolor="LightSteelBlue">#B0C4DE</td>
+</tr>
+<tr>
+<td>LightYellow</td>
+<td>#FFFFE0     </td><td bgcolor="LightYellow">#FFFFE0</td>
+</tr>
+<tr>
+<td>Lime</td>
+<td>#00FF00     </td><td bgcolor="Lime">#00FF00</td>
+</tr>
+<tr>
+<td>LimeGreen</td>
+<td>#32CD32     </td><td bgcolor="LimeGreen">#32CD32</td>
+</tr>
+<tr>
+<td>Linen</td>
+<td>#FAF0E6     </td><td bgcolor="Linen">#FAF0E6</td>
+</tr>
+<tr>
+<td>Magenta</td>
+<td>#FF00FF     </td><td bgcolor="Magenta">#FF00FF</td>
+</tr>
+<tr>
+<td>Maroon</td>
+<td>#800000     </td><td bgcolor="Maroon">#800000</td>
+</tr>
+<tr>
+<td>MediumAquaMarine</td>
+<td>#66CDAA     </td><td bgcolor="MediumAquaMarine">#66CDAA</td>
+</tr>
+<tr>
+<td>MediumBlue</td>
+<td>#0000CD     </td><td bgcolor="MediumBlue">#0000CD</td>
+</tr>
+<tr>
+<td>MediumOrchid</td>
+<td>#BA55D3     </td><td bgcolor="MediumOrchid">#BA55D3</td>
+</tr>
+<tr>
+<td>MediumPurple</td>
+<td>#9370DB     </td><td bgcolor="MediumPurple">#9370DB</td>
+</tr>
+<tr>
+<td>MediumSeaGreen</td>
+<td>#3CB371     </td><td bgcolor="MediumSeaGreen">#3CB371</td>
+</tr>
+<tr>
+<td>MediumSlateBlue</td>
+<td>#7B68EE     </td><td bgcolor="MediumSlateBlue">#7B68EE</td>
+</tr>
+<tr>
+<td>MediumSpringGreen</td>
+<td>#00FA9A     </td><td bgcolor="MediumSpringGreen">#00FA9A</td>
+</tr>
+<tr>
+<td>MediumTurquoise</td>
+<td>#48D1CC     </td><td bgcolor="MediumTurquoise">#48D1CC</td>
+</tr>
+<tr>
+<td>MediumVioletRed</td>
+<td>#C71585     </td><td bgcolor="MediumVioletRed">#C71585</td>
+</tr>
+<tr>
+<td>MidnightBlue</td>
+<td>#191970     </td><td bgcolor="MidnightBlue">#191970</td>
+</tr>
+<tr>
+<td>MintCream</td>
+<td>#F5FFFA     </td><td bgcolor="MintCream">#F5FFFA</td>
+</tr>
+<tr>
+<td>MistyRose</td>
+<td>#FFE4E1     </td><td bgcolor="MistyRose">#FFE4E1</td>
+</tr>
+<tr>
+<td>Moccasin</td>
+<td>#FFE4B5     </td><td bgcolor="Moccasin">#FFE4B5</td>
+</tr>
+<tr>
+<td>NavajoWhite</td>
+<td>#FFDEAD     </td><td bgcolor="NavajoWhite">#FFDEAD</td>
+</tr>
+<tr>
+<td>Navy</td>
+<td>#000080     </td><td bgcolor="Navy">#000080</td>
+</tr>
+<tr>
+<td>OldLace</td>
+<td>#FDF5E6     </td><td bgcolor="OldLace">#FDF5E6</td>
+</tr>
+<tr>
+<td>Olive</td>
+<td>#808000     </td><td bgcolor="Olive">#808000</td>
+</tr>
+<tr>
+<td>OliveDrab</td>
+<td>#6B8E23     </td><td bgcolor="OliveDrab">#6B8E23</td>
+</tr>
+<tr>
+<td>Orange</td>
+<td>#FFA500     </td><td bgcolor="Orange">#FFA500</td>
+</tr>
+<tr>
+<td>OrangeRed</td>
+<td>#FF4500     </td><td bgcolor="OrangeRed">#FF4500</td>
+</tr>
+<tr>
+<td>Orchid</td>
+<td>#DA70D6     </td><td bgcolor="Orchid">#DA70D6</td>
+</tr>
+<tr>
+<td>PaleGoldenRod</td>
+<td>#EEE8AA     </td><td bgcolor="PaleGoldenRod">#EEE8AA</td>
+</tr>
+<tr>
+<td>PaleGreen</td>
+<td>#98FB98     </td><td bgcolor="PaleGreen">#98FB98</td>
+</tr>
+<tr>
+<td>PaleTurquoise</td>
+<td>#AFEEEE     </td><td bgcolor="PaleTurquoise">#AFEEEE</td>
+</tr>
+<tr>
+<td>PaleVioletRed</td>
+<td>#DB7093     </td><td bgcolor="PaleVioletRed">#DB7093</td>
+</tr>
+<tr>
+<td>PapayaWhip</td>
+<td>#FFEFD5     </td><td bgcolor="PapayaWhip">#FFEFD5</td>
+</tr>
+<tr>
+<td>PeachPuff</td>
+<td>#FFDAB9     </td><td bgcolor="PeachPuff">#FFDAB9</td>
+</tr>
+<tr>
+<td>Peru</td>
+<td>#CD853F     </td><td bgcolor="Peru">#CD853F</td>
+</tr>
+<tr>
+<td>Pink</td>
+<td>#FFC0CB     </td><td bgcolor="Pink">#FFC0CB</td>
+</tr>
+<tr>
+<td>Plum</td>
+<td>#DDA0DD     </td><td bgcolor="Plum">#DDA0DD</td>
+</tr>
+<tr>
+<td>PowderBlue</td>
+<td>#B0E0E6     </td><td bgcolor="PowderBlue">#B0E0E6</td>
+</tr>
+<tr>
+<td>Purple</td>
+<td>#800080     </td><td bgcolor="Purple">#800080</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>#FF0000     </td><td bgcolor="Red">#FF0000</td>
+</tr>
+<tr>
+<td>RosyBrown</td>
+<td>#BC8F8F     </td><td bgcolor="RosyBrown">#BC8F8F</td>
+</tr>
+<tr>
+<td>RoyalBlue</td>
+<td>#4169E1     </td><td bgcolor="RoyalBlue">#4169E1</td>
+</tr>
+<tr>
+<td>SaddleBrown</td>
+<td>#8B4513     </td><td bgcolor="SaddleBrown">#8B4513</td>
+</tr>
+<tr>
+<td>Salmon</td>
+<td>#FA8072     </td><td bgcolor="Salmon">#FA8072</td>
+</tr>
+<tr>
+<td>SandyBrown</td>
+<td>#F4A460     </td><td bgcolor="SandyBrown">#F4A460</td>
+</tr>
+<tr>
+<td>SeaGreen</td>
+<td>#2E8B57     </td><td bgcolor="SeaGreen">#2E8B57</td>
+</tr>
+<tr>
+<td>SeaShell</td>
+<td>#FFF5EE     </td><td bgcolor="SeaShell">#FFF5EE</td>
+</tr>
+<tr>
+<td>Sienna</td>
+<td>#A0522D     </td><td bgcolor="Sienna">#A0522D</td>
+</tr>
+<tr>
+<td>Silver</td>
+<td>#C0C0C0     </td><td bgcolor="Silver">#C0C0C0</td>
+</tr>
+<tr>
+<td>SkyBlue</td>
+<td>#87CEEB     </td><td bgcolor="SkyBlue">#87CEEB</td>
+</tr>
+<tr>
+<td>SlateBlue</td>
+<td>#6A5ACD     </td><td bgcolor="SlateBlue">#6A5ACD</td>
+</tr>
+<tr>
+<td>SlateGray</td>
+<td>#708090     </td><td bgcolor="SlateGray">#708090</td>
+</tr>
+<tr>
+<td>Snow</td>
+<td>#FFFAFA     </td><td bgcolor="Snow">#FFFAFA</td>
+</tr>
+<tr>
+<td>SpringGreen</td>
+<td>#00FF7F     </td><td bgcolor="SpringGreen">#00FF7F</td>
+</tr>
+<tr>
+<td>SteelBlue</td>
+<td>#4682B4     </td><td bgcolor="SteelBlue">#4682B4</td>
+</tr>
+<tr>
+<td>Tan</td>
+<td>#D2B48C     </td><td bgcolor="Tan">#D2B48C</td>
+</tr>
+<tr>
+<td>Teal</td>
+<td>#008080     </td><td bgcolor="Teal">#008080</td>
+</tr>
+<tr>
+<td>Thistle</td>
+<td>#D8BFD8     </td><td bgcolor="Thistle">#D8BFD8</td>
+</tr>
+<tr>
+<td>Tomato</td>
+<td>#FF6347     </td><td bgcolor="Tomato">#FF6347</td>
+</tr>
+<tr>
+<td>Turquoise</td>
+<td>#40E0D0     </td><td bgcolor="Turquoise">#40E0D0</td>
+</tr>
+<tr>
+<td>Violet</td>
+<td>#EE82EE     </td><td bgcolor="Violet">#EE82EE</td>
+</tr>
+<tr>
+<td>Wheat</td>
+<td>#F5DEB3     </td><td bgcolor="Wheat">#F5DEB3</td>
+</tr>
+<tr>
+<td>White</td>
+<td>#FFFFFF     </td><td bgcolor="White">#FFFFFF</td>
+</tr>
+<tr>
+<td>WhiteSmoke</td>
+<td>#F5F5F5     </td><td bgcolor="WhiteSmoke">#F5F5F5</td>
+</tr>
+<tr>
+<td>Yellow</td>
+<td>#FFFF00     </td><td bgcolor="Yellow">#FFFF00</td>
+</tr>
+<tr>
+<td>YellowGreen</td>
+<td>#9ACD32     </td><td bgcolor="YellowGreen">#9ACD32</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/css/" rel="tag"># css</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/08/ubuntu-desktop/" rel="prev" title="Ubuntu手动添加启动图标">
+      <i class="fa fa-chevron-left"></i> Ubuntu手动添加启动图标
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/09/semver/" rel="next" title="软件版本号">
+      软件版本号 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hypc"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">hypc</p>
+  <div class="site-description" itemprop="description">业精于勤荒于嬉, 行成于思毁于随~</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">342</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">157</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hypc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hypc" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/json-schema-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;json-schema-tutorial&#x2F;" rel="noopener" target="_blank">JSONSchema Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/redis-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;redis-tutorial&#x2F;" rel="noopener" target="_blank">Redis Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/lua-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;lua-tutorial&#x2F;" rel="noopener" target="_blank">Lua Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/design-patterns/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;design-patterns&#x2F;" rel="noopener" target="_blank">Design Patterns</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/rfc6749/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;rfc6749&#x2F;" rel="noopener" target="_blank">RFC6749</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/django-tutorial/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;django-tutorial&#x2F;" rel="noopener" target="_blank">Django Tutorial</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/python-style-guide/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;python-style-guide&#x2F;" rel="noopener" target="_blank">Python Style Guide</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/volere-requirements-specification-template/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;volere-requirements-specification-template&#x2F;" rel="noopener" target="_blank">Volere Requirements Specification Template</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/gopl-zh/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;gopl-zh&#x2F;" rel="noopener" target="_blank">The Go Programming Language</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://hypc-pub.github.io/advanced-go-programming-book/" title="https:&#x2F;&#x2F;hypc-pub.github.io&#x2F;advanced-go-programming-book&#x2F;" rel="noopener" target="_blank">Advanced Go Programming</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hypc</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hypc.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://hypc.github.io/2018/07/09/css-color/";
+    this.page.identifier = "/2018/07/09/css-color/";
+    this.page.title = "CSS颜色值";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://hypc.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
