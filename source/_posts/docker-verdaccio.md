@@ -1,7 +1,7 @@
 ---
 title: 使用verdaccio搭建npmjs服务
 date: 2019-05-29 08:16:30
-tags: [docker, npm]
+tags: [docker, verdaccio, npm]
 ---
 
 **[verdaccio][]**: A lightweight private npm proxy registry.

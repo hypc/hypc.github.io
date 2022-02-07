@@ -1,7 +1,7 @@
 ---
 title: 搭建CI/CD平台
 date: 2020-05-25 10:11:41
-tags: [ci/cd]
+tags: [ci/cd, jenkins, drone]
 ---
 
 `CI/CD`是一种通过在应用开发阶段引入自动化来频繁向客户交付应用的方法。`CI/CD`的核心概念是持续集成、持续交付和持续部署。

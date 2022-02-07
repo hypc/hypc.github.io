@@ -8,9 +8,7 @@ tags: [docker, redash]
 
 [Redash]: https://redash.io/
 
-<video width="720" autoplay loop muted>
-    <source src="/images/redash-intro-720.mp4" type="video/mp4">
-</video>
+<video controls autoplay src="/images/redash-intro-720.mp4" style="max-width: 80%;"></video>
 
 <!--more-->
 

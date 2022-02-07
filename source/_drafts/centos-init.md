@@ -15,21 +15,25 @@ sed -i 's/^ONBOOT=.*$/ONBOOT=yes/' /etc/sysconfig/network-scripts/*
 mv /etc/yum.repos.d /etc/yum.repos.d.bak
 mkdir /etc/yum.repos.d
 curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
-sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 yum makecache
 
 ## 安装常用软件
-yum update -y && yum install -y vim git tree unzip rsync samba bind-utils
+yum update -y && yum install -y vim git tree unzip
 ## 安装vim插件
 curl -o- https://raw.githubusercontent.com/hypc/vimfiles/master/install.simple.sh | bash
 
 ## docker
-yum install -y yum-utils device-mapper-persistent-data lvm2
+yum install -y yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum install -y --nobest docker-ce containerd.io
-systemctl enable docker && systemctl start docker
+yum install -y docker-ce
+mkdir -p /etc/docker && tee /etc/docker/daemon.json <<"EOF"
+{
+    "registry-mirrors": ["https://icxw8635.mirror.aliyuncs.com"]
+}
+EOF
+systemctl enable --now docker
 ## docker-compose
-curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -43,10 +47,10 @@ chmod +x /usr/local/bin/docker-compose
 PermitRootLogin yes
 ```
 
-然后开启并运行`sshd`服务：
+然后启动`sshd`服务：
 
 ```bash
-systemctl enable sshd && systemctl start sshd
+systemctl enable --now sshd
 ```
 
 ## 网络管理命令
@@ -59,5 +63,5 @@ systemctl enable sshd && systemctl start sshd
 使用`fdisk`命令进行分区，使用`mke2fs`命令进行格式化。
 
 ```bash
-echo '/dev/sdb1 /mnt/nas ext4 defaults 0 2' >> /etc/fstab   # 开机自动挂载磁盘
+echo '/dev/sdb1 /mnt/a ext4 defaults 0 0' >> /etc/fstab   # 开机自动挂载磁盘
 ```
